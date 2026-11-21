@@ -1,12 +1,7 @@
 "use strict";
 
-window.CONFIG = Object.assign({
-  apiBase: "https://invitation.permatawedding.com/api/API",
-  ORDER_ID: " ",
-}, window.CONFIG || {});
+window.CONFIG = window.CONFIG || {};
 var CONFIG = window.CONFIG;
-
-const BASE_DOMAIN = "https://invitation.permatawedding.com";
 
 let isMusicPlaying = false;
 let countdownTimer = null;
@@ -105,22 +100,31 @@ function _setText(key, val) {
   });
 }
 
+// ─── BASE DOMAIN ─────────────────────────────────────────────────
+const _BASE_DOMAIN = (function () {
+  try {
+    return new URL(CONFIG.apiBase).origin;
+  } catch {
+    return window.location.origin;
+  }
+})();
+
+function photoUrl(path) {
+  if (!path) return "";
+  return path.startsWith("http") ? path : `${_BASE_DOMAIN}${path}`;
+}
+
 function _setSrc(id, path) {
   const el = document.getElementById(id);
   if (!el || !path) return;
-  el.src = path.startsWith("http") ? path : `${BASE_DOMAIN}${path}`;
+  el.src = photoUrl(path);
 }
 
 function _setCoverBg(id, path) {
   const el = document.getElementById(id);
   if (!el || !path) return;
-  const url = path.startsWith("http") ? path : `${BASE_DOMAIN}${path}`;
+  const url = photoUrl(path);
   el.style.backgroundImage = `url('${url}')`;
-}
-
-function photoUrl(path) {
-  if (!path) return "";
-  return path.startsWith("http") ? path : `${BASE_DOMAIN}${path}`;
 }
 
 function tglIndo(datetime) {
@@ -173,22 +177,30 @@ function attInfo(val) {
 }
 
 async function fetchAllData() {
+  if (!CONFIG.ORDER_ID || !CONFIG.ORDER_ID.trim()) {
+    console.info("Static mode: CONFIG.ORDER_ID tidak diset, melewati fetchAllData.");
+    return;
+  }
+
   const oid = encodeURIComponent(CONFIG.ORDER_ID);
   const headers = { Accept: "application/json" };
+  const base = CONFIG.apiBase || "/api";
 
   const [coupleRes, evRes, muRes, stRes, glRes, lvRes, wlRes, enRes, cmRes] = await Promise.all([
-    fetch(`${CONFIG.apiBase}/couples?order_id=${oid}&limit=1`, { headers }),
-    fetch(`${CONFIG.apiBase}/events?order_id=${oid}&limit=20&sort=sort_order&dir=asc`, { headers }),
-    fetch(`${CONFIG.apiBase}/music?order_id=${oid}&limit=5&sort=sort_order&dir=asc`, { headers }),
-    fetch(`${CONFIG.apiBase}/love-stories?order_id=${oid}&limit=20&sort=sort_order&dir=asc`, { headers }),
-    fetch(`${CONFIG.apiBase}/galleries?order_id=${oid}&limit=30&sort=sort_order&dir=asc`, { headers }),
-    fetch(`${CONFIG.apiBase}/livestreaming?order_id=${oid}&limit=5`, { headers }),
-    fetch(`${CONFIG.apiBase}/digital-wallets?order_id=${oid}&limit=10`, { headers }),
-    fetch(`${CONFIG.apiBase}/entertainment?order_id=${oid}&limit=10&sort=sort_order&dir=asc`, { headers }),
-    fetch(`${CONFIG.apiBase}/comments?order_id=${oid}&limit=30&sort=created_at&dir=desc`, { headers }),
+    fetch(`${base}/couples?order_id=${oid}&limit=1`, { headers }),
+    fetch(`${base}/events?order_id=${oid}&limit=20&sort=sort_order&dir=asc`, { headers }),
+    fetch(`${base}/music?order_id=${oid}&limit=5&sort=sort_order&dir=asc`, { headers }),
+    fetch(`${base}/love-stories?order_id=${oid}&limit=20&sort=sort_order&dir=asc`, { headers }),
+    fetch(`${base}/galleries?order_id=${oid}&limit=30&sort=sort_order&dir=asc`, { headers }),
+    fetch(`${base}/livestreaming?order_id=${oid}&limit=5`, { headers }),
+    fetch(`${base}/digital-wallets?order_id=${oid}&limit=10`, { headers }),
+    fetch(`${base}/entertainment?order_id=${oid}&limit=10&sort=sort_order&dir=asc`, { headers }),
+    fetch(`${base}/comments?order_id=${oid}&limit=30&sort=created_at&dir=desc`, { headers }),
   ]);
 
-  const [coupleJ, evJ, muJ, stJ, glJ, lvJ, wlJ, enJ, cmJ] = await Promise.all([coupleRes.json(), evRes.json(), muRes.json(), stRes.json(), glRes.json(), lvRes.json(), wlRes.json(), enRes.json(), cmRes.json()]);
+  const [coupleJ, evJ, muJ, stJ, glJ, lvJ, wlJ, enJ, cmJ] = await Promise.all([
+    coupleRes.json(), evRes.json(), muRes.json(), stRes.json(), glRes.json(), lvRes.json(), wlRes.json(), enRes.json(), cmRes.json()
+  ]);
 
   DATA.couple = coupleJ.success ? coupleJ.data?.items?.[0] || null : null;
   DATA.events = evJ.success ? evJ.data?.items || [] : [];
@@ -199,11 +211,10 @@ async function fetchAllData() {
   DATA.wallets = wlJ.success ? wlJ.data?.items?.filter((w) => +w.is_active === 1) || [] : [];
   DATA.entertainments = enJ.success ? enJ.data?.items || [] : [];
   DATA.comments = cmJ.success ? cmJ.data?.items || [] : [];
-
-  if (!DATA.couple) throw new Error("Data couple tidak ditemukan");
 }
 
 function renderCouple() {
+  if (!DATA.couple) return;
   const c = DATA.couple;
   const gNick = c.groom_nickname || c.groom_name;
   const bNick = c.bride_nickname || c.bride_name;
@@ -211,8 +222,8 @@ function renderCouple() {
 
   const firstEvent = DATA.events[0];
   const mainDate = firstEvent ? firstEvent.event_datetime : null;
-  const coverDateText = mainDate ? tglCover(mainDate) : "01 · 10 · 2026";
-  const formattedFullDate = mainDate ? tglIndo(mainDate) : "1 Oktober 2026";
+  const coverDateText = mainDate ? tglCover(mainDate) : null;
+  const formattedFullDate = mainDate ? tglIndo(mainDate) : null;
 
   const initials = `${(gNick[0] || "").toUpperCase()} <span class="text-xs">&amp;</span> ${(bNick[0] || "").toUpperCase()}`;
 
@@ -226,7 +237,7 @@ function renderCouple() {
   _setHtml("cover-monogram", initials);
   _setText("cover-groom", gNick);
   _setText("cover-bride", bNick);
-  _setText("cover-date", coverDateText);
+  if (coverDateText) _setText("cover-date", coverDateText);
 
   _setText("name-groom", gNick);
   _setText("name-bride", bNick);
@@ -239,27 +250,37 @@ function renderCouple() {
   _setText("bride-mother", c.bride_mother);
   _setText("bride-address", c.bride_address);
 
-  _setSrc("groom-photo", c.groom_photo_url);
-  _setSrc("bride-photo", c.bride_photo_url);
+  if (c.groom_photo_url) _setSrc("groom-photo", c.groom_photo_url);
+  if (c.bride_photo_url) _setSrc("bride-photo", c.bride_photo_url);
 
   _setText("closing-couple", coupleNames.toUpperCase());
-  _setText("closing-date", formattedFullDate);
+  if (formattedFullDate) _setText("closing-date", formattedFullDate);
 
   const title = `Pernikahan ${coupleNames}`;
-  const titleDate = `${title} — ${formattedFullDate}`;
+  const titleDate = formattedFullDate ? `${title} — ${formattedFullDate}` : title;
   document.title = title;
 
   _setMeta("meta-og-title", titleDate);
   _setMeta("meta-og-description", c.meta_description);
-  _setMeta("meta-og-image", coverPhoto);
+  if (coverPhoto) _setMeta("meta-og-image", coverPhoto);
   _setMeta("meta-twitter-title", titleDate);
   _setMeta("meta-twitter-description", c.meta_description);
-  _setMeta("meta-twitter-image", coverPhoto);
+  if (coverPhoto) _setMeta("meta-twitter-image", coverPhoto);
 }
 
 function renderEvents() {
   const container = document.getElementById("event-cards-container");
   if (!container) return;
+
+  // Jika HTML sudah ter-pre-render dengan class .event-card-jp dan bukan icon spinner loading
+  if (container.querySelectorAll(".event-card-jp").length > 0) {
+    const cdDays = document.getElementById("cd-days");
+    const targetDateAttr = cdDays?.closest("[data-target]")?.getAttribute("data-target") || (DATA.events[0]?.event_datetime ? new Date(DATA.events[0].event_datetime) : null);
+    if (targetDateAttr) {
+      startCountdown(new Date(targetDateAttr));
+    }
+    return;
+  }
 
   if (!DATA.events.length) {
     container.innerHTML = '<p style="text-align:center;opacity:.7;padding:1rem">Informasi acara belum tersedia.</p>';
@@ -345,6 +366,11 @@ function renderStories() {
   const container = document.getElementById("story-list");
   if (!container) return;
 
+  // Jika HTML sudah ter-pre-render dengan class .tl-item dan bukan icon spinner loading
+  if (container.querySelectorAll(".tl-item").length > 0) {
+    return;
+  }
+
   const stories = DATA.stories.length ? DATA.stories : FALLBACK_STORIES;
   const isFromDb = DATA.stories.length > 0;
   const icons = ["fas fa-torii-gate", "fas fa-heart", "fas fa-ring", "fas fa-gift", "fas fa-star"];
@@ -372,6 +398,12 @@ function renderStories() {
 function renderGalleries() {
   const container = document.getElementById("gallery-container");
   if (!container) return;
+
+  // Jika HTML sudah ter-pre-render dengan class .jpg-item dan bukan icon spinner loading
+  if (container.querySelectorAll(".jpg-item").length > 0) {
+    return;
+  }
+
   if (!DATA.galleries.length) {
     container.innerHTML = '<p style="text-align:center;opacity:.7;grid-column:1/-1;padding:2rem">Galeri belum tersedia.</p>';
     return;
@@ -415,6 +447,13 @@ function renderLive() {
 function renderWallets() {
   const container = document.getElementById("wallet-container");
   if (!container) return;
+
+  // Jika HTML sudah ter-pre-render dengan class .gift-card-jp dan bukan icon spinner loading
+  if (container.querySelectorAll(".gift-card-jp").length > 0) {
+    initCopyButtons();
+    return;
+  }
+
   if (!DATA.wallets.length) {
     const section = document.getElementById("amplop");
     if (section) section.style.display = "none";

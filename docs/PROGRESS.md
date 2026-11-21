@@ -52,6 +52,13 @@ Terakhir diperbarui: 2026-11-21
   2. **Otomatisasi Hitungan Kunjungan (View Tracker)**: Injeksi otomatis beacon tracking ringan tanpa beban render (`navigator.sendBeacon` / `fetch keepalive`) dengan session guard anti-double-count.
   3. **Ekspor & Salin Rekap RSVP Tamu**: Tombol "Ekspor CSV" untuk mengunduh daftar tamu ke file Excel/CSV, dan tombol "Salin Rekap WA" untuk menyalin ringkasan kehadiran berformat rapi langsung ke clipboard.
   4. **Perluasan Unit Test Suite**: Automated unit tests diperluas menjadi 110 pengujian (100% PASS / Berhasil).
+- Inspeksi Mendalam & Perbaikan Total Tema Sakura-Zen:
+  1. **Standardisasi Path Foto Mempelai & Cover**: Memperbaiki jalur `src` foto mempelai di template master `sakura-zen/index.html` dari `images/` (yang salah) menjadi `couple/mempelai-pria.jpg` dan `couple/mempelai-wanita.jpg`.
+  2. **Pembersihan Handler Onerror**: Menghapus atribut `onerror="this.src = 'https://ui-avatars.com/...'"` yang otomatis menggantikan foto asli pengantin dengan placeholder avatar.
+  3. **Penyediaan Aset Cover & Dukungan Compiler**: Menyediakan file default `couple/cover.jpg`, memperbarui styling background `#cover-photo`, dan menambahkan regex background-image replacement pada `InvitationCompiler.php`.
+  4. **Pembersihan Runtime JS & Safe Rendering (Opsi A)**: Menghapus hardcode `BASE_DOMAIN` luar, mengamankan `fetchAllData()` agar keluar secara anggun saat mode statis murni tanpa melempar uncaught exception, serta memproteksi seluruh fungsi render agar tidak menimpa data DOM yang telah di-pre-render statis.
+  5. **Penambahan Styling Kisah Cinta (Timeline)**: Menambahkan CSS lengkap untuk komponen `.timeline-jp`, `.tl-item`, `.tl-dot`, dll. dengan tema visual crimson Jepang yang responsif.
+  6. **Verifikasi & Build Test**: Pengujian build kompilasi tema `sakura-zen` terverifikasi sukses, seluruh 110 automated unit test lolos 100% PASS.
 - Pembaruan Dokumentasi Publik Repository (GitHub README.md):
   1. Penambahan tautan Live Preview resmi: `https://invitation-test.permatawedding.com/`.
   2. Diagram alur interaktif (*Mermaid Flowchart*) dan penjelasan rinci 7-step alur pemesanan klien (Client Order Workflow) beserta tahapan pre-rendering otomatis di sisi server.

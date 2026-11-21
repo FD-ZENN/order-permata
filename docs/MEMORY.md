@@ -176,6 +176,24 @@ Cari memakai kata kunci: #database, #auth, #compiler, #template, [DB], [ENV], [S
 - Lokasi terkait: `api/core/InvitationCompiler.php`, `admin/index.html`, `admin/assets/app.js`, `tests/CompilerBuildTest.php`
 - Tag: #compiler #opengraph #thumbnail-wa #view-beacon #rsvp #ekspor-csv #rekap-wa
 
+### [TEMA] Inspeksi Mendalam & Perbaikan Total Tema Sakura-Zen — 2026-11-22
+- Fakta/keputusan: Tema `sakura-zen` mengalami gambar mempelai tidak muncul (berganti avatar placeholder), cover broken, dan error runtime JavaScript.
+- Akar Masalah & Temuan:
+  1. Jalur Gambar Salah di Template Master: File `templates/sakura-zen/index.html` menunjuk ke `images/mempelai-pria.jpg` dan `images/mempelai-wanita.jpg` yang tidak ada (karena di folder `images/` hanya ada `fl.png` dan `fl2.png`, sementara foto fisik berada di `couple/mempelai-pria.jpg` dan `couple/mempelai-wanita.jpg`).
+  2. Handler Onerror Placeholder: Tag `<img>` memiliki atribut `onerror="this.src = 'https://ui-avatars.com/...'" ` yang langsung menggantikan foto dengan avatar saat link salah/404.
+  3. Cover Image Hilang: `#cover-photo` menunjuk ke `images/cover.jpg` yang tidak ada.
+  4. Ketergantungan Hardcode Domain Runtime JS: `templates/sakura-zen/js/script.js` memiliki `const BASE_DOMAIN = "https://invitation.permatawedding.com"` dan `CONFIG.apiBase` hardcode yang menimpa path relatif lokal `couple/...` dengan domain luar, memicu error 404 saat dibuka di localhost / staging.
+  5. Uncaught Throw Error di `fetchAllData()`: Melempar `throw new Error("Data couple tidak ditemukan")` saat `CONFIG.ORDER_ID` kosong / mode statis murni.
+  6. Styling CSS Kisah Cinta Hilang: Class `.timeline-jp`, `.tl-item`, `.tl-dot`, dll. tidak memiliki deklarasi di `css/style.css`.
+- Solusi & Perbaikan:
+  1. Standardisasi Path Gambar: Mengarahkan `src` foto mempelai ke `couple/mempelai-pria.jpg` dan `couple/mempelai-wanita.jpg`, menambahkan `loading="lazy"` & `decoding="async"`, serta menghapus atribut `onerror` ui-avatars.
+  2. Penyediaan Cover & Dukungan Compiler: Menyalin file `cover.jpg` default ke `templates/sakura-zen/couple/cover.jpg`, memperbarui CSS/HTML `#cover-photo`, dan menambahkan regex replacement background `#cover-photo` pada `InvitationCompiler.php`.
+  3. Pembersihan Runtime JS & Dynamic Origin Resolver: Mengubah `BASE_DOMAIN` hardcode ke resolver dinamis `_BASE_DOMAIN` berbasis origin aktif; memasang guard pada `fetchAllData()` jika `ORDER_ID` kosong agar tidak throw exception; melindungi seluruh fungsi render (`renderCouple`, `renderEvents`, `renderStories`, `renderGalleries`, `renderWallets`) agar data yang sudah di-pre-render statis oleh compiler tidak ditimpa/dikosongkan.
+  4. Penambahan Styling Timeline Kisah Cinta di `css/style.css`: Menambahkan styling `.timeline-jp`, `.tl-item`, `.tl-dot`, `.tl-content`, `.tl-title`, `.tl-date`, dan `.tl-text` dengan aksen crimson Jepang yang responsif.
+  5. Verifikasi & Pengujian: Uji build compiler tema Sakura-Zen berhasil 100%, seluruh 110 unit tests PASS tanpa error.
+- Lokasi terkait: `templates/sakura-zen/index.html`, `templates/sakura-zen/css/style.css`, `templates/sakura-zen/js/script.js`, `templates/sakura-zen/couple/cover.jpg`, `api/core/InvitationCompiler.php`
+- Tag: #tema #sakura-zen #foto-mempelai #cover #compiler #javascript #css #timeline
+
 
 
 

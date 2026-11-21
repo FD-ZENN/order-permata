@@ -402,6 +402,11 @@ class InvitationCompiler
             $html = preg_replace('/id="groom-photo"[^>]*src="[^"]*"/is', 'id="groom-photo" src="' . $couple['groom_photo_url'] . '"', $html);
         }
 
+        // Cover Background Photo (untuk elemen dengan background-image cover)
+        $coverPhotoRel = $couple['cover_photo_url'] ?: ($couple['groom_photo_url'] ?: ($couple['bride_photo_url'] ?: 'couple/cover.jpg'));
+        $html = preg_replace('/(id="cover-photo"[^>]*style="[^"]*background-image:\s*url\([\'"]?)[^\'")]+([\'"]?\)[^"]*")/is', '${1}' . $coverPhotoRel . '${2}', $html);
+        $html = preg_replace('/(id="hero-cover-img"[^>]*style="[^"]*background-image:\s*url\([\'"]?)[^\'")]+([\'"]?\)[^"]*")/is', '${1}' . $coverPhotoRel . '${2}', $html);
+
         // --- B. TANGGAL COVER & PENUTUP ---
         if (!empty($events[0]['event_datetime'])) {
             $coverDate = self::formatTglCover($events[0]['event_datetime']);
