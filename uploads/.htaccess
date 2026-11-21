@@ -1,8 +1,26 @@
 # Cloudflare Security Standard: Matikan eksekusi script di direktori upload
-php_flag engine off
-Options -ExecCGI -Indexes
-RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .cgi .pl .sh
-<FilesMatch "\.(php|phtml|php[0-9]|phar|cgi|pl|sh)$">
-    Order Deny,Allow
-    Deny from all
-</FilesMatch>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+
+<IfModule mod_mime.c>
+    RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .cgi .pl .sh
+</IfModule>
+
+<IfModule mod_authz_core.c>
+    <FilesMatch "\.(php|phtml|php[0-9]|phar|cgi|pl|sh)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+    <FilesMatch "\.(php|phtml|php[0-9]|phar|cgi|pl|sh)$">
+        Order Deny,Allow
+        Deny from all
+    </FilesMatch>
+</IfModule>
