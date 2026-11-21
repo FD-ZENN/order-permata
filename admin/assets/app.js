@@ -1158,7 +1158,9 @@ async function saveEvent() {
 // ═══════════════════════════════════════════════
 // Tab: Music — CDN Permata Wedding + Audio Preview
 // ═══════════════════════════════════════════════
-const CDN_API_URL = window.location.origin + "/order-permata/cdn/api/music.php";
+const CDN_API_URL = window.location.origin.includes("localhost")
+  ? window.location.origin + "/order-permata/cdn/api/music.php"
+  : window.location.origin + "/cdn/api/music.php";
 let MUSIC_PRESETS = [
   { title: "Sinarengan",  artist: "Permata Wedding", url: "cdn/uploads/music/denny-caknan-feat-bella-bonita-sinarengan.mp3" },
   { title: "Kabagyan",    artist: "Permata Wedding", url: "cdn/uploads/music/kabagyan-sadewok.mp3" },
@@ -1233,7 +1235,10 @@ function previewMusicUrl(url) {
   // Jika URL berupa path relatif lokal 'cdn/uploads/music/...', sesuaikan dengan origin saat ini
   let playUrl = url;
   if (!playUrl.startsWith('http://') && !playUrl.startsWith('https://')) {
-    playUrl = window.location.origin + '/order-permata/' + playUrl.replace(/^\/+/, '');
+    const rootBase = window.location.origin.includes('localhost')
+      ? window.location.origin + '/order-permata/'
+      : window.location.origin + '/';
+    playUrl = rootBase + playUrl.replace(/^\/+/, '');
   }
   currentPreviewAudio = new Audio(playUrl);
   currentPreviewAudio.onended = () => { currentPreviewAudio = null; };
