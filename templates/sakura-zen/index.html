@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Pernikahan Ahmad & Siti</title>
+    <meta name="description" content="Undangan Pernikahan Ahmad Fauzan Pratama & Siti Nur Aisyah — 1 Oktober 2025." />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta id="meta-og-title" property="og:title" content="Pernikahan Ahmad & Siti — 1 Oktober 2025" />
+    <meta id="meta-og-description" property="og:description" content="Dengan memohon rahmat dan rida Allah SWT, kami mengundang Anda untuk hadir di hari bahagia kami." />
+    <meta id="meta-og-image" property="og:image" content="https://invitation.permatawedding.com/2027/ilyas-pramudita/images/cover.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta id="meta-twitter-title" name="twitter:title" content="Pernikahan Ahmad & Siti — 1 Oktober 2025" />
+    <meta id="meta-twitter-description" name="twitter:description" content="Dengan memohon rahmat dan rida Allah SWT, kami mengundang Anda untuk hadir di hari bahagia kami." />
+    <meta id="meta-twitter-image" name="twitter:image" content="https://invitation.permatawedding.com/2027/ilyas-pramudita/images/cover.jpg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&family=Shippori+Mincho:wght@400;500;600;700&family=Yuji+Syuku&display=swap" rel="stylesheet" />
+
+    <!-- Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" />
+    <link rel="stylesheet" href="css/style.css?v00000" />
+  </head>
+  <body>
+    <!-- ── LOADING ── -->
+    <div id="loading-screen">
+      <div class="jp-loader">
+        <div id="cover-initials" class="hanko-stamp mt-3">I <span class="text-xs">&amp;</span> P</div>
+      </div>
+    </div>
+
+    <!-- ── MUSIC ── -->
+    <audio id="bg-music" loop preload="none">
+      <source src="https://files.matikiri.net/uploads/DENNY_CAKNAN_-_Sinarengan__feat._Bella_Bonita_.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- ── MUSIC BUTTON ── -->
+    <button id="music-btn" class="floating-btn jp-btn" aria-label="Toggle musik">
+      <i class="fas fa-fan"></i>
+    </button>
+
+    <!-- ── SAKURA PETALS ── -->
+    <div id="sakura-container"></div>
+
+    <!-- ════════════════════════════════════════════════
+       COVER SECTION
+  ════════════════════════════════════════════════ -->
+    <section id="cover" class="cover-section">
+      <!-- id="cover-photo" diisi _setCoverBg() dari API cover_photo_url [6][18] -->
+      <div id="cover-photo" class="cover-img-bg" style="background-image: url(&quot;images/cover.jpg&quot;)"></div>
+      <div class="cover-overlay"></div>
+      <div class="seigaiha-pattern" style="opacity: 0.07"></div>
+
+      <div class="cover-content relative z-10">
+        <div class="cover-right animate__animated animate__fadeInRight animate__delay-1s">
+          <h1 class="vertical-text couple-names-jp" style="color: #fff">
+            <!-- id="cover-groom" & id="cover-bride" diisi dari API [6] -->
+            <span id="cover-groom">Ilyas</span>
+            <span class="ampersand-jp">と</span>
+            <span id="cover-bride">Pramudita</span>
+          </h1>
+          <div class="hanko-large animate__animated animate__zoomIn animate__delay-2s" style="color: #fff; border-color: #fff">愛</div>
+        </div>
+        <div class="cover-left animate__animated animate__fadeIn animate__delay-3s">
+          <div class="guest-info glass-jp-dark">
+            <p class="text-sm mb-1" style="color: rgba(255, 255, 255, 0.75)">Katur dhumateng / Kepada Yth:</p>
+            <h3 id="guest-name" class="font-bold text-lg" style="color: #ffb7c5">Tamu Kehormatan</h3>
+            <p id="cover-date" class="text-xs mt-2" style="color: rgba(255, 255, 255, 0.55)">01 · 10 · 2025</p>
+          </div>
+          <button id="open-btn" class="btn-jp mt-4"><i class="fas fa-door-open mr-2"></i> Buka Undangan</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════
+       MAIN CONTENT
+  ════════════════════════════════════════════════ -->
+    <div id="main-content" style="display: none">
+      <!-- ── OPENING / SCRIPTURE ── -->
+      <section id="opening" class="section-ivory text-center relative overflow-hidden">
+        <div class="branch-ornament branch-left"></div>
+        <div class="container relative z-10" data-aos="fade-up">
+          <div class="hanko-large mx-auto mb-3">祈り</div>
+          <div class="vertical-line mx-auto mb-4"></div>
+          <h2 class="sub-heading text-sakura mb-3">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</h2>
+          <p class="body-text text-ink leading-relaxed max-w-md mx-auto">
+            "Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya
+            pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."
+          </p>
+          <p class="body-text text-crimson mt-4 font-bold text-sm tracking-wide">— (QS. Ar-Rum: 21) —</p>
+        </div>
+      </section>
+
+      <!-- ── COUPLE SECTION — data diisi dari API [6] ── -->
+      <section id="couple" class="section-paper text-center relative">
+        <div class="container relative z-10">
+          <h2 class="section-title text-ink" data-aos="fade-down"><span class="text-crimson">S</span>ang Mempelai</h2>
+          <p class="body-text text-ink opacity-80 mb-6 max-w-md mx-auto" data-aos="fade-up">Dengan memohon rahmat dan rida Allah SWT, kami bermaksud menyelenggarakan acara pernikahan putra-putri kami:</p>
+
+          <div class="couple-grid">
+            <!-- Mempelai Pria [6] -->
+            <div class="couple-card" data-aos="fade-right">
+              <div class="brush-ring mx-auto mb-4">
+                <!-- id="groom-photo" → diisi _setSrc() dari groom_photo_url [6][18] -->
+                <img id="groom-photo" src="images/mempelai-pria.jpg" alt="Mempelai Pria" class="couple-img-circle" onerror="this.src = 'https://ui-avatars.com/api/?name=Ilyas&background=FDF2F4&color=9C2750&size=200'" />
+              </div>
+              <!-- id="groom-full" → diisi dari groom_name [6] -->
+              <h3 id="groom-full" class="couple-name text-ink">Ahmad Fauzan Pratama</h3>
+              <p class="couple-parents text-ink opacity-70 mb-3 text-sm">
+                Putra dari<br />
+                <!-- id="groom-father" & id="groom-mother" → diisi dari API [6] -->
+                <span id="groom-father">Bpk. Yadi</span> &amp;
+                <span id="groom-mother">Ibu Suranti</span>
+              </p>
+              <!-- id="groom-address" → diisi dari groom_address [6] -->
+              <p id="groom-address" class="text-xs text-ink opacity-60">Jambeyan Rt.18, Slogo, Tanon, Sragen</p>
+            </div>
+
+            <!-- Divider -->
+            <div class="couple-divider" data-aos="zoom-in">
+              <div class="red-line"></div>
+              <div class="hanko-small">結</div>
+              <div class="red-line"></div>
+            </div>
+
+            <!-- Mempelai Wanita [6] -->
+            <div class="couple-card" data-aos="fade-left">
+              <div class="brush-ring mx-auto mb-4">
+                <!-- id="bride-photo" → diisi _setSrc() dari bride_photo_url [6][18] -->
+                <img id="bride-photo" src="images/mempelai-wanita.jpg" alt="Mempelai Wanita" class="couple-img-circle" onerror="this.src = 'https://ui-avatars.com/api/?name=Pramudita&background=FDF2F4&color=9C2750&size=200'" />
+              </div>
+              <!-- id="bride-full" → diisi dari bride_name [6] -->
+              <h3 id="bride-full" class="couple-name text-ink">Siti Nur Aisyah</h3>
+              <p class="couple-parents text-ink opacity-70 mb-3 text-sm">
+                Putri dari<br />
+                <!-- id="bride-father" & id="bride-mother" → diisi dari API [6] -->
+                <span id="bride-father">Bpk. Prayitno</span> &amp;
+                <span id="bride-mother">Ibu Dari Yuli Astri</span>
+              </p>
+              <!-- id="bride-address" → diisi dari bride_address [6] -->
+              <p id="bride-address" class="text-xs text-ink opacity-60">Gumping Rt.18, Blangu, Gesi, Sragen</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── LOVE STORY — Opsi C: DB utama, fallback hardcode [12] ── -->
+      <section id="story" class="section-ivory text-center relative overflow-hidden">
+        <div class="branch-ornament branch-right"></div>
+        <div class="container relative z-10">
+          <h2 class="section-title text-ink" data-aos="fade-down"><span class="text-crimson">K</span>isah Cinta</h2>
+          <p class="body-text text-ink opacity-70 mb-6" data-aos="fade-up">Di bawah langit Jepang, sebuah cerita dimulai&hellip;</p>
+          <!-- id="story-list" → diisi renderStories() dari /love-stories [12] -->
+          <!-- Jika DB kosong, renderStories() akan tampilkan FALLBACK_STORIES -->
+          <div class="timeline-jp" id="story-list">
+            <div class="text-center py-4 text-crimson">
+              <i class="fas fa-fan fa-spin fa-2x"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── EVENT SECTION — data dari API /events [9] ── -->
+      <section id="event" class="section-paper text-center relative overflow-hidden">
+        <div class="container relative z-10">
+          <h2 class="section-title text-ink" data-aos="fade-down"><span class="text-crimson">W</span>aktu &amp; Tempat</h2>
+
+          <!-- Countdown — dari event_datetime pertama [9] -->
+          <div class="countdown-jp mb-6" data-aos="fade-up">
+            <h3 class="text-crimson font-calligraphy text-2xl mb-3">Menanti Hari Bahagia</h3>
+            <div class="flex justify-center gap-3">
+              <div class="cd-box-jp">
+                <span id="cd-days">00</span>
+                <p>Hari</p>
+              </div>
+              <div class="cd-box-jp">
+                <span id="cd-hours">00</span>
+                <p>Jam</p>
+              </div>
+              <div class="cd-box-jp">
+                <span id="cd-mins">00</span>
+                <p>Menit</p>
+              </div>
+              <div class="cd-box-jp">
+                <span id="cd-secs">00</span>
+                <p>Detik</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- id="event-cards-container" → diisi renderEvents() dari /events [9] -->
+          <div class="event-cards-jp" id="event-cards-container">
+            <div class="text-center py-4 text-crimson">
+              <i class="fas fa-fan fa-spin fa-2x"></i>
+            </div>
+          </div>
+
+          <!-- Hiburan — id="entertainment-container" → diisi renderEntertainment() dari /entertainment [8] -->
+          <div class="ent-info mt-5" id="entertainment-container" data-aos="fade-up">
+            <!-- Diisi otomatis dari /entertainment?order_id= [8] -->
+          </div>
+
+          <!-- Google Maps Embed — tetap hardcode karena iframe spesifik lokasi -->
+          <div class="map-container-jp mt-5 p-2 bg-white border-solid border border-gray-300" data-aos="zoom-in">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5596.363698710305!2d110.99046998872396!3d-7.328413782769874!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a06ced95f940d%3A0x5027a76e355b390!2sBlangu%2C%20Kec.%20Gesi%2C%20Kabupaten%20Sragen%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1786938289372!5m2!1sid!2sid"
+              allowfullscreen=""
+              loading="lazy"
+              class="map-iframe-jp"
+            >
+            </iframe>
+          </div>
+          <p class="text-xs text-ink opacity-50 mt-2">Blangu, Gesi, Sragen, Jawa Tengah</p>
+
+          <!-- Tombol Google Maps — href diisi renderMaps() dari google_maps_url [9] -->
+          <div class="mt-4" data-aos="fade-up">
+            <a id="maps-btn" href="#" target="_blank" rel="noopener" class="btn-jp-sm" style="display: none"> <i class="fas fa-map-marker-alt mr-2"></i> Buka di Google Maps </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── GALLERY SECTION — Lightbox2, data dari API /galleries [10] ── -->
+      <section id="gallery" class="section-ivory text-center relative overflow-hidden">
+        <div class="seigaiha-pattern opacity-10"></div>
+        <div class="container relative z-10">
+          <h2 class="section-title text-ink" data-aos="fade-down"><span class="text-crimson">G</span>aleri Mempelai</h2>
+          <p class="body-text text-ink opacity-80 mb-6" data-aos="fade-up">Kenangan abadi di bawah mekarnya sakura.</p>
+          <div class="jp-gallery" id="gallery-container" data-aos="zoom-in">
+            <div class="text-center py-4 text-crimson" style="grid-column: 1/-1">
+              <i class="fas fa-fan fa-spin fa-2x"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── LIVE STREAMING — dari API /livestreaming [11] ── -->
+      <!-- id="live-section" → disembunyikan jika tidak ada data [11] -->
+      <section id="live-section" class="section-paper text-center relative overflow-hidden" style="display: none">
+        <div class="container relative z-10">
+          <h2 class="section-title text-ink" data-aos="fade-down"><span class="text-crimson">L</span>ive Streaming</h2>
+          <p class="body-text text-ink opacity-80 mb-5 max-w-sm mx-auto" data-aos="fade-up">Untuk keluarga dan kerabat yang tidak bisa hadir secara langsung.</p>
+          <div data-aos="zoom-in">
+            <!-- id="live-title" → diisi dari title [11] -->
+            <h3 id="live-title" class="font-calligraphy text-ink text-2xl mb-2">Siaran Langsung Pernikahan</h3>
+            <!-- id="live-schedule" → diisi dari stream_start [11] -->
+            <p id="live-schedule" class="text-sm text-crimson font-bold mb-4" style="display: none"></p>
+            <!-- id="live-link" → diisi dari youtube_url [11] -->
+            <a id="live-link" href="#" target="_blank" rel="noopener" class="btn-jp inline-flex items-center gap-2"> <i class="fab fa-youtube"></i> Tonton Live Streaming </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── RSVP / BUKU TAMU [5] ── -->
+      <section id="rsvp" class="section-paper relative overflow-hidden">
+        <svg class="origami-bg" viewBox="0 0 100 100">
+          <path d="M50,10 L70,40 L90,20 L50,90 L10,20 L30,40 Z" fill="none" stroke="var(--c-crimson)" stroke-width="0.5" opacity="0.1" />
+          <path d="M30,40 L50,10 L70,40 L50,90 Z" fill="none" stroke="var(--c-crimson)" stroke-width="0.5" opacity="0.1" />
+          <path d="M50,10 L50,90" fill="none" stroke="var(--c-crimson)" stroke-width="0.5" opacity="0.1" />
+        </svg>
+
+        <div class="container relative z-10">
+          <h2 class="section-title text-ink text-center" data-aos="fade-down"><span class="text-crimson">B</span>uku Tamu</h2>
+          <div class="vertical-line mx-auto mb-5"></div>
+
+          <div class="jp-rsvp-layout">
+            <!-- Form RSVP -->
+            <div class="shoji-panel p-4" data-aos="fade-right">
+              <h3 class="font-calligraphy text-crimson mb-2 text-center text-2xl">Konfirmasi Kehadiran</h3>
+              <p class="text-ink text-center text-sm mb-4 opacity-70">Kehadiran &amp; doa restu Anda melengkapi kebahagiaan kami.</p>
+              <form id="rsvp-form" class="jp-form">
+                <div class="form-group-jp">
+                  <input type="text" id="rsvp-name" class="form-input-jp" placeholder="Nama Lengkap" required />
+                </div>
+                <div class="form-group-jp select-jp">
+                  <!-- value sesuai enum DB: hadir | tidak_hadir | ragu_ragu [5][29] -->
+                  <select id="rsvp-att" class="form-input-jp" required>
+                    <option value="" disabled selected>Kehadiran?</option>
+                    <option value="hadir">Ya, Saya Hadir</option>
+                    <option value="ragu_ragu">Mungkin / Belum Pasti</option>
+                    <option value="tidak_hadir">Maaf, Tidak Hadir</option>
+                  </select>
+                  <i class="fas fa-caret-down"></i>
+                </div>
+                <div class="form-group-jp">
+                  <textarea id="rsvp-msg" class="form-input-jp" rows="4" placeholder="Tuliskan pesan &amp; doa..." required></textarea>
+                </div>
+                <button type="submit" id="rsvp-submit" class="btn-jp w-full">Kirim Pesan</button>
+                <div id="rsvp-feedback" class="feedback-msg mt-3 text-center text-sm font-bold"></div>
+              </form>
+            </div>
+
+            <!-- Daftar Komentar [5] -->
+            <div class="shoji-panel p-4" data-aos="fade-left">
+              <h3 class="font-calligraphy text-crimson mb-3 text-center text-2xl">Pesan &amp; Doa</h3>
+              <!-- id="comments-list" → diisi renderComments() dari /comments [5] -->
+              <div class="comments-v-scroll" id="comments-list">
+                <div class="text-center py-4 text-crimson">
+                  <i class="fas fa-fan fa-spin fa-2x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── AMPLOP DIGITAL — dari API /digital-wallets [7] ── -->
+      <section id="amplop" class="section-paper text-center relative overflow-hidden">
+        <div class="container relative z-10">
+          <h2 class="section-title text-ink" data-aos="fade-down"><span class="text-crimson">T</span>anda Kasih</h2>
+          <p class="body-text text-ink opacity-80 mb-5 max-w-sm mx-auto" data-aos="fade-up">Bagi Anda yang ingin memberikan tanda kasih berupa amplop digital, dapat melalui rekening berikut:</p>
+          <!-- id="wallet-container" → diisi renderWallets() dari /digital-wallets [7] -->
+          <!-- Jika DB kosong, section amplop akan disembunyikan otomatis -->
+          <div class="gift-jp-cards" id="wallet-container" data-aos="zoom-in">
+            <div class="text-center py-4 text-crimson" style="width: 100%">
+              <i class="fas fa-fan fa-spin fa-2x"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CLOSING ── -->
+      <section class="section-ivory text-center relative overflow-hidden" style="padding-bottom: 70px">
+        <div class="container relative z-10">
+          <div class="mt-8 mb-4" data-aos="zoom-in">
+            <div class="hanko-large mx-auto">感謝</div>
+          </div>
+          <p class="font-calligraphy text-ink text-3xl mb-2 mt-4" data-aos="fade-up">Arigatou Gozaimasu</p>
+          <p class="text-ink text-sm max-w-sm mx-auto mb-6 opacity-70" data-aos="fade-up">Terima kasih atas doa dan restu yang Anda berikan kepada kami berdua.</p>
+          <div class="closing-names" data-aos="fade-up">
+            <p class="font-calligraphy text-crimson" style="font-size: 1.5rem"><span data-key="name-groom">AHMAD</span> &amp; <span data-key="name-bride">Siti</span></p>
+            <p class="text-xs text-ink opacity-50 mt-1">01 Oktober 2025</p>
+          </div>
+          <footer class="text-ink text-xs opacity-50 mt-8 pt-4">
+            <p>
+              <span data-key="name-groom">Ahmad</span> &amp; <span data-key="name-bride">Siti</span><br />
+              <strong>Made with Permata Wedding</strong>
+            </p>
+          </footer>
+        </div>
+      </section>
+    </div>
+    <!-- /main-content -->
+
+    <!-- ── BOTTOM NAVIGATION ── -->
+    <nav class="bottom-nav-jp">
+      <div class="jp-nav-inner">
+        <a href="#opening" class="nav-btn-jp active" id="nav-opening"> <i class="fas fa-torii-gate"></i><span>Intro</span> </a>
+        <a href="#couple" class="nav-btn-jp" id="nav-couple"> <i class="fas fa-user-friends"></i><span>Mempelai</span> </a>
+        <a href="#story" class="nav-btn-jp" id="nav-story"> <i class="fas fa-scroll"></i><span>Kisah</span> </a>
+        <a href="#event" class="nav-btn-jp" id="nav-event"> <i class="far fa-calendar-alt"></i><span>Acara</span> </a>
+        <a href="#gallery" class="nav-btn-jp" id="nav-gallery"> <i class="fas fa-camera-retro"></i><span>Galeri</span> </a>
+        <a href="#rsvp" class="nav-btn-jp" id="nav-rsvp"> <i class="fas fa-envelope-open-text"></i><span>RSVP</span> </a>
+        <a href="#amplop" class="nav-btn-jp" id="nav-amplop"> <i class="fas fa-gift"></i><span>Amplop</span> </a>
+      </div>
+    </nav>
+
+    <!-- ── SCRIPTS ── -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    <script src="js/script.js?v00000"></script>
+  </body>
+</html>

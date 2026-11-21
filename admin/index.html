@@ -1,0 +1,2290 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#7c0939" />
+    <title>Admin Permata Wedding</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" />
+    <link rel="preload" href="assets/fonts/material-symbols-outlined.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <!-- LOGIN -->
+    <div id="login-page" style="display: flex">
+      <div class="login-branding">
+        <h1>Kelola Momen Spesial &amp; Undangan Bahagia dengan Sentuhan Eksklusif.</h1>
+        <p>Ruang kerja kurasi estetika bagi perencana dan desainer undangan pernikahan. Menggabungkan kehangatan kartu cetak mewah dengan kepraktisan digital real-time.</p>
+        <div class="login-trust">
+          <span> <span class="material-symbols-outlined icon-xs">lock</span> Secure Admin Access </span> <span> <span class="material-symbols-outlined icon-xs">verified_user</span> Authorized Personnel Only </span>
+        </div>
+      </div>
+      <div class="login-form-panel">
+        <div class="form-header">
+          <div class="label-tag"><span class="material-symbols-outlined icon-xs"> admin_panel_settings </span> ADMIN SECURITY ACCESS</div>
+          <h2>Login Administrator</h2>
+          <p>Silakan masuk menggunakan akun administrator resmi Permata Wedding.</p>
+        </div>
+        <div class="form-group">
+          <label>Username</label>
+          <div class="input-icon-wrap">
+            <span class="material-symbols-outlined">mail</span>
+            <input id="l-username" type="text" placeholder="admin" autocomplete="username" />
+          </div>
+        </div>
+        <div class="form-group" style="margin-top: 1rem">
+          <div class="form-row-between">
+            <label style="margin: 0">Kata Sandi</label>
+          </div>
+          <div class="input-icon-wrap">
+            <span class="material-symbols-outlined">lock</span>
+            <input id="l-password" type="password" placeholder="••••••••" autocomplete="current-password" />
+          </div>
+        </div>
+        <button class="btn btn-primary login-btn" id="l-btn" onclick="doLogin()" style="margin-top: 1rem">
+          Masuk ke Dashboard Admin
+          <span class="material-symbols-outlined icon-sm">arrow_forward</span>
+        </button>
+        <div class="login-note"><span class="material-symbols-outlined icon-xs"> security </span> <span> Halaman ini hanya dapat digunakan oleh administrator dan staf yang telah diberi akses resmi. </span></div>
+        <!-- FOOTER -->
+        <div class="login-footer">
+          Permata Wedding Platform © <span id="current-year"></span><br />
+          Akses terbatas untuk administrator.
+        </div>
+      </div>
+    </div>
+
+    <!-- APP SHELL -->
+    <div id="app">
+      <!-- SIDEBAR -->
+      <aside id="sidebar">
+        <div>
+          <div class="sidebar-logo">
+            <div>
+              <div class="logo-text">Permata Wedding</div>
+              <div class="logo-sub">Admin Panel Permata Wedding</div>
+            </div>
+          </div>
+          <div class="sidebar-cta">
+            <button
+              class="btn btn-primary"
+              onclick="
+                navigate('orders');
+                setTimeout(openOrderModal, 100);
+              "
+            >
+              <span class="material-symbols-outlined icon-sm">add_circle</span>
+              Buat Undangan
+            </button>
+          </div>
+          <nav class="sidebar-nav">
+            <div class="nav-section-label">Menu Utama</div>
+            <div class="nav-item active" data-page="dashboard" onclick="navigate('dashboard')">
+              <span class="nav-icon"><span class="material-symbols-outlined icon-sm">dashboard</span></span>
+              Dashboard
+            </div>
+            <div class="nav-item" data-page="themes" onclick="navigate('themes')">
+              <span class="nav-icon"><span class="material-symbols-outlined icon-sm">palette</span></span>
+              Themes
+            </div>
+            <div class="nav-item" data-page="orders" onclick="navigate('orders')">
+              <span class="nav-icon"><span class="material-symbols-outlined icon-sm">local_mall</span></span>
+              Orders
+              <span class="nav-badge" id="orders-badge" style="display: none"></span>
+            </div>
+            <div class="nav-item" data-page="testimonials" onclick="navigate('testimonials')">
+              <span class="nav-icon"><span class="material-symbols-outlined icon-sm">rate_review</span></span>
+              Testimoni
+            </div>
+            <div class="nav-item" data-page="whatsapp" onclick="navigate('whatsapp')">
+              <span class="nav-icon"><span class="material-symbols-outlined icon-sm" style="color: #25d366">chat</span></span>
+              WhatsApp Gateway
+            </div>
+            <div class="nav-item" data-page="cdn" onclick="navigate('cdn')">
+              <span class="nav-icon"><span class="material-symbols-outlined icon-sm" style="color: #0284c7">cloud_queue</span></span>
+              CDN Media Hub
+            </div>
+            <div class="nav-item" data-page="settings" onclick="navigate('settings')">
+              <span class="nav-icon"><span class="material-symbols-outlined icon-sm">settings</span></span>
+              Pengaturan
+            </div>
+          </nav>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="nav-item logout-item" onclick="doLogout()">
+            <span class="nav-icon"><span class="material-symbols-outlined icon-sm">logout</span></span>
+            Keluar
+          </div>
+          <div class="sidebar-profile">
+            <div class="sidebar-profile-avatar">PW</div>
+            <div class="sidebar-profile-info">
+              <div class="sidebar-profile-name" id="sidebar-user-name">Permata</div>
+              <div class="sidebar-profile-role" id="sidebar-user-role">Permata</div>
+            </div>
+            <div class="sidebar-profile-dot" title="Online"></div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <div id="main">
+        <header id="topbar">
+          <button id="btn-toggle-sidebar" onclick="toggleSidebar()" aria-label="Buka menu">
+            <svg viewBox="0 0 24 24">
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+          <div id="topbar-title">Dashboard</div>
+          <div class="topbar-actions">
+            <button class="btn btn-outline btn-sm hide-mobile" onclick="navigate('themes')">
+              <span class="material-symbols-outlined icon-xs">visibility</span>
+              Live Preview
+            </button>
+            <button class="btn-icon hide-mobile" onclick="navigate('settings')" title="Pengaturan">
+              <span class="material-symbols-outlined icon-sm">tune</span>
+            </button>
+            <div style="position: relative">
+              <button class="btn-icon" id="btn-notif" onclick="toggleNotifDropdown()" title="Notifikasi Pesanan">
+                <span class="material-symbols-outlined icon-sm">notifications</span>
+                <span class="notif-dot" id="notif-dot" style="display: none"></span>
+              </button>
+
+              <!-- Dropdown Pesanan Baru -->
+              <div
+                id="notif-dropdown"
+                style="
+                  display: none;
+                  position: absolute;
+                  right: 0;
+                  top: calc(100% + 8px);
+                  width: min(320px, calc(100vw - 2rem));
+                  background: var(--surface-container-lowest);
+                  border: 1px solid var(--border-mid);
+                  border-radius: var(--r-lg);
+                  box-shadow: var(--shadow-3);
+                  z-index: 100;
+                  overflow: hidden;
+                "
+              >
+                <div style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: var(--surface-container-low)">
+                  <strong style="font-size: 0.8125rem; color: var(--on-surface)">Pesanan Masuk Terbaru</strong>
+                  <span class="badge badge-rose" id="notif-badge-count" style="width: auto">0 Baru</span>
+                </div>
+                <div id="notif-list" style="max-height: 280px; overflow-y: auto; -webkit-overflow-scrolling: touch">
+                  <div style="padding: 1.5rem; text-align: center; color: var(--outline); font-size: 0.75rem">Memuat pesanan...</div>
+                </div>
+                <div style="padding: 0.5rem; text-align: center; border-top: 1px solid var(--border-light); background: var(--surface-container-lowest)">
+                  <button
+                    class="btn btn-ghost btn-sm"
+                    style="width: 100%; font-size: 0.75rem"
+                    onclick="
+                      navigate('orders');
+                      toggleNotifDropdown();
+                    "
+                  >
+                    Lihat Semua Pesanan →
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button id="btn-logout" onclick="doLogout()">
+            <span class="material-symbols-outlined icon-xs">logout</span>
+            Keluar
+          </button>
+        </header>
+
+        <main id="content">
+          <!-- ═══ DASHBOARD ═══ -->
+          <div class="page active" id="page-dashboard">
+            <div class="page-header">
+              <div>
+                <div class="page-title">Selamat Datang di Permata Wedding Dashboard</div>
+                <div class="page-sub">Kelola digital stationery, pantau grafik pesanan masuk, dan konfirmasi data mempelai secara real-time.</div>
+              </div>
+              <div style="display: flex; gap: 0.5rem; flex-wrap: wrap">
+                <button class="btn btn-outline" onclick="loadDashboard()">
+                  <span class="material-symbols-outlined icon-sm">refresh</span>
+                  Refresh Data
+                </button>
+                <button
+                  class="btn btn-primary"
+                  onclick="
+                    navigate('orders');
+                    setTimeout(openOrderModal, 100);
+                  "
+                >
+                  <span class="material-symbols-outlined icon-sm">add_circle</span>
+                  Buat Undangan
+                </button>
+              </div>
+            </div>
+
+            <!-- 5 STATS REKAP -->
+            <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+              <div class="stat-card">
+                <div class="stat-card-head">
+                  <div>
+                    <div class="stat-label">Total Undangan Aktif</div>
+                    <div class="stat-value" id="stat-total">—</div>
+                  </div>
+                  <div class="stat-card-icon" style="background: var(--surface-container-high); color: var(--primary-container)">
+                    <span class="material-symbols-outlined icon-lg">drafts</span>
+                  </div>
+                </div>
+                <div class="stat-meta" ><span class="material-symbols-outlined icon-xs">trending_up</span> Order dengan domain aktif</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-card-head">
+                  <div>
+                    <div class="stat-label">Total Kunjungan (Views)</div>
+                    <div class="stat-value" id="stat-views" >0</div>
+                  </div>
+                  <div class="stat-card-icon" >
+                    <span class="material-symbols-outlined icon-lg">visibility</span>
+                  </div>
+                </div>
+                <div class="stat-meta"">analytics</span> Seluruh undangan dibuka</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-card-head">
+                  <div>
+                    <div class="stat-label">Pesanan Baru (Aktif)</div>
+                    <div class="stat-value" id="stat-active">—</div>
+                  </div>
+                  <div class="stat-card-icon" style="background: #fff0f3; color: var(--secondary)">
+                    <span class="material-symbols-outlined icon-lg">shopping_bag</span>
+                  </div>
+                </div>
+                <div class="stat-meta" style="color: var(--secondary)"><span class="material-symbols-outlined icon-xs">arrow_upward</span> Akumulasi order aktif</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-card-head">
+                  <div>
+                    <div class="stat-label">Pesanan Terbayar (Paid)</div>
+                    <div class="stat-value" id="stat-paid">—</div>
+                  </div>
+                  <div class="stat-card-icon" style="background: var(--success-bg); color: var(--success-text)">
+                    <span class="material-symbols-outlined icon-lg">group_add</span>
+                  </div>
+                </div>
+                <div class="stat-meta" style="color: var(--success-text)"><span class="material-symbols-outlined icon-xs">check</span> Status pembayaran lunas</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-card-head">
+                  <div>
+                    <div class="stat-label">Tema Katalog Aktif</div>
+                    <div class="stat-value" id="stat-themes">—</div>
+                  </div>
+                  <div class="stat-card-icon" style="background: var(--warn-bg); color: var(--warn-text)">
+                    <span class="material-symbols-outlined icon-lg">palette</span>
+                  </div>
+                </div>
+                <div class="stat-meta" style="color: var(--warn-text)"><span class="material-symbols-outlined icon-xs">new_releases</span> Desain katalog aktif</div>
+              </div>
+            </div>
+
+            <!-- GRAFIK ORDERAN MASUK TIAP BULAN DAN MINGGU + RESET TAHUNAN & HISTORI -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Grafik Orderan Masuk Tiap Bulan dan Minggu</div>
+                  <div class="page-sub" style="font-size: 0.75rem; margin: 0">Dihitung otomatis dari rekaman tanggal order di database. Siklus tahun berjalan direset per 1 Januari, dan arsip tahun lampau tetap dapat dipilih.</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap">
+                  <div class="category-pills" style="margin: 0; padding: 0">
+                    <button class="cat-pill active" id="btn-period-month" onclick="setChartPeriod('month')">Bulan Ini (Mingguan)</button>
+                    <button class="cat-pill" id="btn-period-year" onclick="setChartPeriod('year')">Tahunan (Bulanan)</button>
+                  </div>
+                  <select
+                    id="chart-year-select"
+                    onchange="changeChartYear(this.value)"
+                    style="padding: 0.35rem 0.75rem; border-radius: var(--r-full); border: 1px solid var(--border); font-size: 0.75rem; font-weight: 600; background: #fff; color: var(--primary-container)"
+                  ></select>
+                </div>
+              </div>
+
+              <div id="chart-container" style="display: flex; align-items: flex-end; justify-content: space-between; height: 180px; padding: 1.5rem 0.5rem 0.5rem; border-bottom: 1px solid var(--border-light); gap: 0.75rem; overflow-x: auto; -webkit-overflow-scrolling: touch"></div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 1rem; padding-top: 1rem; text-align: center">
+                <div>
+                  <div style="font-size: 0.6875rem; text-transform: uppercase; color: var(--outline); font-weight: 600">Total Order Periode</div>
+                  <div id="chart-stat-orders" style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; color: var(--primary)">0 Pesanan</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.6875rem; text-transform: uppercase; color: var(--outline); font-weight: 600">Total Nilai Transaksi</div>
+                  <div id="chart-stat-revenue" style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; color: var(--on-surface)">Rp 0</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.6875rem; text-transform: uppercase; color: var(--outline); font-weight: 600">Order Lunas</div>
+                  <div id="chart-stat-paid" style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; color: var(--success-text)">0 Lunas</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.6875rem; text-transform: uppercase; color: var(--outline); font-weight: 600">Rata-rata Nilai Order</div>
+                  <div id="chart-stat-avg" style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; color: var(--secondary)">Rp 0</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PESANAN & TEMA -->
+            <div class="dashboard-mid-grid">
+              <!-- PESANAN TERBARU - KIRI -->
+              <div class="card dashboard-orders-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Pesanan Terbaru</div>
+                    <div class="page-sub" style="font-size: 0.75rem; margin: 0">5 pesanan terakhir yang tercatat di database sistem</div>
+                  </div>
+
+                  <button class="btn btn-outline btn-sm" onclick="navigate('orders')">
+                    Kelola Semua Pesanan
+                    <span class="material-symbols-outlined icon-xs"> arrow_forward </span>
+                  </button>
+                </div>
+
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Kode Order</th>
+                        <th>Pelanggan</th>
+                        <th>Pilihan Tema</th>
+                        <th>Status Pembayaran</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+
+                    <tbody id="dashboard-recent-orders-tbody">
+                      <tr>
+                        <td colspan="8">
+                          <div class="empty-state">
+                            <p>Memuat pesanan terbaru…</p>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- TEMA TERPOPULER - KANAN -->
+              <div class="card dashboard-themes-card">
+                <div class="card-header">
+                  <div class="card-title">Tema Terpopuler</div>
+
+                  <button class="btn btn-ghost btn-sm" onclick="navigate('themes')">Lihat Semua</button>
+                </div>
+
+                <div id="popular-themes-list" style="display: flex; flex-direction: column; gap: 0.75rem">
+                  <div class="empty-state" style="padding: 1.5rem 0">
+                    <p>Memuat tema terpopuler...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ THEMES ═══ -->
+          <div class="page" id="page-themes">
+            <div class="page-header">
+              <div>
+                <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary-container); font-weight: 700; margin-bottom: 0.25rem">Permata Wedding Design Studio • Katalog Database</div>
+                <div class="page-title">Katalog &amp; Desain Tema Undangan</div>
+                <div class="page-sub">Kelola template desain digital, variasi palet warna pernikahan, tipografi, dan status ketersediaan tema untuk calon pengantin.</div>
+              </div>
+              <button class="btn btn-primary" onclick="openThemeModal()">
+                <span class="material-symbols-outlined icon-sm">add_circle</span>
+                + Tambah Tema Baru
+              </button>
+            </div>
+
+            <!-- STATS ATAS TEMA -->
+            <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); margin-bottom: 1.5rem">
+              <div class="stat-card">
+                <div class="stat-card-head">
+                  <div>
+                    <div class="stat-label">Total Koleksi Tema</div>
+                    <div class="stat-value" id="thm-stat-total">0</div>
+                  </div>
+                  <div class="stat-card-icon" style="background: var(--surface-container-high); color: var(--primary-container)">
+                    <span class="material-symbols-outlined icon-md">auto_stories</span>
+                  </div>
+                </div>
+                <div class="stat-meta" style="color: var(--success-text)">Terdaftar di server</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-head">
+                  <div>
+                    <div class="stat-label">Tema Aktif</div>
+                    <div class="stat-value" id="thm-stat-active">0</div>
+                  </div>
+                  <div class="stat-card-icon" style="background: #fff0f3; color: var(--secondary)">
+                    <span class="material-symbols-outlined icon-md">hotel_class</span>
+                  </div>
+                </div>
+                <div class="stat-meta" style="color: var(--secondary)">Siap digunakan calon pengantin</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-head">
+                  <div>
+                    <div class="stat-label">Tema Nonaktif (Draft)</div>
+                    <div class="stat-value" id="thm-stat-draft">0</div>
+                  </div>
+                  <div class="stat-card-icon" style="background: var(--warn-bg); color: var(--warn-text)">
+                    <span class="material-symbols-outlined icon-md">new_releases</span>
+                  </div>
+                </div>
+                <div class="stat-meta">Dalam tahap review</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-head">
+                  <div>
+                    <div class="stat-label">Total Kategori</div>
+                    <div class="stat-value" id="thm-stat-cats">0</div>
+                  </div>
+                  <div class="stat-card-icon" style="background: #fef7e6; color: #c5a059">
+                    <span class="material-symbols-outlined icon-md">palette</span>
+                  </div>
+                </div>
+                <div class="stat-meta">Varian gaya desain</div>
+              </div>
+            </div>
+
+            <!-- CATEGORY FILTER PILLS -->
+            <div class="category-pills" id="theme-category-pills">
+              <button class="cat-pill active" onclick="filterThemesByCat('', this)">Semua Tema</button>
+              <button class="cat-pill" onclick="filterThemesByCat('basic', this)">Basic</button>
+              <button class="cat-pill" onclick="filterThemesByCat('minimalis', this)">Minimalis Clean</button>
+              <button class="cat-pill" onclick="filterThemesByCat('klasik', this)">Klasik</button>
+              <button class="cat-pill" onclick="filterThemesByCat('premium', this)">Premium</button>
+            </div>
+
+            <!-- SEARCH & SORT BAR -->
+            <div class="filter-bar" style="margin-bottom: 1.5rem">
+              <input id="theme-search" placeholder="Cari nama template tema dari database..." oninput="filterThemes()" style="flex: 1; min-width: 280px" />
+              <select id="theme-sort" onchange="sortThemes(this.value)" style="padding: 0.4rem 1rem">
+                <option value="terbaru">Urutkan: ID / Terbaru</option>
+                <option value="nama">Urutkan: Nama (A-Z)</option>
+              </select>
+            </div>
+
+            <!-- THEME CARDS GRID -->
+            <div class="theme-grid" id="themes-grid-container">
+              <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--outline)">Memuat tema dari server…</div>
+            </div>
+            <!-- Pagination Controls Themes -->
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; margin-top: 0.5rem; border-top: 1px solid var(--border-light); flex-wrap: wrap; gap: 0.75rem">
+              <div id="themes-pagination-info" style="font-size: 0.8125rem; color: var(--on-surface-variant)">Menampilkan 0 dari 0 tema</div>
+              <div id="themes-pagination-controls" style="display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap">
+                <!-- Tombol navigasi halaman dirender via renderThemesPagination() -->
+              </div>
+            </div>
+            <!-- STUDIO BOX -->
+            <div class="studio-box" style="display:none;">
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.5rem">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 0.4rem; font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--primary)">
+                    <span class="material-symbols-outlined icon-sm">brush</span>
+                    Permata Theme Studio — Konfigurasi Cepat
+                  </div>
+                  <div style="font-size: 0.8125rem; color: var(--on-surface-variant); margin-top: 0.25rem">Ubah preset visual bawaan dan fitur interaktif template secara instan untuk seluruh katalog tema pengantin.</div>
+                </div>
+                <div style="display: flex; gap: 0.5rem">
+                  <button class="btn btn-outline btn-sm" onclick="toast('Preset dikembalikan ke default', 'info')">Reset ke Standar</button>
+                  <button class="btn btn-primary btn-sm" onclick="toast('Preset global berhasil disimpan!', 'success')">Simpan Preset Global</button>
+                </div>
+              </div>
+
+              <div class="studio-grid">
+                <div class="studio-item-card">
+                  <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--on-surface); margin-bottom: 0.75rem">1. Palet Warna Aksen Utama</div>
+                  <div class="color-palette-options">
+                    <div class="palette-opt active" onclick="selectPalette(this)">
+                      <span>Rose Gold</span>
+                      <div class="palette-dots"><span class="p-dot" style="background: #9c2750"></span><span class="p-dot" style="background: #e05a7d"></span><span class="p-dot" style="background: #ffd9e0"></span></div>
+                    </div>
+                    <div class="palette-opt" onclick="selectPalette(this)">
+                      <span>Champagne</span>
+                      <div class="palette-dots"><span class="p-dot" style="background: #c5a059"></span><span class="p-dot" style="background: #e9c176"></span><span class="p-dot" style="background: #ffdea5"></span></div>
+                    </div>
+                    <div class="palette-opt" onclick="selectPalette(this)">
+                      <span>Emerald Luxe</span>
+                      <div class="palette-dots"><span class="p-dot" style="background: #1b5e20"></span><span class="p-dot" style="background: #4caf50"></span><span class="p-dot" style="background: #c8e6c9"></span></div>
+                    </div>
+                    <div class="palette-opt" onclick="selectPalette(this)">
+                      <span>Classic Burgundy</span>
+                      <div class="palette-dots"><span class="p-dot" style="background: #4a0e17"></span><span class="p-dot" style="background: #7c0939"></span><span class="p-dot" style="background: #ddbfc4"></span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="studio-item-card">
+                  <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--on-surface); margin-bottom: 0.75rem">2. Tipografi Judul (Headline Font)</div>
+                  <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.8125rem">
+                    <label style="display: flex; align-items: center; justify-content: space-between; padding: 0.4rem 0.6rem; background: #fff; border-radius: var(--r); border: 1px solid var(--border); cursor: pointer">
+                      <span style="font-family: var(--font-display); font-weight: 600">Playfair Display</span>
+                      <span class="badge badge-rose" style="font-size: 0.625rem; width: auto">Bawaan Permata Wedding</span>
+                    </label>
+                    <label style="display: flex; align-items: center; justify-content: space-between; padding: 0.4rem 0.6rem; background: #fff; border-radius: var(--r); border: 1px solid var(--border); cursor: pointer">
+                      <span style="font-family: Georgia, serif">Cormorant Garamond</span>
+                      <span style="font-size: 0.6875rem; color: var(--outline)">Vintage Serif</span>
+                    </label>
+                    <label style="display: flex; align-items: center; justify-content: space-between; padding: 0.4rem 0.6rem; background: #fff; border-radius: var(--r); border: 1px solid var(--border); cursor: pointer">
+                      <span style="font-family: sans-serif; font-weight: 700">Cinzel Decorative</span>
+                      <span style="font-size: 0.6875rem; color: var(--outline)">Royal Stamping</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="studio-item-card">
+                  <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--on-surface); margin-bottom: 0.75rem">3. Fitur Interaktif Bawaan</div>
+                  <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.75rem">
+                    <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer">
+                      <span>Amplop Digital &amp; QRIS</span>
+                      <input type="checkbox" checked />
+                    </label>
+                    <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer">
+                      <span>Animasi Buka Amplop (Wax Seal)</span>
+                      <input type="checkbox" checked />
+                    </label>
+                    <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer">
+                      <span>Live Streaming YouTube / Zoom</span>
+                      <input type="checkbox" checked />
+                    </label>
+                    <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer">
+                      <span>Countdown Timer Hari H</span>
+                      <input type="checkbox" checked />
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ ORDERS ═══ -->
+          <div class="page" id="page-orders">
+            <div class="page-header">
+              <div>
+                <div class="page-title">Daftar Pesanan Undangan</div>
+                <div class="page-sub">Kelola status produksi, aktivasi domain mempelai, dan kelengkapan pembayaran.</div>
+              </div>
+              <button class="btn btn-primary" onclick="openOrderModal()"><span class="material-symbols-outlined icon-sm">add_circle</span> Tambah Order Baru</button>
+            </div>
+
+            <!-- Filter Pills Status Pembayaran -->
+            <div class="category-pills" id="order-status-pills">
+              <button class="cat-pill active" onclick="filterOrdersByStatus('', this)">Semua Pesanan</button>
+              <button class="cat-pill" onclick="filterOrdersByStatus('paid', this)">Lunas (Paid)</button>
+              <button class="cat-pill" onclick="filterOrdersByStatus('partial', this)">DP (Partial)</button>
+              <button class="cat-pill" onclick="filterOrdersByStatus('unpaid', this)">Menunggu Bayar</button>
+              <button class="cat-pill" onclick="filterOrdersByStatus('cancelled', this)">Dibatalkan</button>
+            </div>
+
+            <!-- Search & Filter Bar -->
+            <div class="filter-bar" style="margin-bottom: 1.25rem">
+              <input id="order-search" placeholder="Cari kode order, nama pasangan, no. HP..." oninput="filterOrders()" style="flex: 1; min-width: 260px" />
+              <select id="order-filter-pkg" onchange="filterOrders()" style="padding: 0.4rem 1rem">
+                <option value="">Semua Paket</option>
+                <option value="basic">Paket Basic</option>
+                <option value="premium">Paket Premium</option>
+                <option value="exclusive">Paket Exclusive</option>
+              </select>
+            </div>
+
+            <!-- Card Data Table -->
+            <div class="card">
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Pelanggan</th>
+                      <th>Tema</th>
+                      <th>Total Tagihan</th>
+                      <th>Status Pembayaran</th>
+                      <th>Kunjungan</th>
+                      <th>Domain Status</th>
+                      <th style="text-align: right">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody id="orders-tbody">
+                    <tr>
+                      <td colspan="7">
+                        <div class="empty-state"><p>Memuat daftar pesanan...</p></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- Pagination Controls -->
+              <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; margin-top: 1rem; border-top: 1px solid var(--border-light); flex-wrap: wrap; gap: 0.75rem">
+                <div id="orders-pagination-info" style="font-size: 0.8125rem; color: var(--on-surface-variant)">Menampilkan 0 dari 0 pesanan</div>
+                <div id="orders-pagination-controls" style="display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap">
+                  <!-- Tombol navigasi halaman dirender via renderOrdersPagination() -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ ORDER DETAIL ═══ -->
+          <div class="page" id="page-order-detail">
+            <div class="page-header">
+              <div>
+                <div class="page-title" id="od-title">Detail Undangan</div>
+                <div class="page-sub">Kelola seluruh data pasangan, rangkaian acara, musik, amplop, dan ucapan tamu.</div>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                <button class="btn btn-outline" id="btn-od-preview" onclick="previewCurrentOrder()" title="Buka Live Preview Undangan">
+                  <span class="material-symbols-outlined icon-sm">visibility</span> Preview Web
+                </button>
+                <button class="btn btn-outline" id="btn-od-recompile" onclick="recompileCurrentOrder()" title="Kompilasi Ulang HTML Statis Undangan">
+                  <span class="material-symbols-outlined icon-sm">build</span> Recompile
+                </button>
+                <button class="btn btn-primary" onclick="openOrderWaDirect()" style="background:linear-gradient(135deg, #25d366, #128c7e);border-color:#128c7e;">
+                  <span class="material-symbols-outlined icon-sm">chat</span> Kirim WhatsApp
+                </button>
+                <button class="btn btn-outline" onclick="navigate('orders')">
+                  <span class="material-symbols-outlined icon-sm">arrow_back</span>
+                  Kembali ke Orders
+                </button>
+              </div>
+            </div>
+
+            <div class="tabs">
+              <button class="tab-btn active" data-tab="couple" onclick="switchTab('couple')"><span class="material-symbols-outlined icon-xs">favorite</span> Mempelai</button>
+              <button class="tab-btn" data-tab="events" onclick="switchTab('events')"><span class="material-symbols-outlined icon-xs">event</span> Acara</button>
+              <button class="tab-btn" data-tab="music" onclick="switchTab('music')"><span class="material-symbols-outlined icon-xs">music_note</span> Musik</button>
+              <button class="tab-btn" data-tab="love-stories" onclick="switchTab('love-stories')"><span class="material-symbols-outlined icon-xs">timeline</span> Cerita</button>
+              <button class="tab-btn" data-tab="wallets" onclick="switchTab('wallets')"><span class="material-symbols-outlined icon-xs">account_balance_wallet</span> Amplop</button>
+              <button class="tab-btn" data-tab="gallery" onclick="switchTab('gallery')"><span class="material-symbols-outlined icon-xs">photo_library</span> Galeri</button>
+              <button class="tab-btn" data-tab="livestreaming" onclick="switchTab('livestreaming')"><span class="material-symbols-outlined icon-xs">live_tv</span> Live</button>
+              <button class="tab-btn" data-tab="entertainment" onclick="switchTab('entertainment')"><span class="material-symbols-outlined icon-xs">celebration</span> Hiburan</button>
+              <button class="tab-btn" data-tab="comments" onclick="switchTab('comments')"><span class="material-symbols-outlined icon-xs">chat</span> RSVP &amp; Ucapan</button>
+            </div>
+
+            <!-- TAB: COUPLE -->
+            <div class="tab-panel active" id="tab-couple">
+              <div class="card">
+                <div class="card-header"><div class="card-title">Profil Pasangan Mempelai</div></div>
+                <div class="form-grid">
+                  <div class="span-full form-group"><label>Slug URL Undangan *</label><input id="c-slug" placeholder="sarah-dan-dimas" /></div>
+                </div>
+                <div class="form-group">
+                  <label>Foto Cover Utama</label>
+                  <div style="display: flex; gap: 0.5rem">
+                    <input id="c-cover" placeholder="URL foto cover" style="flex: 1" /><button type="button" class="btn btn-outline btn-sm" id="btn-upload-cover">
+                      <span class="material-symbols-outlined icon-xs">photo_camera</span> Upload
+                    </button>
+                  </div>
+                  <img id="c-cover-preview" style="display: none; max-height: 100px; margin-top: 0.5rem; border-radius: var(--r-md); border: 1px solid var(--border)" />
+                </div>
+                <hr class="divider" />
+                <div class="couple-grid">
+                  <div>
+                    <div class="card-title" style="margin-bottom: 0.75rem; color: var(--primary)"><span class="material-symbols-outlined icon-sm" style="vertical-align: middle">man</span> Mempelai Pria</div>
+                    <div class="form-group"><label>Nama Lengkap *</label><input id="c-groom-name" /></div>
+                    <div class="form-group"><label>Nama Panggilan</label><input id="c-groom-nick" /></div>
+                    <div class="form-group"><label>Nama Ayah</label><input id="c-groom-father" /></div>
+                    <div class="form-group"><label>Nama Ibu</label><input id="c-groom-mother" /></div>
+                    <div class="form-group">
+                      <label>Foto Mempelai Pria</label>
+                      <div style="display: flex; gap: 0.5rem">
+                        <input id="c-groom-photo" placeholder="URL foto" style="flex: 1" /><button type="button" class="btn btn-outline btn-sm" id="btn-upload-groom">
+                          <span class="material-symbols-outlined icon-xs">photo_camera</span> Upload
+                        </button>
+                      </div>
+                      <img id="c-groom-preview" style="display: none; max-height: 80px; margin-top: 0.5rem; border-radius: var(--r-md); border: 1px solid var(--border)" />
+                    </div>
+                    <div class="form-group"><label>Alamat</label><textarea id="c-groom-addr"></textarea></div>
+                  </div>
+                  <div>
+                    <div class="card-title" style="margin-bottom: 0.75rem; color: var(--secondary)"><span class="material-symbols-outlined icon-sm" style="vertical-align: middle">woman</span> Mempelai Wanita</div>
+                    <div class="form-group"><label>Nama Lengkap *</label><input id="c-bride-name" /></div>
+                    <div class="form-group"><label>Nama Panggilan</label><input id="c-bride-nick" /></div>
+                    <div class="form-group"><label>Nama Ayah</label><input id="c-bride-father" /></div>
+                    <div class="form-group"><label>Nama Ibu</label><input id="c-bride-mother" /></div>
+                    <div class="form-group">
+                      <label>Foto Mempelai Wanita</label>
+                      <div style="display: flex; gap: 0.5rem">
+                        <input id="c-bride-photo" placeholder="URL foto" style="flex: 1" /><button type="button" class="btn btn-outline btn-sm" id="btn-upload-bride">
+                          <span class="material-symbols-outlined icon-xs">photo_camera</span> Upload
+                        </button>
+                      </div>
+                      <img id="c-bride-preview" style="display: none; max-height: 80px; margin-top: 0.5rem; border-radius: var(--r-md); border: 1px solid var(--border)" />
+                    </div>
+                    <div class="form-group"><label>Alamat</label><textarea id="c-bride-addr"></textarea></div>
+                  </div>
+                </div>
+                <div style="margin-top: 1.25rem; text-align: right">
+                  <button class="btn btn-primary" onclick="saveCouple()">Simpan Data Mempelai</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: EVENTS -->
+            <div class="tab-panel" id="tab-events">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Rangkaian Acara (Akad &amp; Resepsi)</div>
+                  <button class="btn btn-primary btn-sm" onclick="openEventModal()"><span class="material-symbols-outlined icon-xs">add</span> Tambah Acara</button>
+                </div>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Nama Acara</th>
+                        <th>Waktu</th>
+                        <th>Venue</th>
+                        <th>Urutan</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="events-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: MUSIC -->
+            <div class="tab-panel" id="tab-music">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Musik Latar Undangan</div>
+                  <button class="btn btn-primary btn-sm" onclick="openMusicModal()"><span class="material-symbols-outlined icon-xs">add</span> Tambah Musik</button>
+                </div>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Judul / Artis</th>
+                        <th>Audio</th>
+                        <th>Autoplay / Loop</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="music-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: LOVE STORIES -->
+            <div class="tab-panel" id="tab-love-stories">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Love Story Timeline</div>
+                  <button class="btn btn-primary btn-sm" onclick="openLsModal()"><span class="material-symbols-outlined icon-xs">add</span> Tambah Cerita</button>
+                </div>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Judul</th>
+                        <th>Tanggal</th>
+                        <th>Isi Cerita</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="ls-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: WALLETS -->
+            <div class="tab-panel" id="tab-wallets">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Amplop Digital / Rekening Bank</div>
+                  <button class="btn btn-primary btn-sm" onclick="openWalletModal()"><span class="material-symbols-outlined icon-xs">add</span> Tambah Rekening</button>
+                </div>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Bank / Wallet</th>
+                        <th>Nomor</th>
+                        <th>Atas Nama</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="wl-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: GALLERY -->
+            <div class="tab-panel" id="tab-gallery">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Galeri Foto Pre-wedding</div>
+                  <button class="btn btn-primary btn-sm" onclick="openGalleryModal()"><span class="material-symbols-outlined icon-xs">add</span> Tambah Foto</button>
+                </div>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Preview</th>
+                        <th>Caption</th>
+                        <th>Cover</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="gl-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: LIVESTREAMING -->
+            <div class="tab-panel" id="tab-livestreaming">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Live Streaming YouTube / Zoom</div>
+                  <button class="btn btn-primary btn-sm" onclick="openLvModal()"><span class="material-symbols-outlined icon-xs">add</span> Tambah Live</button>
+                </div>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Judul</th>
+                        <th>YouTube</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="lv-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: ENTERTAINMENT -->
+            <div class="tab-panel" id="tab-entertainment">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Hiburan &amp; Pengisi Acara</div>
+                  <button class="btn btn-primary btn-sm" onclick="openEnModal()"><span class="material-symbols-outlined icon-xs">add</span> Tambah Hiburan</button>
+                </div>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Nama</th>
+                        <th>Jenis</th>
+                        <th>Keterangan</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="en-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: COMMENTS / RSVP -->
+            <div class="tab-panel" id="tab-comments">
+              <div class="card">
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap">
+                  <div class="stat-card" style="flex: 1; min-width: 100px">
+                    <div class="stat-value" id="cm-hadir" style="color: var(--success-text)">—</div>
+                    <div class="stat-label">Hadir Pasti</div>
+                  </div>
+                  <div class="stat-card" style="flex: 1; min-width: 100px">
+                    <div class="stat-value" id="cm-tidak" style="color: var(--error)">—</div>
+                    <div class="stat-label">Berhalangan</div>
+                  </div>
+                  <div class="stat-card" style="flex: 1; min-width: 100px">
+                    <div class="stat-value" id="cm-ragu" style="color: var(--warn-text)">—</div>
+                    <div class="stat-label">Ragu / Belum</div>
+                  </div>
+                  <div class="stat-card" style="flex: 1; min-width: 100px">
+                    <div class="stat-value" id="cm-total">—</div>
+                    <div class="stat-label">Total Tamu</div>
+                  </div>
+                </div>
+                <div class="card-header">
+                  <div class="card-title">Daftar Ucapan &amp; Konfirmasi Tamu</div>
+                  <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+                    <button class="btn btn-outline btn-sm" onclick="exportRsvpCsv()" title="Unduh data ucapan &amp; kehadiran dalam format CSV / Excel">
+                      <span class="material-symbols-outlined icon-xs">download</span> Ekspor CSV
+                    </button>
+                    <button class="btn btn-outline btn-sm" onclick="copyRsvpSummaryToClipboard()" title="Salin ringkasan teks RSVP untuk dikirim ke WhatsApp pengantin" style="color:#25d366;border-color:rgba(37,211,102,0.4)">
+                      <span class="material-symbols-outlined icon-xs">content_copy</span> Salin Rekap WA
+                    </button>
+                    <button class="btn btn-outline btn-sm" onclick="loadComments()"><span class="material-symbols-outlined icon-xs">refresh</span> Refresh</button>
+                  </div>
+                </div>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Nama Tamu</th>
+                        <th>Ucapan</th>
+                        <th>Kehadiran</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="cm-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ TESTIMONIALS ═══ -->
+          <div class="page" id="page-testimonials">
+            <div class="page-header">
+              <div>
+                <div class="page-title">Testimoni &amp; Ulasan Pengantin</div>
+                <div class="page-sub">Kelola apresiasi, cerita kepuasan, dan ulasan bintang dari pasangan pengantin Permata Wedding.</div>
+              </div>
+              <button class="btn btn-primary" onclick="openTmModal()"><span class="material-symbols-outlined icon-sm">add_circle</span> Tambah Testimoni</button>
+            </div>
+
+            <!-- 4 Stat Cards Ringkasan Testimoni -->
+            <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); margin-bottom: 1.5rem">
+              <div class="stat-card">
+                <div class="stat-card-head">
+                  <div>
+                    <div class="stat-label">Total Ulasan</div>
+                    <div class="stat-value" id="tm-stat-total">0</div>
+                  </div>
+                  <div class="stat-card-icon" style="background: var(--surface-container-high); color: var(--primary-container)">
+                    <span class="material-symbols-outlined icon-md">rate_review</span>
+                  </div>
+                </div>
+                <div class="stat-meta" style="color: var(--success-text)">Ulasan terdata</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-card-head">
+                  <div>
+                    <div class="stat-label">Rata-rata Rating</div>
+                    <div class="stat-value" id="tm-stat-avg" style="color: #c5a059">5.0 <small style="font-size: 0.8125rem; color: var(--outline)">/ 5.0</small></div>
+                  </div>
+                  <div class="stat-card-icon" style="background: #fef7e6; color: #c5a059">
+                    <span class="material-symbols-outlined icon-md">hotel_class</span>
+                  </div>
+                </div>
+                <div class="stat-meta" id="tm-stat-stars" style="color: #c5a059">★★★★★</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-card-head">
+                  <div>
+                    <div class="stat-label">Tayang (Published)</div>
+                    <div class="stat-value" id="tm-stat-pub" style="color: var(--success-text)">0</div>
+                  </div>
+                  <div class="stat-card-icon" style="background: var(--success-bg); color: var(--success-text)">
+                    <span class="material-symbols-outlined icon-md">visibility</span>
+                  </div>
+                </div>
+                <div class="stat-meta" style="color: var(--success-text)">Aktif di web publik</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-card-head">
+                  <div>
+                    <div class="stat-label">Draft / Arsip</div>
+                    <div class="stat-value" id="tm-stat-draft">0</div>
+                  </div>
+                  <div class="stat-card-icon" style="background: var(--surface-container-low); color: var(--outline)">
+                    <span class="material-symbols-outlined icon-md">drafts</span>
+                  </div>
+                </div>
+                <div class="stat-meta">Belum dipublikasikan</div>
+              </div>
+            </div>
+
+            <!-- Filter Status Pills -->
+            <div class="category-pills" id="tm-status-pills">
+              <button class="cat-pill active" onclick="filterTmByStatus('', this)">Semua Ulasan</button>
+              <button class="cat-pill" onclick="filterTmByStatus('1', this)">Published</button>
+              <button class="cat-pill" onclick="filterTmByStatus('0', this)">Draft</button>
+              <button class="cat-pill" onclick="filterTmByRating(5, this)">★ Bintang 5</button>
+            </div>
+
+            <!-- Search & Sort Bar -->
+            <div class="filter-bar" style="margin-bottom: 1.5rem">
+              <input id="tm-search" placeholder="Cari nama pengantin atau kutipan isi testimoni..." oninput="filterTestimonials()" style="flex: 1; min-width: 280px" />
+              <select id="tm-filter-sort" onchange="sortTestimonials(this.value)" style="padding: 0.4rem 1rem">
+                <option value="terbaru">Urutkan: Terbaru</option>
+                <option value="rating-tinggi">Rating: Tertinggi</option>
+                <option value="rating-rendah">Rating: Terendah</option>
+                <option value="nama">Nama (A-Z)</option>
+              </select>
+            </div>
+
+            <!-- Grid Card Testimoni -->
+            <div id="testimonials-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 1.25rem">
+              <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--outline)">Memuat testimoni...</div>
+            </div>
+            <!-- Pagination Controls Testimonials -->
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; margin-top: 1.5rem; border-top: 1px solid var(--border-light); flex-wrap: wrap; gap: 0.75rem">
+              <div id="tm-pagination-info" style="font-size: 0.8125rem; color: var(--on-surface-variant)">Menampilkan 0 dari 0 ulasan</div>
+              <div id="tm-pagination-controls" style="display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap">
+                <!-- Tombol navigasi halaman dirender via renderTestimonialsPagination() -->
+              </div>
+            </div>
+          </div>
+          <!-- ═══ SETTINGS ═══ -->
+          <div class="page" id="page-settings">
+            <div class="page-header">
+              <div>
+                <div class="page-title">Pengaturan Sistem</div>
+                <div class="page-sub">Konfigurasi akun administrator dan endpoint backend API.</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title" style="display: flex; align-items: center; gap: 0.5rem">
+                <span class="material-symbols-outlined icon-sm" style="color: var(--primary-container)">lock</span>
+                Ganti Password Admin
+              </div>
+              <hr class="divider" />
+              <div class="form-grid cols-1" style="max-width: 420px">
+                <div class="form-group"><label>Password Lama *</label><input id="pw-old" type="password" autocomplete="current-password" /></div>
+                <div class="form-group"><label>Password Baru *</label><input id="pw-new" type="password" autocomplete="new-password" /></div>
+                <div class="form-group"><label>Konfirmasi Password Baru *</label><input id="pw-confirm" type="password" autocomplete="new-password" /></div>
+              </div>
+              <button class="btn btn-primary" style="margin-top: 0.75rem" onclick="changePassword()">Simpan Password Baru</button>
+            </div>
+
+            <div class="card">
+              <div class="card-title" style="display: flex; align-items: center; gap: 0.5rem">
+                <span class="material-symbols-outlined icon-sm" style="color: var(--warn-text)">settings</span>
+                Konfigurasi API
+              </div>
+              <hr class="divider" />
+              <div class="form-group" style="max-width: 520px"><label>Base URL API Endpoint</label><input id="api-url-input" placeholder="https://api.permatawedding.com" /></div>
+              <button class="btn btn-outline" style="margin-top: 0.5rem" onclick="saveApiUrl()">Simpan Perubahan URL</button>
+            </div>
+          </div>
+
+          <!-- ═══ WHATSAPP GATEWAY ═══ -->
+          <div class="page" id="page-whatsapp">
+            <div class="page-header">
+              <div>
+                <div class="page-title" style="display:flex;align-items:center;gap:8px;">
+                  <span class="material-symbols-outlined" style="color:#25d366;font-size:28px;">chat</span>
+                  WhatsApp Gateway Center
+                </div>
+                <div class="page-sub">Kirim pesan WhatsApp otomatis/manual, live chat 2-arah dengan klien, pantau status koneksi perangkat, dan scan QR code.</div>
+              </div>
+              <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+                <div id="wa-gateway-status-badge" class="badge badge-warn" style="padding:6px 14px;font-size:0.8rem;display:inline-flex;align-items:center;gap:6px;">
+                  <span id="wa-gateway-status-dot" style="width:8px;height:8px;border-radius:50%;background:#f59e0b;display:inline-block;"></span>
+                  <span id="wa-gateway-status-text">Memeriksa GoWA...</span>
+                </div>
+                <button class="btn btn-outline btn-sm" id="btn-wa-reconnect" onclick="reconnectWaDevice()" title="Reconnect session ke server GoWA">
+                  <span class="material-symbols-outlined icon-xs">sync</span> Reconnect
+                </button>
+                <button class="btn btn-primary btn-sm" id="btn-wa-scan-qr" onclick="openWaQrModal()" style="background:#25d366;border-color:#128c7e;" title="Scan QR Code untuk login">
+                  <span class="material-symbols-outlined icon-xs">qr_code_scanner</span> Scan QR Code
+                </button>
+                <a href="wa/" target="_blank" class="btn btn-outline btn-sm">
+                  <span class="material-symbols-outlined icon-xs">open_in_new</span> Console Mandiri
+                </a>
+              </div>
+            </div>
+
+            <!-- WhatsApp Tabs Navigation -->
+            <div class="category-pills" id="wa-tab-pills" style="margin-bottom:1.5rem;">
+              <button class="cat-pill active" onclick="switchWaAdminTab('inbox', this)">
+                <span class="material-symbols-outlined icon-xs" style="vertical-align:middle;">forum</span> Live Chat Inbox
+              </button>
+              <button class="cat-pill" onclick="switchWaAdminTab('send', this)">Kirim Pesan Cepat</button>
+              <button class="cat-pill" onclick="switchWaAdminTab('logs', this)">Riwayat &amp; Log Pesan</button>
+              <button class="cat-pill" onclick="switchWaAdminTab('bot', this)">Bot &amp; Jam Operasional</button>
+            </div>
+
+            <!-- TAB 0: LIVE CHAT INBOX & BALAS CEPAT -->
+            <div id="wa-tab-panel-inbox">
+              <div class="card" style="padding:0;overflow:hidden;border:1px solid var(--border-light);box-shadow:var(--shadow-sm);">
+                <div style="display:grid;grid-template-columns:320px 1fr;height:620px;">
+                  <!-- KOLOM KIRI: DAFTAR KONTAK KLIEN -->
+                  <div style="border-right:1px solid var(--border-light);background:var(--surface-container-lowest);display:flex;flex-direction:column;height:100%;">
+                    <div style="padding:12px;border-bottom:1px solid var(--border-light);background:var(--surface-container-low);">
+                      <div style="font-weight:700;font-size:0.875rem;color:var(--on-surface);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
+                        <span>Percakapan Klien</span>
+                        <button class="btn-icon" onclick="loadWaInboxContacts()" title="Segarkan Kontak" style="width:28px;height:28px;">
+                          <span class="material-symbols-outlined" style="font-size:16px;">refresh</span>
+                        </button>
+                      </div>
+                      <input type="text" id="wa-inbox-search" placeholder="Cari nama atau nomor HP..." oninput="filterWaInboxContacts()" style="font-size:0.8125rem;padding:6px 10px;" />
+                    </div>
+                    <div id="wa-inbox-contacts-list" style="flex:1;overflow-y:auto;">
+                      <div style="padding:2rem;text-align:center;color:var(--outline);font-size:0.8125rem;">Memuat daftar klien...</div>
+                    </div>
+                  </div>
+
+                  <!-- KOLOM KANAN: CHAT CONVERSATION VIEW -->
+                  <div style="display:flex;flex-direction:column;height:100%;background:#efeae2;background-image:radial-gradient(#d6cfc2 1px, transparent 1px);background-size:16px 16px;">
+                    <!-- HEADER CHAT -->
+                    <div style="padding:10px 16px;background:var(--surface-container-low);border-bottom:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:center;min-height:56px;">
+                      <div style="display:flex;align-items:center;gap:10px;">
+                        <div id="wa-chat-header-avatar" style="width:36px;height:36px;border-radius:50%;background:#25d366;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.875rem;">WA</div>
+                        <div>
+                          <div style="font-weight:700;font-size:0.875rem;color:var(--on-surface);" id="wa-chat-header-name">Pilih Kontak Klien</div>
+                          <div style="font-size:0.75rem;color:var(--outline);" id="wa-chat-header-phone">—</div>
+                        </div>
+                      </div>
+                      <div style="display:flex;gap:6px;" id="wa-chat-header-actions">
+                        <button class="btn btn-outline btn-xs" onclick="syncActiveChatFromApi()" title="Ambil pesan terbaru langsung dari API GoWA">
+                          <span class="material-symbols-outlined icon-xs">cloud_sync</span> Sync dari Server
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- AREA BUBBLE CHAT -->
+                    <div id="wa-chat-messages-body" style="flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:8px;">
+                      <div style="margin:auto;text-align:center;color:#667781;font-size:0.8125rem;background:rgba(255,255,255,0.7);padding:8px 16px;border-radius:8px;">
+                        Silakan pilih klien di panel sebelah kiri untuk melihat percakapan dan membalas langsung.
+                      </div>
+                    </div>
+
+                    <!-- INPUT BALAS CEPAT -->
+                    <div style="padding:10px 14px;background:var(--surface-container-low);border-top:1px solid var(--border-light);display:flex;gap:8px;align-items:flex-end;">
+                      <textarea id="wa-chat-reply-input" rows="1" placeholder="Ketik balasan pesan WhatsApp... (Tekan Ctrl+Enter untuk kirim)" 
+                        style="flex:1;resize:none;max-height:100px;min-height:38px;padding:8px 12px;font-size:0.875rem;border-radius:8px;"
+                        onkeydown="if(event.ctrlKey && event.key==='Enter') sendWaQuickReply()"></textarea>
+                      <button class="btn btn-primary" onclick="sendWaQuickReply()" id="btn-wa-quick-reply" style="height:38px;background:#25d366;border-color:#128c7e;display:flex;align-items:center;gap:4px;">
+                        <span class="material-symbols-outlined icon-xs">send</span> Kirim
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 1: KIRIM PESAN -->
+            <div id="wa-tab-panel-send">
+              <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:1.5rem;">
+                <div class="card">
+                  <div class="card-title" style="margin-bottom:0.5rem;">
+                    <span class="material-symbols-outlined icon-sm" style="color:var(--primary)">send</span>
+                    Composer Pesan WhatsApp
+                  </div>
+                  <hr class="divider" />
+                  
+                  <div class="form-group">
+                    <label>Pilih Pesanan Klien (Otomatis Isi Nomor &amp; Data Undangan)</label>
+                    <select id="wa-panel-order-select" onchange="onWaPanelOrderSelect()">
+                      <option value="">— Pilih pesanan klien atau isi nomor di bawah —</option>
+                    </select>
+                  </div>
+
+                  <div class="form-grid" style="margin-bottom:1rem;">
+                    <div class="form-group">
+                      <label>Nomor WhatsApp *</label>
+                      <input id="wa-panel-phone" placeholder="Contoh: 085741773941 / 628..." oninput="updateWaPanelPreview()" />
+                    </div>
+                    <div class="form-group">
+                      <label>Nama Pengantin</label>
+                      <input id="wa-panel-name" placeholder="Nama Mempelai" />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Pilihan Cepat Template</label>
+                    <select id="wa-panel-template" onchange="onWaPanelTemplateSelect()">
+                      <option value="">— Pilih format template pesan —</option>
+                      <option value="sapaan">Sapaan Awal</option>
+                      <option value="paket">Info Paket &amp; Harga</option>
+                      <option value="form_data">Form Data Pemesanan</option>
+                      <option value="pembayaran">Konfirmasi Pembayaran</option>
+                      <option value="undangan_siap">Undangan Sudah Jadi</option>
+                      <option value="link_kirim">Link Kirim Tamu</option>
+                      <option value="terima_kasih">Terima Kasih</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Isi Pesan WhatsApp *</label>
+                    <textarea id="wa-panel-message" style="min-height:180px;font-family:inherit;font-size:0.875rem;" placeholder="Ketik pesan WhatsApp..." oninput="updateWaPanelPreview()"></textarea>
+                    <div style="display:flex;justify-content:space-between;margin-top:4px;">
+                      <span style="font-size:11px;color:var(--outline);">Tag <code>{INVITATION_URL}</code> &amp; <code>{KIRIM_URL}</code> diganti otomatis.</span>
+                      <span id="wa-panel-char-count" style="font-size:11px;color:var(--outline);">0 karakter</span>
+                    </div>
+                  </div>
+
+                  <input type="hidden" id="wa-panel-invitation-url" />
+                  <input type="hidden" id="wa-panel-kirim-url" />
+
+                  <div style="display:flex;gap:10px;margin-top:1.25rem;">
+                    <button class="btn btn-primary" id="btn-wa-panel-send" onclick="sendWaFromPanel()" style="background:linear-gradient(135deg, #25d366, #128c7e);border-color:#128c7e;">
+                      <span class="material-symbols-outlined icon-xs">send</span> Kirim via GoWA
+                    </button>
+                    <button class="btn btn-outline" onclick="resetWaPanelForm()">Reset</button>
+                  </div>
+                </div>
+
+                <!-- PREVIEW BOX -->
+                <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;">
+                  <div>
+                    <div class="card-title" style="margin-bottom:0.5rem;display:flex;align-items:center;gap:8px;">
+                      <span class="material-symbols-outlined icon-sm" style="color:#25d366">visibility</span>
+                      Pratinjau Balon Chat WhatsApp
+                    </div>
+                    <hr class="divider" />
+                    <div style="background:#efeae2;background-image:radial-gradient(#d6cfc2 1px, transparent 1px);background-size:16px 16px;border-radius:var(--r-md);padding:1.25rem;border:1px solid #d9d2c5;min-height:260px;display:flex;flex-direction:column;justify-content:flex-end;">
+                      <div style="background:#dcf8c6;align-self:flex-end;max-width:90%;padding:10px 14px;border-radius:12px 0 12px 12px;box-shadow:0 1px 2px rgba(0,0,0,0.15);font-size:0.875rem;white-space:pre-wrap;word-break:break-word;color:#111;" id="wa-panel-preview-text">
+Ketik pesan atau pilih template di sebelah kiri untuk melihat pratinjau pesan WhatsApp.
+                      </div>
+                    </div>
+                  </div>
+                  <div style="margin-top:1.25rem;padding:0.75rem;background:var(--surface-container-low);border-radius:var(--r-md);border:1px solid var(--border-light);font-size:0.75rem;color:var(--outline);">
+                    <strong>Informasi Integrasi:</strong> Pesan dikirim melalui API Gateway server GoWA port 3000 dengan header Device ID <code>permatawedding</code>.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 2: RIWAYAT CHAT -->
+            <div id="wa-tab-panel-logs" style="display:none;">
+              <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+                  <div class="card-title" style="margin:0;">Log Riwayat Pesan WhatsApp</div>
+                  <button class="btn btn-outline btn-sm" onclick="loadWaPanelLogs()">
+                    <span class="material-symbols-outlined icon-xs">refresh</span> Muat Ulang
+                  </button>
+                </div>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Arah</th>
+                        <th>Nomor HP / Customer</th>
+                        <th>Isi Pesan</th>
+                        <th>Status</th>
+                        <th>Waktu</th>
+                      </tr>
+                    </thead>
+                    <tbody id="wa-panel-logs-tbody">
+                      <tr><td colspan="6"><div class="empty-state"><p>Memuat riwayat chat...</p></div></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 3: BOT & OPERASIONAL -->
+            <div id="wa-tab-panel-bot" style="display:none;">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+                <div class="card">
+                  <div class="card-title">
+                    <span class="material-symbols-outlined icon-sm" style="color:var(--primary)">schedule</span>
+                    Jam Operasional CS
+                  </div>
+                  <hr class="divider" />
+                  <div style="font-size:0.85rem;line-height:1.7;">
+                    <div><strong>Status Saat Ini:</strong> <span id="wa-bot-status-text" class="badge badge-success">Aktif (Jam Kerja)</span></div>
+                    <div><strong>Jam Kerja:</strong> Senin - Sabtu, 08.00 - 17.00 WIB</div>
+                    <div><strong>Balasan Offline:</strong> Mengirimkan pesan katalog saat klien menghubungi di luar jam kerja (dengan jeda 120 menit).</div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-title">
+                    <span class="material-symbols-outlined icon-sm" style="color:var(--primary)">smart_toy</span>
+                    Menu Bot Interaktif
+                  </div>
+                  <hr class="divider" />
+                  <div style="font-size:0.8125rem;line-height:1.6;color:var(--on-surface-variant)">
+                    Trigger keyword: <code>menu, halo, hai, p, bantuan, info, mulai</code><br/>
+                    • Opsi 1: Info Paket &amp; Harga<br/>
+                    • Opsi 2: Cek Link Undangan Otomatis (via nomor HP)<br/>
+                    • Opsi 3: Format Form Pemesanan Undangan<br/>
+                    • Opsi 4: Konsultasi / Terhubung ke Admin
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- PAGE: CDN MEDIA HUB -->
+          <div class="page" id="page-cdn" style="display: none">
+            <div class="page-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+              <div>
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+                  <h1 class="page-title" style="margin:0;">Pusat Media &amp; CDN Permata Wedding</h1>
+                 
+                </div>
+                <p class="page-subtitle" style="margin:0;">Kelola aset audio musik latar (BGM) dan video undangan digital di server CDN.</p>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <a href="https://content.permatawedding.com" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+                  <span class="material-symbols-outlined icon-xs">open_in_new</span> Console CDN
+                </a>
+                <button class="btn btn-outline btn-sm" onclick="openCdnImportModal()">
+                  <span class="material-symbols-outlined icon-xs">download</span> Import via Link / TikTok
+                </button>
+                <button class="btn btn-primary btn-sm" onclick="openCdnUploadModal()" style="background:linear-gradient(135deg, #0284c7, #0369a1);border-color:#0284c7;">
+                  <span class="material-symbols-outlined icon-xs">cloud_upload</span> Unggah Aset
+                </button>
+              </div>
+            </div>
+
+            <!-- STATS CARDS -->
+            <div class="stats-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:1rem;margin-bottom:1.5rem;">
+              <div class="card" style="padding:1.25rem;display:flex;align-items:center;gap:1rem;">
+                <div style="width:48px;height:48px;border-radius:12px;background:#e0f2fe;color:#0284c7;display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:28px">library_music</span>
+                </div>
+                <div>
+                  <div style="font-size:0.75rem;font-weight:600;color:var(--outline);text-transform:uppercase;letter-spacing:0.5px;">Musik Audio (BGM)</div>
+                  <div style="font-size:1.5rem;font-weight:800;color:var(--on-surface);" id="cdn-stat-music-count">0 Lagu</div>
+                  <div style="font-size:0.6875rem;color:var(--outline);">uploads/music/</div>
+                </div>
+              </div>
+
+              <div class="card" style="padding:1.25rem;display:flex;align-items:center;gap:1rem;">
+                <div style="width:48px;height:48px;border-radius:12px;background:#f3e8ff;color:#8b5cf6;display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:28px">movie</span>
+                </div>
+                <div>
+                  <div style="font-size:0.75rem;font-weight:600;color:var(--outline);text-transform:uppercase;letter-spacing:0.5px;">Video Undangan</div>
+                  <div style="font-size:1.5rem;font-weight:800;color:var(--on-surface);" id="cdn-stat-video-count">0 Video</div>
+                  <div style="font-size:0.6875rem;color:var(--outline);">uploads/videos/</div>
+                </div>
+              </div>
+
+              <div class="card" style="padding:1.25rem;display:flex;align-items:center;gap:1rem;">
+                <div style="width:48px;height:48px;border-radius:12px;background:#d1fae5;color:#10b981;display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:28px">storage</span>
+                </div>
+                <div>
+                  <div style="font-size:0.75rem;font-weight:600;color:var(--outline);text-transform:uppercase;letter-spacing:0.5px;">Penyimpanan Digunakan</div>
+                  <div style="font-size:1.5rem;font-weight:800;color:var(--on-surface);" id="cdn-stat-storage">0 MB</div>
+                  <div style="font-size:0.6875rem;color:var(--outline);">Local &amp; Cloud Ready</div>
+                </div>
+              </div>
+
+              <div class="card" style="padding:1.25rem;display:flex;align-items:center;gap:1rem;">
+                <div style="width:48px;height:48px;border-radius:12px;background:#fef3c7;color:#f59e0b;display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:28px">verified</span>
+                </div>
+                <div>
+                  <div style="font-size:0.75rem;font-weight:600;color:var(--outline);text-transform:uppercase;letter-spacing:0.5px;">Koneksi &amp; Status</div>
+                  <div style="font-size:1.1rem;font-weight:700;color:#059669;display:flex;align-items:center;gap:6px;">
+                    <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#10b981"></span> CDN Aktif
+                  </div>
+                  <div style="font-size:0.6875rem;color:var(--outline);">content.permatawedding.com</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TABS NAVIGATION -->
+            <div style="display:flex;gap:8px;margin-bottom:1.25rem;border-bottom:1px solid var(--border-mid);padding-bottom:0.75rem;" id="cdn-tab-pills">
+              <button class="cat-pill active" onclick="switchCdnTab('music', this)">
+                <span class="material-symbols-outlined icon-xs">library_music</span> Koleksi Musik Audio
+              </button>
+              <button class="cat-pill" onclick="switchCdnTab('video', this)">
+                <span class="material-symbols-outlined icon-xs">movie</span> Koleksi Video
+              </button>
+              <button class="cat-pill" onclick="switchCdnTab('studio', this)">
+                <span class="material-symbols-outlined icon-xs">tune</span> Audio Studio &amp; Trim
+              </button>
+            </div>
+
+            <!-- TAB 1: KOLEKSI MUSIK -->
+            <div id="cdn-panel-music">
+              <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem;">
+                  <div class="filter-bar" style="display:flex;align-items:center;gap:10px;flex:1;max-width:480px;">
+                    <div class="input-icon-wrap" style="flex:1;">
+                      <input type="text" id="cdn-music-search" placeholder="Cari judul lagu, penyanyi, nama file..." oninput="filterCdnMusic()" />
+                    </div>
+                    <select id="cdn-music-cat-filter" onchange="filterCdnMusic()" style="width:auto;min-width:160px;">
+                      <option value="">Semua Kategori</option>
+                      <option value="Romantic Wedding">Romantic Wedding</option>
+                      <option value="Traditional Javanese">Traditional Javanese</option>
+                      <option value="Modern Acoustic">Modern Acoustic</option>
+                      <option value="Pop Wedding">Pop Wedding</option>
+                      <option value="Instrumental / Piano">Instrumental / Piano</option>
+                    </select>
+                  </div>
+                  <div style="display:flex;gap:8px;">
+                    <button class="btn btn-outline btn-sm" onclick="loadCdnMusic(true)">
+                      <span class="material-symbols-outlined icon-xs">refresh</span> Muat Ulang
+                    </button>
+                    <button class="btn btn-primary btn-sm" onclick="openCdnUploadModal('music')">
+                      <span class="material-symbols-outlined icon-xs">add</span> Tambah Musik
+                    </button>
+                  </div>
+                </div>
+
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th style="width:48px;">Play</th>
+                        <th>Judul &amp; Penyanyi</th>
+                        <th>Kategori</th>
+                        <th>Durasi</th>
+                        <th>Ukuran / Bitrate</th>
+                        <th>Link Publik CDN (content.permatawedding.com)</th>
+                        <th class="text-right" style="width:110px;">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="cdn-music-tbody">
+                      <tr><td colspan="7"><div class="empty-state"><p>Memuat koleksi musik dari CDN...</p></div></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 2: KOLEKSI VIDEO -->
+            <div id="cdn-panel-video" style="display:none">
+              <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem;">
+                  <div style="display:flex;align-items:center;gap:10px;flex:1;max-width:400px;">
+                    <div class="input-icon-wrap" style="flex:1;">
+                      <span class="material-symbols-outlined">search</span>
+                      <input type="text" id="cdn-video-search" placeholder="Cari video..." oninput="filterCdnVideos()" />
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:8px;">
+                    <button class="btn btn-outline btn-sm" onclick="loadCdnVideos(true)">
+                      <span class="material-symbols-outlined icon-xs">refresh</span> Muat Ulang
+                    </button>
+                    <button class="btn btn-primary btn-sm" onclick="openCdnUploadModal('video')">
+                      <span class="material-symbols-outlined icon-xs">add</span> Tambah Video
+                    </button>
+                  </div>
+                </div>
+
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th style="width:50px;">Preview</th>
+                        <th>Nama Video</th>
+                        <th>Kategori</th>
+                        <th>Ukuran File</th>
+                        <th>Link Publik CDN (content.permatawedding.com)</th>
+                        <th class="text-right" style="width:110px;">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="cdn-video-tbody">
+                      <tr><td colspan="6"><div class="empty-state"><p>Memuat koleksi video dari CDN...</p></div></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 3: AUDIO STUDIO -->
+            <div id="cdn-panel-studio" style="display:none">
+              <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.5rem;">
+                  <div>
+                    <h3 style="margin:0 0 0.5rem 0;color:var(--on-surface);display:flex;align-items:center;gap:8px;">
+                      <span class="material-symbols-outlined" style="color:#0284c7">audio_file</span> Audio Studio Permata Wedding
+                    </h3>
+                    <p style="margin:0;color:var(--outline);font-size:0.875rem;max-width:640px;">
+                      Studio audio internal untuk memotong durasi lagu (Cut / Trim), menambahkan transisi Fade In / Fade Out yang halus, serta kompresi bitrate MP3 (128 kbps) agar undangan dibuka secepat kilat di ponsel para tamu.
+                    </p>
+                  </div>
+                  <a href="https://content.permatawedding.com" target="_blank" rel="noopener" class="btn btn-primary" style="background:linear-gradient(135deg, #0284c7, #0369a1);border-color:#0284c7;">
+                    <span class="material-symbols-outlined icon-xs">launch</span> Buka Full Audio Studio
+                  </a>
+                </div>
+
+                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:1.25rem;">
+                  <div style="padding:1.25rem;border:1px solid var(--border-light);border-radius:var(--r-md);background:var(--surface-container-low)">
+                    <div style="font-weight:700;color:var(--on-surface);margin-bottom:0.5rem;display:flex;align-items:center;gap:8px;">
+                      <span class="material-symbols-outlined icon-sm" style="color:#0284c7">content_cut</span> Potong Durasi (Trim)
+                    </div>
+                    <p style="font-size:0.8125rem;color:var(--outline);line-height:1.6;margin:0;">
+                      Tentukan titik mulai (Start) dan akhir (End) bagian reff lagu yang paling menyentuh hati dengan presisi 0.1 detik menggunakan waveform visual.
+                    </p>
+                  </div>
+
+                  <div style="padding:1.25rem;border:1px solid var(--border-light);border-radius:var(--r-md);background:var(--surface-container-low)">
+                    <div style="font-weight:700;color:var(--on-surface);margin-bottom:0.5rem;display:flex;align-items:center;gap:8px;">
+                      <span class="material-symbols-outlined icon-sm" style="color:#10b981">graphic_eq</span> Fade In &amp; Fade Out
+                    </div>
+                    <p style="font-size:0.8125rem;color:var(--outline);line-height:1.6;margin:0;">
+                      Hilangkan suara musik yang berhenti mendadak (*abrupt*). Lagu akan masuk dan berakhir secara perlahan dan syahdu di undangan pernikahan.
+                    </p>
+                  </div>
+
+                  <div style="padding:1.25rem;border:1px solid var(--border-light);border-radius:var(--r-md);background:var(--surface-container-low)">
+                    <div style="font-weight:700;color:var(--on-surface);margin-bottom:0.5rem;display:flex;align-items:center;gap:8px;">
+                      <span class="material-symbols-outlined icon-sm" style="color:#f59e0b">compress</span> Kompresi Bitrate Cepat
+                    </div>
+                    <p style="font-size:0.8125rem;color:var(--outline);line-height:1.6;margin:0;">
+                      Kompresi ukuran file dari 10 MB menjadi 1.5–2.5 MB tanpa mengurangi kejernihan audio piano dan vokal di speaker smartphone.
+                    </p>
+                  </div>
+                </div>
+
+                <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:#e0f2fe;border:1px solid #bae6fd;border-radius:var(--r-md);font-size:0.8125rem;color:#0369a1;">
+                  <strong>💡 Tips Penggunaan Undangan:</strong> Setelah mengunggah atau memotong lagu di CDN, URL lagu berformat <code>https://content.permatawedding.com/uploads/music/nama-lagu.mp3</code> dapat langsung disalin dan ditempelkan pada data pesanan mempelai di tab <strong>Musik</strong>.
+                </div>
+              </div>
+            </div>
+
+            <!-- AUDIO PLAYER BAR (STICKY BOTTOM BAR) -->
+            <div id="cdn-global-audio-bar" style="display:none;position:sticky;bottom:1rem;z-index:90;background:var(--surface-container-lowest);border:1px solid var(--border-mid);border-radius:var(--r-lg);padding:0.75rem 1.25rem;box-shadow:0 10px 25px -5px rgba(0,0,0,0.15), 0 8px 10px -6px rgba(0,0,0,0.1);align-items:center;gap:1.25rem;margin-top:1.5rem;">
+              <button id="cdn-bar-play-btn" onclick="toggleCdnGlobalAudio()" style="width:40px;height:40px;border-radius:50%;background:#0284c7;color:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
+                <span class="material-symbols-outlined" id="cdn-bar-play-icon">play_arrow</span>
+              </button>
+              <div style="flex:1;min-width:0;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                  <div style="font-size:0.875rem;font-weight:700;color:var(--on-surface);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="cdn-bar-title">Nama Lagu</div>
+                  <div style="font-size:0.75rem;color:var(--outline);font-variant-numeric:tabular-nums;" id="cdn-bar-time">0:00 / 0:00</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <input type="range" id="cdn-bar-seek" min="0" max="100" value="0" style="flex:1;height:4px;cursor:pointer;" oninput="seekCdnGlobalAudio(this.value)" />
+                </div>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="stopCdnGlobalAudio()" title="Tutup Player">
+                <span class="material-symbols-outlined icon-xs">close</span>
+              </button>
+            </div>
+
+          </div>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="app-footer">
+          <span class="material-symbols-outlined icon-xs" style="color: var(--primary-container)">local_florist</span>
+          © 2025 Permata Wedding — Wedding Invitation Permata Wedding. Hak cipta dilindungi undang-undang.
+        </footer>
+      </div>
+    </div>
+
+    <!-- MODALS -->
+
+    <!-- QR CODE SCANNER MODAL -->
+    <div class="modal-overlay" id="wa-qr-modal">
+      <div class="modal" style="max-width: 440px; text-align: center;">
+        <div class="modal-header">
+          <div class="modal-title" style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined" style="color: #25d366">qr_code_scanner</span> Scan QR WhatsApp
+          </div>
+          <button class="modal-close" onclick="closeModal('wa-qr-modal')">×</button>
+        </div>
+        <div class="modal-body" style="padding: 1.5rem;">
+          <div id="wa-qr-img-wrap" style="min-height: 250px; display: flex; align-items: center; justify-content: center; background: #fff; padding: 12px; border-radius: 12px; border: 1px solid var(--border-light);">
+            <div style="color: var(--outline); font-size: 0.875rem;">Mengambil QR code dari server GoWA...</div>
+          </div>
+          <p style="font-size: 0.8125rem; color: var(--outline); margin-top: 1rem; line-height: 1.5;">
+            Buka aplikasi WhatsApp di HP Anda &gt; Setelan / Titik Tiga &gt; Perangkat Tertaut &gt; Tautkan Perangkat, lalu arahkan kamera ke kode QR di atas.
+          </p>
+          <div style="margin-top: 1rem; display: flex; gap: 8px; justify-content: center;">
+            <button class="btn btn-outline btn-sm" onclick="fetchWaQrCode()">
+              <span class="material-symbols-outlined icon-xs">refresh</span> Refresh QR
+            </button>
+            <button class="btn btn-primary btn-sm" onclick="checkWaDeviceStatus(); closeModal('wa-qr-modal');">
+              <span class="material-symbols-outlined icon-xs">done</span> Selesai
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREVIEW UNDANGAN MODAL -->
+    <div class="modal-overlay" id="invitation-preview-modal">
+      <div class="modal" style="max-width: 900px; height: 85vh; display: flex; flex-direction: column; padding: 0;">
+        <div class="modal-header" style="padding: 12px 20px; border-bottom: 1px solid var(--border-light);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="modal-title" style="display: flex; align-items: center; gap: 8px; font-size: 1rem;">
+              <span class="material-symbols-outlined" style="color: var(--primary)">visibility</span> Live Preview Undangan
+            </div>
+            <span id="preview-modal-badge" class="badge badge-info" style="font-size: 0.6875rem;">Desktop</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="btn-group" style="display: flex; gap: 4px;">
+              <button class="btn btn-outline btn-xs active" onclick="setPreviewDevice('desktop', this)" title="Layar Komputer / Penuh">
+                <span class="material-symbols-outlined icon-xs">desktop_windows</span>
+              </button>
+              <button class="btn btn-outline btn-xs" onclick="setPreviewDevice('mobile', this)" title="Layar Smartphone (375px)">
+                <span class="material-symbols-outlined icon-xs">smartphone</span>
+              </button>
+            </div>
+            <a id="preview-modal-external-link" href="#" target="_blank" rel="noopener" class="btn btn-outline btn-xs" title="Buka di Tab Baru">
+              <span class="material-symbols-outlined icon-xs">open_in_new</span>
+            </a>
+            <button class="modal-close" onclick="closeModal('invitation-preview-modal')">×</button>
+          </div>
+        </div>
+        <div class="modal-body" style="flex: 1; padding: 0; background: #555; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+          <iframe id="preview-modal-iframe" src="about:blank" style="width: 100%; height: 100%; border: none; transition: width 0.3s ease; background: #fff;"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK WHATSAPP MODAL -->
+    <div class="modal-overlay" id="quick-wa-modal">
+      <div class="modal" style="max-width: 600px;">
+        <div class="modal-header">
+          <div class="modal-title" style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined" style="color: #25d366">chat</span> Kirim WhatsApp ke Pelanggan
+          </div>
+          <button class="modal-close" onclick="closeModal('quick-wa-modal')">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Nama Customer</label>
+              <input id="qwa-name" readonly style="background: var(--surface-container-high)" />
+            </div>
+            <div class="form-group">
+              <label>Nomor WhatsApp *</label>
+              <input id="qwa-phone" placeholder="Contoh: 0857... / 628..." required />
+            </div>
+            <div class="span-full form-group">
+              <label>Pilihan Cepat Template Pesan</label>
+              <select id="qwa-template" onchange="applyQuickWaTemplate()">
+                <option value="">— Pilih format template pesan —</option>
+                <option value="sapaan">Sapaan Awal</option>
+                <option value="paket">Info Paket &amp; Harga</option>
+                <option value="form_data">Form Data Pemesanan</option>
+                <option value="pembayaran">Konfirmasi Pembayaran</option>
+                <option value="undangan_siap">Undangan Sudah Jadi</option>
+                <option value="link_kirim">Link Kirim Tamu</option>
+                <option value="terima_kasih">Terima Kasih</option>
+              </select>
+            </div>
+            <div class="span-full form-group">
+              <label>Isi Pesan WhatsApp *</label>
+              <textarea id="qwa-message" style="min-height: 150px; font-family: inherit" placeholder="Tulis isi pesan..."></textarea>
+              <div style="font-size: 11px; color: var(--outline); margin-top: 4px">
+                Tag <code>{INVITATION_URL}</code> &amp; <code>{KIRIM_URL}</code> otomatis diganti dengan link undangan pelanggan.
+              </div>
+            </div>
+            <input type="hidden" id="qwa-invitation-url" />
+            <input type="hidden" id="qwa-kirim-url" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" onclick="closeModal('quick-wa-modal')">Batal</button>
+          <button class="btn btn-primary" id="btn-send-qwa" onclick="submitQuickWa()" style="background: linear-gradient(135deg, #25d366, #128c7e); border-color: #128c7e">
+            <span class="material-symbols-outlined icon-xs">send</span> Kirim via GoWA
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- THEME MODAL -->
+    <div class="modal-overlay" id="theme-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title" id="theme-modal-title">Tambah Tema</div>
+          <button class="modal-close" onclick="closeModal('theme-modal')">×</button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="theme-id" />
+          <div class="form-grid">
+            <div class="span-full form-group"><label>Nama Tema *</label><input id="theme-name" /></div>
+            <div class="span-full form-group">
+              <label>Thumbnail Gambar *</label>
+              <div style="display: flex; gap: 0.5rem">
+                <input id="theme-thumbnail" placeholder="URL gambar" style="flex: 1" /><button type="button" class="btn btn-outline btn-sm" id="btn-upload-theme">
+                  <span class="material-symbols-outlined icon-xs">photo_camera</span> Upload
+                </button>
+              </div>
+              <img id="theme-thumb-preview" style="display: none; max-height: 80px; margin-top: 0.5rem; border-radius: var(--r-md); border: 1px solid var(--border)" />
+            </div>
+            <div class="form-group">
+              <label>Kategori</label>
+              <select id="theme-category">
+                <option value="">— Pilih Kategori —</option>
+                <option value="basic">Basic</option>
+                <option value="minimalis">Minimalis Clean</option>
+                <option value="klasik">Klasik</option>
+                <option value="premium">Premium</option>
+              </select>
+            </div>
+            <div class="form-group"><label>URL Preview Live</label><input id="theme-preview" /></div>
+            <div class="form-group">
+              <label>Status</label>
+              <select id="theme-active">
+                <option value="1">Aktif</option>
+                <option value="0">Nonaktif</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('theme-modal')">Batal</button><button class="btn btn-primary" onclick="saveTheme()">Simpan Tema</button></div>
+      </div>
+    </div>
+
+    <!-- ORDER MODAL -->
+    <div class="modal-overlay" id="order-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title" id="order-modal-title">Tambah Order Baru</div>
+          <button class="modal-close" onclick="closeModal('order-modal')">×</button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="order-id" />
+          <div class="form-grid">
+            <input type="hidden" id="order-code" />
+            <div class="form-group"><label>Nama Pelanggan *</label><input id="order-cust-name" /></div>
+            <div class="form-group"><label>No. WhatsApp / HP</label><input id="order-cust-phone" /></div>
+            <div class="form-group">
+              <label>Pilihan Tema</label>
+              <select id="order-theme">
+                <option value="">— Tanpa Tema —</option>
+              </select>
+            </div>
+            <div class="form-group" style="display: none;">
+              <label>Paket</label>
+              <select id="order-package">
+                <option value="basic">Basic</option>
+                <option value="premium">Premium</option>
+                <option value="exclusive">Exclusive</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Status Pembayaran</label>
+              <select id="order-pay-status">
+                <option value="unpaid">Unpaid</option>
+                <option value="paid">Paid</option>
+                <option value="partial">Partial (DP)</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Status Domain</label>
+              <select id="order-active">
+                <option value="1">Aktif</option>
+                <option value="0">Nonaktif</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Total Harga (Rp)</label><input id="order-total-price" type="number" value="100000" /></div>
+            <div class="span-full form-group"><label>Catatan Order</label><textarea id="order-notes"></textarea></div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('order-modal')">Batal</button><button class="btn btn-primary" onclick="saveOrder()">Simpan Order</button></div>
+      </div>
+    </div>
+
+    <!-- EVENT MODAL -->
+    <div class="modal-overlay" id="ev-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title" id="ev-modal-title">Tambah Acara</div>
+          <button class="modal-close" onclick="closeModal('ev-modal')">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group"><label>Nama Acara *</label><input id="ev-name" placeholder="Akad Nikah / Resepsi" /></div>
+            <div class="form-group"><label>Waktu Mulai *</label><input id="ev-datetime" type="datetime-local" /></div>
+            <div class="form-group"><label>Waktu Selesai</label><input id="ev-end" type="datetime-local" /></div>
+            <div class="form-group"><label>Urutan Urut</label><input id="ev-sort" type="number" value="0" /></div>
+            <div class="form-group"><label>Nama Tempat / Venue</label><input id="ev-venue" /></div>
+            <div class="form-group"><label>Google Maps URL</label><input id="ev-maps" /></div>
+            <div class="span-full form-group"><label>Alamat Lengkap</label><textarea id="ev-address"></textarea></div>
+            <div class="span-full form-group"><label>Keterangan Tambahan</label><textarea id="ev-desc"></textarea></div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('ev-modal')">Batal</button><button class="btn btn-primary" onclick="saveEvent()">Simpan Acara</button></div>
+      </div>
+    </div>
+
+    <!-- MUSIC MODAL -->
+<div id="mu-modal" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title" id="mu-modal-title">Tambah Musik Latar</h3>
+      <button class="modal-close" onclick="closeModal('mu-modal');stopAllAudioPreview()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Pilih dari Daftar Musik</label>
+        <select id="mu-preset" onchange="applyMusicPreset()">
+          <option value="">— Pilih preset atau isi manual —</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Judul Lagu *</label>
+        <input type="text" id="mu-title" placeholder="Until I Found You" />
+      </div>
+      <div class="form-group">
+        <label>Nama Penyanyi / Artis</label>
+        <input type="text" id="mu-artist" placeholder="Ed Sheeran" />
+      </div>
+      <div class="form-group">
+        <label>URL File Audio (.mp3) *</label>
+        <div style="display:flex;gap:8px;align-items:stretch;">
+          <input type="text" id="mu-url" placeholder="https://..." style="flex:1;" />
+          <button type="button" onclick="toggleModalAudioPreview()"
+            style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;
+                   background:#fff1f2;color:#f43f6e;border:1px solid #fecdd3;
+                   border-radius:6px;font-weight:600;font-size:0.8rem;cursor:pointer;">
+            ▶ Preview
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Urutan</label>
+        <input type="number" id="mu-sort" value="0" />
+      </div>
+      <div class="form-group">
+        <label style="text-transform:none;letter-spacing:0">
+          <input type="checkbox" id="mu-autoplay" /> Autoplay
+        </label>
+      </div>
+      <div class="form-group">
+        <label style="text-transform:none;letter-spacing:0">
+          <input type="checkbox" id="mu-loop" checked /> Loop
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('mu-modal');stopAllAudioPreview()">Batal</button>
+      <button class="btn btn-primary" onclick="saveMusic()">Simpan Musik</button>
+    </div>
+  </div>
+</div>
+
+    <!-- LOVE STORY MODAL -->
+    <div class="modal-overlay" id="ls-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title" id="ls-modal-title">Tambah Cerita Cinta</div>
+          <button class="modal-close" onclick="closeModal('ls-modal')">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group"><label>Judul Cerita *</label><input id="ls-title" /></div>
+            <div class="form-group"><label>Tanggal Momen</label><input id="ls-date" type="date" /></div>
+            <div class="form-group"><label>Urutan</label><input id="ls-sort" type="number" value="0" /></div>
+            <div class="form-group">
+              <label>Foto Momen</label>
+              <div style="display: flex; gap: 0.5rem">
+                <input id="ls-photo" style="flex: 1" /><button type="button" class="btn btn-outline btn-sm" id="btn-upload-story"><span class="material-symbols-outlined icon-xs">photo_camera</span> Upload</button>
+              </div>
+            </div>
+            <div class="span-full form-group"><label>Isi Cerita</label><textarea id="ls-content"></textarea></div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('ls-modal')">Batal</button><button class="btn btn-primary" onclick="saveLoveStory()">Simpan Cerita</button></div>
+      </div>
+    </div>
+
+    <!-- WALLET MODAL -->
+    <div class="modal-overlay" id="wl-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title" id="wl-modal-title">Tambah Rekening Amplop</div>
+          <button class="modal-close" onclick="closeModal('wl-modal')">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Tipe</label>
+              <select id="wl-type">
+                <option value="bank">Bank</option>
+                <option value="gopay">GoPay</option>
+                <option value="ovo">OVO</option>
+                <option value="dana">Dana</option>
+                <option value="shopeepay">ShopeePay</option>
+                <option value="other">Lainnya</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Nama Bank / E-Wallet</label><input id="wl-bank" placeholder="BCA / Mandiri / GoPay" /></div>
+            <div class="form-group"><label>Nomor Rekening / No. HP</label><input id="wl-number" /></div>
+            <div class="form-group"><label>Atas Nama *</label><input id="wl-holder" /></div>
+            <div class="span-full form-group">
+              <label>QR Code Amplop</label>
+              <div style="display: flex; gap: 0.5rem">
+                <input id="wl-qr" style="flex: 1" /><button type="button" class="btn btn-outline btn-sm" id="btn-upload-qr"><span class="material-symbols-outlined icon-xs">photo_camera</span> Upload</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('wl-modal')">Batal</button><button class="btn btn-primary" onclick="saveWallet()">Simpan Rekening</button></div>
+      </div>
+    </div>
+
+    <!-- GALLERY MODAL -->
+    <div class="modal-overlay" id="gl-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title" id="gl-modal-title">Tambah Foto Galeri</div>
+          <button class="modal-close" onclick="closeModal('gl-modal')">×</button>
+        </div>
+        <div class="modal-body">
+          <div id="gl-multi-mode">
+            <div class="form-group">
+              <label>Pilih Foto (Bisa pilih banyak sekaligus)</label>
+              <input
+                type="file"
+                id="gl-multi-input"
+                accept="image/jpeg,image/png,image/webp"
+                multiple
+                onchange="previewMultiGallery(this)"
+                style="padding: 0.75rem; border: 2px dashed var(--outline-variant); border-radius: var(--r-md); width: 100%; cursor: pointer; background: var(--surface-container-low)"
+              />
+              <div id="gl-multi-count" style="font-size: 12px; color: var(--on-surface-variant); margin-top: 0.35rem"></div>
+            </div>
+            <div id="gl-multi-preview" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; max-height: 200px; overflow-y: auto"></div>
+          </div>
+
+          <div id="gl-single-mode" style="display: none">
+            <div class="form-group">
+              <label>URL Foto *</label>
+              <div style="display: flex; gap: 0.5rem">
+                <input id="gl-url" style="flex: 1" /><button type="button" class="btn btn-outline btn-sm" id="btn-upload-gallery"><span class="material-symbols-outlined icon-xs">photo_camera</span> Upload</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid" style="margin-top: 0.75rem">
+            <div class="form-group"><label>Caption</label><input id="gl-caption" placeholder="Opsional" /></div>
+            <div class="form-group"><label>Urutan Mulai</label><input id="gl-sort" type="number" value="0" /></div>
+          </div>
+          <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 13px; margin-top: 0.75rem; cursor: pointer"> <input type="checkbox" id="gl-cover" /> Jadikan foto pertama sebagai Cover Galeri </label>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" onclick="closeModal('gl-modal')">Batal</button>
+          <button class="btn btn-primary" id="btn-save-gallery" onclick="saveGallery()">Simpan Galeri</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVESTREAMING MODAL -->
+    <div class="modal-overlay" id="lv-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title" id="lv-modal-title">Tambah Livestreaming</div>
+          <button class="modal-close" onclick="closeModal('lv-modal')">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group"><label>Judul Siaran</label><input id="lv-title" placeholder="Akad Nikah Live" /></div>
+            <div class="form-group">
+              <label>Status</label>
+              <select id="lv-active">
+                <option value="1">Aktif</option>
+                <option value="0">Nonaktif</option>
+              </select>
+            </div>
+            <div class="span-full form-group"><label>URL YouTube / Embed Link *</label><input id="lv-url" /></div>
+            <div class="form-group"><label>Jadwal Mulai</label><input id="lv-start" type="datetime-local" /></div>
+            <div class="form-group"><label>Jadwal Selesai</label><input id="lv-end" type="datetime-local" /></div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('lv-modal')">Batal</button><button class="btn btn-primary" onclick="saveLivestreaming()">Simpan</button></div>
+      </div>
+    </div>
+
+    <!-- ENTERTAINMENT MODAL -->
+    <div class="modal-overlay" id="en-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title" id="en-modal-title">Tambah Hiburan</div>
+          <button class="modal-close" onclick="closeModal('en-modal')">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group"><label>Nama Pengisi / Grup *</label><input id="en-name" /></div>
+            <div class="form-group"><label>Jenis</label><input id="en-type" placeholder="Akustik Band / MC / DJ" /></div>
+            <div class="form-group"><label>Urutan</label><input id="en-sort" type="number" value="0" /></div>
+            <div class="span-full form-group"><label>Keterangan</label><textarea id="en-desc"></textarea></div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('en-modal')">Batal</button><button class="btn btn-primary" onclick="saveEntertainment()">Simpan</button></div>
+      </div>
+    </div>
+
+    <!-- COMMENT EDIT MODAL -->
+    <div class="modal-overlay" id="cm-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title">Edit Ucapan &amp; Kehadiran Tamu</div>
+          <button class="modal-close" onclick="closeModal('cm-modal')">×</button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="cm-edit-id" />
+          <div class="form-grid cols-1">
+            <div class="form-group"><label>Nama Tamu</label><input id="cm-edit-name" /></div>
+            <div class="form-group"><label>Ucapan / Doa</label><textarea id="cm-edit-content"></textarea></div>
+            <div class="form-group">
+              <label>Status Kehadiran</label>
+              <select id="cm-edit-attendance">
+                <option value="hadir">Hadir</option>
+                <option value="tidak_hadir">Tidak Hadir</option>
+                <option value="ragu_ragu">Ragu-ragu</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('cm-modal')">Batal</button><button class="btn btn-primary" onclick="saveComment()">Simpan Perubahan</button></div>
+      </div>
+    </div>
+
+    <!-- TESTIMONIAL MODAL -->
+    <div class="modal-overlay" id="tm-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title" id="tm-modal-title">Tambah Testimoni</div>
+          <button class="modal-close" onclick="closeModal('tm-modal')">×</button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="tm-id" />
+          <div class="form-grid">
+            <div class="form-group"><label>Nama Pelanggan *</label><input id="tm-name" /></div>
+            <div class="form-group">
+              <label>Rating Bintang</label>
+              <select id="tm-rating">
+                <option value="5">★★★★★ (5/5)</option>
+                <option value="4">★★★★ (4/5)</option>
+                <option value="3">★★★ (3/5)</option>
+                <option value="2">★★ (2/5)</option>
+                <option value="1">★ (1/5)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Status Publikasi</label>
+              <select id="tm-published">
+                <option value="1">Published</option>
+                <option value="0">Draft</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Urutan</label><input id="tm-sort" type="number" value="0" /></div>
+            <div class="span-full form-group">
+              <label>Foto Profil</label>
+              <div style="display: flex; gap: 0.5rem">
+                <input id="tm-photo" style="flex: 1" /><button type="button" class="btn btn-outline btn-sm" id="btn-upload-testi"><span class="material-symbols-outlined icon-xs">photo_camera</span> Upload</button>
+              </div>
+            </div>
+            <div class="span-full form-group"><label>Isi Ulasan Testimoni *</label><textarea id="tm-content"></textarea></div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('tm-modal')">Batal</button><button class="btn btn-primary" onclick="saveTestimonial()">Simpan Testimoni</button></div>
+      </div>
+    </div>
+
+    <!-- CDN UPLOAD MODAL -->
+    <div class="modal-overlay" id="cdn-upload-modal">
+      <div class="modal" style="max-width: 580px;">
+        <div class="modal-header">
+          <div class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <span class="material-symbols-outlined" style="color:#0284c7">cloud_upload</span> Unggah Aset ke CDN Permata Wedding
+          </div>
+          <button class="modal-close" onclick="closeModal('cdn-upload-modal')">×</button>
+        </div>
+        <div class="modal-body">
+          <form id="cdn-upload-form" onsubmit="submitCdnUpload(event)">
+            <div class="form-grid">
+              <div class="form-group span-full">
+                <label>Tipe Aset Media *</label>
+                <div style="display:flex;gap:1rem;margin-top:4px;">
+                  <label style="display:flex;align-items:center;gap:6px;font-weight:600;cursor:pointer;">
+                    <input type="radio" name="cdn_upload_type" value="music" checked onchange="onCdnUploadTypeChange(this.value)" />
+                    Musik Audio (.mp3, .wav, .m4a, .ogg)
+                  </label>
+                  <label style="display:flex;align-items:center;gap:6px;font-weight:600;cursor:pointer;">
+                    <input type="radio" name="cdn_upload_type" value="video" onchange="onCdnUploadTypeChange(this.value)" />
+                    Video Undangan (.mp4, .webm)
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group span-full">
+                <label>Pilih Berkas File *</label>
+                <div style="border:2px dashed var(--border-mid);border-radius:var(--r-md);padding:1.5rem;text-align:center;background:var(--surface-container-low);cursor:pointer;" onclick="document.getElementById('cdn-file-input').click()">
+                  <span class="material-symbols-outlined" style="font-size:36px;color:#0284c7;display:block;margin-bottom:6px;">upload_file</span>
+                  <div style="font-size:0.875rem;font-weight:700;color:var(--on-surface);" id="cdn-file-chosen-text">Pilih file audio atau seret ke sini</div>
+                  <div style="font-size:0.75rem;color:var(--outline);margin-top:2px;">Maksimal 50 MB per berkas</div>
+                  <input type="file" id="cdn-file-input" style="display:none;" onchange="onCdnFileSelected(this)" />
+                </div>
+              </div>
+
+              <div class="form-group span-full">
+                <label>Judul Aset *</label>
+                <input type="text" id="cdn-upload-title" placeholder="Contoh: A Thousand Years Romantic Piano" required />
+              </div>
+
+              <div class="form-group" id="cdn-upload-artist-wrap">
+                <label>Penyanyi / Artis</label>
+                <input type="text" id="cdn-upload-artist" placeholder="Contoh: Christina Perri / Permata Wedding" />
+              </div>
+
+              <div class="form-group">
+                <label>Kategori Aset</label>
+                <select id="cdn-upload-category">
+                  <option value="Romantic Wedding">Romantic Wedding</option>
+                  <option value="Traditional Javanese">Traditional Javanese</option>
+                  <option value="Modern Acoustic">Modern Acoustic</option>
+                  <option value="Pop Wedding">Pop Wedding</option>
+                  <option value="Instrumental / Piano">Instrumental / Piano</option>
+                  <option value="Wedding Highlights">Wedding Highlights</option>
+                  <option value="Religi / Islami">Religi / Islami</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="margin-top:1.25rem;padding:0.75rem 1rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r-md);font-size:0.75rem;color:#166534;">
+              <strong>Domain Publik Otomatis:</strong> File akan dapat diakses langsung secara global melalui <code>https://content.permatawedding.com/uploads/...</code>
+            </div>
+
+            <div class="modal-footer" style="padding:1rem 0 0 0;margin-top:1rem;border-top:1px solid var(--border-light);">
+              <button type="button" class="btn btn-outline" onclick="closeModal('cdn-upload-modal')">Batal</button>
+              <button type="submit" class="btn btn-primary" id="btn-submit-cdn-upload" style="background:linear-gradient(135deg, #0284c7, #0369a1);border-color:#0284c7;">
+                <span class="material-symbols-outlined icon-xs">cloud_upload</span> Mulai Unggah
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- CDN IMPORT FROM URL MODAL -->
+    <div class="modal-overlay" id="cdn-import-modal">
+      <div class="modal" style="max-width: 580px;">
+        <div class="modal-header">
+          <div class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <span class="material-symbols-outlined" style="color:#0284c7">download</span> Import Media dari URL / TikTok
+          </div>
+          <button class="modal-close" onclick="closeModal('cdn-import-modal')">×</button>
+        </div>
+        <div class="modal-body">
+          <form id="cdn-import-form" onsubmit="submitCdnImport(event)">
+            <div class="form-grid">
+              <div class="form-group span-full">
+                <label>Tautan / Link Sumber (TikTok Video, Direct MP3, YouTube) *</label>
+                <input type="url" id="cdn-import-url" placeholder="https://www.tiktok.com/@... atau https://domain.com/lagu.mp3" required />
+                <small class="text-muted" style="margin-top:4px;display:block;">Sistem CDN otomatis mengekstrak musik latar audio secara bersih tanpa watermark.</small>
+              </div>
+
+              <div class="form-group span-full">
+                <label>Judul Lagu / Musik</label>
+                <input type="text" id="cdn-import-title" placeholder="Otomatis jika kosong atau isi judul kustom" />
+              </div>
+
+              <div class="form-group">
+                <label>Penyanyi / Artis</label>
+                <input type="text" id="cdn-import-artist" placeholder="Contoh: Yovie &amp; Nuno" />
+              </div>
+
+              <div class="form-group">
+                <label>Kategori</label>
+                <select id="cdn-import-category">
+                  <option value="Romantic Wedding">Romantic Wedding</option>
+                  <option value="Traditional Javanese">Traditional Javanese</option>
+                  <option value="Modern Acoustic">Modern Acoustic</option>
+                  <option value="Pop Wedding">Pop Wedding</option>
+                  <option value="Instrumental / Piano">Instrumental / Piano</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="modal-footer" style="padding:1rem 0 0 0;margin-top:1.25rem;border-top:1px solid var(--border-light);">
+              <button type="button" class="btn btn-outline" onclick="closeModal('cdn-import-modal')">Batal</button>
+              <button type="submit" class="btn btn-primary" id="btn-submit-cdn-import" style="background:linear-gradient(135deg, #0284c7, #0369a1);border-color:#0284c7;">
+                <span class="material-symbols-outlined icon-xs">download</span> Ekstrak &amp; Simpan ke CDN
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- CDN EDIT MODAL -->
+    <div class="modal-overlay" id="cdn-edit-modal">
+      <div class="modal" style="max-width: 500px;">
+        <div class="modal-header">
+          <div class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <span class="material-symbols-outlined" style="color:#0284c7">edit</span> Edit Informasi Aset CDN
+          </div>
+          <button class="modal-close" onclick="closeModal('cdn-edit-modal')">×</button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="cdn-edit-id" />
+          <input type="hidden" id="cdn-edit-type" />
+          <div class="form-grid">
+            <div class="form-group span-full">
+              <label>Judul Aset *</label>
+              <input type="text" id="cdn-edit-title" required />
+            </div>
+            <div class="form-group span-full" id="cdn-edit-artist-wrap">
+              <label>Penyanyi / Artis</label>
+              <input type="text" id="cdn-edit-artist" />
+            </div>
+            <div class="form-group span-full">
+              <label>Kategori</label>
+              <select id="cdn-edit-category">
+                <option value="Romantic Wedding">Romantic Wedding</option>
+                <option value="Traditional Javanese">Traditional Javanese</option>
+                <option value="Modern Acoustic">Modern Acoustic</option>
+                <option value="Pop Wedding">Pop Wedding</option>
+                <option value="Instrumental / Piano">Instrumental / Piano</option>
+                <option value="Wedding Highlights">Wedding Highlights</option>
+                <option value="Religi / Islami">Religi / Islami</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" onclick="closeModal('cdn-edit-modal')">Batal</button>
+          <button class="btn btn-primary" onclick="submitCdnEdit()">Simpan Perubahan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CDN VIDEO PREVIEW MODAL -->
+    <div class="modal-overlay" id="cdn-video-modal">
+      <div class="modal" style="max-width: 680px;">
+        <div class="modal-header">
+          <div class="modal-title" id="cdn-video-modal-title">Pratinjau Video CDN</div>
+          <button class="modal-close" onclick="closeCdnVideoModal()">×</button>
+        </div>
+        <div class="modal-body" style="padding:1rem;">
+          <video id="cdn-video-player" controls style="width:100%;border-radius:var(--r-md);background:#000;max-height:420px;display:block;"></video>
+          <div style="margin-top:0.75rem;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+            <input type="text" id="cdn-video-modal-url" readonly style="flex:1;font-size:0.75rem;font-family:monospace;" />
+            <button class="btn btn-outline btn-sm" onclick="copyFromInput('cdn-video-modal-url')">Salin URL</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONFIRM DIALOG -->
+    <div id="confirm-overlay">
+      <div class="confirm-box">
+        <div class="confirm-icon">
+          <svg viewBox="0 0 24 24" style="width: 32px; height: 32px">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+        </div>
+        <div class="confirm-title" id="confirm-title">Konfirmasi Penghapusan</div>
+        <div class="confirm-msg" id="confirm-msg">Apakah Anda yakin ingin menghapus data ini?</div>
+        <div class="confirm-btns">
+          <button class="btn btn-outline" id="confirm-no">Batal</button>
+          <button class="btn btn-danger" id="confirm-yes">Ya, Hapus</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="assets/app.js?v=2026112103"></script>
+    <script>
+      document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

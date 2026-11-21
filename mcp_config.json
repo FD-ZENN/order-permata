@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "antigravity-mem": {
+      "command": "node",
+      "args": [
+        "C:/Users/XFDE/.gemini/config/plugins/antigravity-mem/scripts/mcp-server.cjs"
+      ]
+    }
+  }
+}

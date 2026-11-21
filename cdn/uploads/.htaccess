@@ -1,0 +1,23 @@
+# ==============================================================================
+# CDN Permata Wedding - Uploads Security Hardening
+# Prevents execution of scripts (PHP, CGI, Perl, Python, ASP, etc.) in uploads
+# ==============================================================================
+
+# Disable execution of scripts
+<FilesMatch "(?i)\.(php|phtml|php3|php4|php5|php7|php8|phps|pht|phar|inc|cgi|pl|py|jsp|asp|sh|bash|exe|bat|cmd)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Turn off PHP engine if mod_php is active
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+# Force media MIME types to prevent content sniffing / XSS
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>

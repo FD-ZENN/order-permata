@@ -1,0 +1,43 @@
+# AGENT RULES & DIRECTIVES FOR ORDER-PERMATA PROJECT
+
+Semua AI Agent (Antigravity, Cursor, Gemini CLI, Claude Code, dll) yang bekerja di repositori ini WAJIB membaca dan mematuhi panduan pada:
+1. `docs/PANDUAN_PENGEMBANGAN_DAN_OPTIMASI_TEMA.md`
+2. `docs/DATABASE_ELEMENT_MAPPING.md`
+
+## ⚠️ MANDATORY SYSTEM DIRECTIVES (ATURAN MUTLAK)
+
+1. **NO HEAVY DATA SCRIPT INJECTION**:
+   - DILARANG MENYUNTIKKAN `<script>window.INVITATION_DATA = { ... };</script>` ke HTML undangan!
+   - Jangan pernah menyarankan atau mengembalikan sistem inject objek payload JSON raksasa ke client.
+
+2. **TRUE STATIC PRE-RENDERING**:
+   - Seluruh data mempelai (nama panggilan, nama lengkap, gelar, orang tua, alamat, foto profil), acara (tanggal, jam, venue, alamat, link Google Maps), cerita cinta, nomor rekening bank, dan kado fisik WAJIB ditulis langsung (pre-rendered) ke dalam tag HTML template saat proses `InvitationCompiler::build()`.
+
+3. **MINIMAL CONFIG SCRIPT ONLY**:
+   - Satu-satunya blok skrip di `<head>` hanyalah:
+     ```html
+     <script>
+       window.CONFIG = window.CONFIG || {};
+       window.CONFIG.ORDER_ID = '...';
+       window.CONFIG.apiBase = '/api';
+     </script>
+     ```
+   - Script client-side (`api.js` / `script.js`) HANYA bertugas menangani interaksi dinamis: RSVP form submit, fetch komentar buku tamu, audio play/pause, dan countdown timer.
+   - **Audio Source**: Format audio di-link secara lokal ke CDN (`cdn/uploads/music/...`) atau domain online. InvitationCompiler otomatis menyesuaikan relative path (`../../cdn/...`) agar undangan pada folder tahun (misal: `2026/nama-tamu/index.html`) dapat langsung memutar file audio tanpa kendala 404.
+
+4. **DYNAMIC YEAR FOLDER STRUCTURE**:
+   - Output hasil compile harus selalu diarahkan ke folder tahun dinamis:
+     `/{year}/{slug}/index.html` (contoh: `/2026/agung-fitri/index.html`).
+   - Tidak perlu membuat `index.php` di folder undangan tamu (Pure Static HTML).
+   - Tahun dideteksi dari `events[0].event_datetime` (fallback ke `order.created_at` / `date('Y')`).
+
+5. **CACHE BUSTING VIA BUILD TIMESTAMP**:
+   - Dilarang keras memakai hardcoded versioning seperti `?v1` atau `?v2`.
+   - Compiler WAJIB menyematkan query string timestamp build: `?v=YYYYMMDDHHIISS` pada pemanggilan CSS, JS, dan `og:image`.
+
+6. **BLUEPRINT / LOOP INJECTION & HIDE ON EMPTY**:
+   - Bagian berulang (Amplop Rekening, Kisah Cinta, Galeri, Hiburan) harus menggunakan mekanisme blueprint cloning di PHP Compiler.
+   - Jika data di database KOSONG (misal pemesan tidak upload foto galeri atau tidak membuat love story), bagian tersebut WAJIB DISEMBUNYIKAN OTOMATIS (`display: none;` atau dihapus dari DOM). JANGAN BIARKAN DATA DUMMY BAWAAN TEMPLATE MUNCUL KE TAMU!
+
+7. **TEMPLATES STANDARDIZATION**:
+   - Saat membuat atau mengedit tema baru di `templates/`, pastikan atribut `id="..."` dan `data-key="..."` mengikuti kontrak yang tercantum di `docs/PANDUAN_PENGEMBANGAN_DAN_OPTIMASI_TEMA.md`.

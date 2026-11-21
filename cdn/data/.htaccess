@@ -1,0 +1,7 @@
+# ==============================================================================
+# CDN Permata Wedding - Data Directory Protection
+# Prevents direct HTTP access to internal database JSON files
+# ==============================================================================
+
+Order Deny,Allow
+Deny from all

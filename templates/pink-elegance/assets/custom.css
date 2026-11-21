@@ -1,0 +1,457 @@
+:root {
+    --primary-color: #c68a8a;        /* Rose dusty pink */
+    --secondary-color: #f7f0f2;      /* Soft blush */
+    --text-color: #4b3d3d;           /* Deep rose brown */
+    --light-color: #fffafa;          /* Creamy white */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--light-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    font-weight: 300;
+    font-size: 15px;
+    padding-bottom: 70px;
+    height: 100vh;
+    position: relative;
+}
+
+/* For Webkit browsers (Chrome, Safari) */
+body::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+}
+
+
+h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--primary-color);
+}
+
+.script-font {
+    font-family: 'Great Vibes', cursive;
+}
+
+section {
+    padding: 50px 20px;
+    scroll-margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Bottom Navbar */
+.bottom-navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 -1px 8px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    padding: 8px 0;
+}
+
+.nav-item {
+    text-align: center;
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #8c7a7a;
+    font-size: 0.7rem;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.nav-link i {
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.nav-link.active {
+    color: var(--primary-color);
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/img/header.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    background-blend-mode: overlay;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    padding: 0 15px;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Styling untuk tombol Undangan */
+.btn-invite {
+    display: inline-block;
+    background-color: var(--primary-color); /* Gunakan warna utama tema rose */
+    color: white;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px; /* Tombol dengan sudut melengkung */
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Tambah efek bayangan untuk tombol */
+}
+        /* Audio control styles */
+        .audio-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .audio-control:hover {
+            transform: scale(1.1);
+        }
+        
+        .audio-icon {
+            width: 24px;
+            height: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .audio-off .audio-icon-on {
+            display: none;
+        }
+        
+        .audio-on .audio-icon-off {
+            display: none;
+        }
+.btn-invite:hover {
+    background-color: #f1b0b7; /* Warna lebih terang saat hover */
+    transform: translateY(-2px); /* Efek hover untuk tombol */
+}
+
+.btn-invite:active {
+    background-color: #e6a1a6; /* Warna lebih gelap saat diklik */
+    transform: translateY(1px); /* Efek tekan tombol */
+}
+
+.btn-invite i {
+    margin-right: 8px;
+}
+.comment-card {
+        background-color: #c68a8a;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        
+    }
+#rsvp-list {
+        max-height: 400px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #ccc transparent;
+        margin-bottom: 1rem;
+    }
+    
+    #rsvp-list::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    #rsvp-list::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+    }
+
+/* Quote Section */
+.quote-section {
+    background-color: var(--secondary-color);
+    text-align: center;
+}
+
+.quote-text {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--primary-color);
+    margin: 0 auto;
+}
+
+/* Couple Section */
+.couple-section {
+    text-align: center;
+}
+
+.top-img {
+    position: absolute;
+    width: 180px;
+    height: auto;
+    margin-top: -20px;
+    margin-left: -90px;
+}
+.couple-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: contain;
+    object-position: 0 -50px 0 -50px;
+    background-color: #ffffff;
+    margin-bottom: 3rem;
+}
+
+
+.heart-divider {
+    margin: 20px 0;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+/* Event Section */
+.event-section {
+    background-color: var(--secondary-color);
+}
+
+.event-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    margin-bottom: 20px;
+}
+
+.event-image {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.event-details {
+    padding: 20px;
+}
+
+.event-icon {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+/* Map Section */
+.map-section {
+    text-align: center;
+}
+
+.map-container {
+    height: 250px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.map-responsive {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.map-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Gift Section */
+.gift-section {
+    background-color: var(--secondary-color);
+    text-align: center;
+}
+
+.gift-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.gift-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    margin-bottom: 20px;
+}
+
+/* RSVP Section */
+.rsvp-section {
+    text-align: center;
+}
+
+.form-control {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #b37878;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Gallery */
+.gallery-section {
+    padding-bottom: 30px;
+}
+
+.swiper {
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+    padding-bottom: 5rem;
+    margin-bottom: -5rem;
+}
+
+/* Divider */
+.divider {
+    width: 100px;
+    margin: 15px auto;
+    border-top: 1px solid var(--primary-color);
+}
+
+/* Countdown */
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.countdown-item {
+    width: 60px;
+    text-align: center;
+}
+
+.countdown-number {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    line-height: 1;
+}
+
+.countdown-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Titles */
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+@media (min-width: 768px) {
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+    }
+
+    .quote-text {
+        font-size: 1.5rem;
+    }
+
+    .countdown-item {
+        width: 80px;
+    }
+
+    .countdown-number {
+        font-size: 2.2rem;
+    }
+}

@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" id="meta-description" 
+      content="Undangan Pernikahan Febri Galih Satria & Silvia Melly Eka Panggraeni, Sabtu, 14 November 2026. Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu." />
+    
+    <title>Undangan Pernikahan - Febri &amp; Silvia</title>
+    
+    <meta property="og:url" content="https://domainkamu.com/undangan/febri-silvia" />
+    <meta property="og:title" id="meta-og-title" 
+      content="Undangan Pernikahan Febri &amp; Silvia" />
+    <meta property="og:description" id="meta-og-description" 
+      content="Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di pernikahan Febri Galih Satria & Silvia Melly Eka Panggraeni. Sabtu, 14 November 2026." />
+    <meta property="og:image" id="meta-og-image" 
+      content="https://invitation.permatawedding.com/2026/febri-silvia/couple/cover.jpg" />
+    <meta property="og:image:alt" content="Undangan Pernikahan Febri & Silvia" />
+    
+    <meta name="twitter:title" id="meta-twitter-title" 
+      content="Undangan Pernikahan Febri &amp; Silvia" />
+    <meta name="twitter:description" id="meta-twitter-description" 
+  content="Undangan pernikahan Febri Galih Satria & Silvia Melly Eka Panggraeni. Sabtu, 14 November 2026." />
+  
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <!-- AOS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <!-- Swiper -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+    <!-- Custom css -->
+    <link href="assets/custom.css" rel="stylesheet" />
+
+    <!-- Style tambahan untuk elemen baru (musik, ucapan, feedback RSVP). Boleh dipindah ke custom.css -->
+    <style>
+      #music-btn {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 1000;
+        width: 44px;
+        height: 44px;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.45);
+        color: #fff;
+      }
+      #music-btn.playing i {
+        animation: pulse-music 1.2s infinite;
+      }
+      @keyframes pulse-music {
+        50% {
+          transform: scale(1.2);
+        }
+      }
+      .rsvp-feedback {
+        display: none;
+        margin-top: 12px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+      }
+      .rsvp-feedback.success {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+      .rsvp-feedback.error {
+        background: #ffebee;
+        color: #c62828;
+      }
+      .comment-card {
+        display: flex;
+        gap: 12px;
+        text-align: left;
+        background: #fff;
+        border-radius: 12px;
+        padding: 14px;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      }
+      .comment-avatar {
+        flex: 0 0 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--primary-color, #b08968);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+      }
+      .comment-name {
+        margin: 0 0 4px;
+        font-weight: 600;
+      }
+      .comment-text {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+      .comment-badge {
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        border-radius: 10px;
+        margin-left: 6px;
+        font-weight: 500;
+      }
+      .badge-hadir {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+      .badge-tidak {
+        background: #ffebee;
+        color: #c62828;
+      }
+      .badge-belum {
+        background: #fff8e1;
+        color: #f57f17;
+      }
+      #comments-list {
+        max-height: 260px;
+        overflow-y: auto;
+        margin-top: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Musik latar (src diisi api.js → renderMusic; atau isi manual di sini) -->
+    <audio id="bg-music" loop preload="none"></audio>
+    <button id="music-btn" type="button" aria-label="Putar / jeda musik"><i id="music-icon" class="fas fa-music"></i></button>
+
+    <!-- Hero/Opening Section -->
+    <section class="hero" id="opening">
+      <div id="cover-photo" style="position: absolute; inset: 0; background-size: cover; background-position: center"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+        <h3 class="script-font mb-3" style="color: white; font-size: 1.5rem">The Wedding of</h3>
+        <h1 class="hero-title script-font"><span data-key="cover-groom">Januar</span> &amp; <span data-key="cover-bride">Sundari</span></h1>
+        <p class="hero-subtitle">Kepada Yth. <strong id="guest-name">Bapak/Ibu/Saudara/i</strong></p>
+        <p class="hero-subtitle">Dengan rahmat Allah SWT, kami mengundang Anda untuk menghadiri pernikahan kami pada</p>
+        <p class="hero-subtitle" id="cover-date">24 Juni 2025</p>
+        <div class="countdown" id="countdown">
+          <div class="countdown-item">
+            <div class="countdown-number" id="days">00</div>
+            <div class="countdown-label">Days</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="hours">00</div>
+            <div class="countdown-label">Hours</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="minutes">00</div>
+            <div class="countdown-label">Minutes</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="seconds">00</div>
+            <div class="countdown-label">Seconds</div>
+          </div>
+        </div>
+        <a href="#couple" class="btn-invite"> Buka Undangan </a>
+      </div>
+    </section>
+
+    <!-- Couple Section -->
+    <section class="couple-section" id="couple">
+      <div class="container">
+        <h2 class="section-title text-center mb-4" data-aos="fade-up">Mempelai</h2>
+
+        <div data-aos="fade-up" data-aos-duration="1000">
+          <div class="mx-auto d-block">
+            <img src="assets/img/flower.png" class="top-img" alt="" />
+            <img id="groom-photo" src="couple/mempelai-pria.jpg" alt="Mempelai Pria" class="couple-photo mx-auto d-block" />
+          </div>
+          <h3 class="mt-3" data-key="groom-full">Januar Ischak</h3>
+          <p>Putra <span data-key="groom-father">Alm. Bapak Joko Subagyo</span> dan <span data-key="groom-mother">Ibu Sumarni</span></p>
+          <small data-key="groom-address">Peloksepur RT 14 RW 05, Bener, Ngrampal, Sragen</small>
+        </div>
+
+        <div class="heart-divider" data-aos="zoom-in" data-aos-duration="1000">
+          <i class="fas fa-heart"></i>
+        </div>
+
+        <div data-aos="fade-up" data-aos-duration="1000">
+          <div class="mx-auto d-block">
+            <img src="assets/img/flower.png" class="top-img" alt="" />
+            <img id="bride-photo" src="couple/mempelai-wanita.jpg" alt="Mempelai Wanita" class="couple-photo mx-auto d-block" />
+          </div>
+          <h3 class="mt-3" data-key="bride-full">Sundari</h3>
+          <p>Putri <span data-key="bride-father">Bapak Sarju</span> dan <span data-key="bride-mother">Almh. Ibu Sujiyem</span></p>
+          <small data-key="bride-address">Ngrancang RT 03 RW 05, Mantingan, Mantingan, Ngawi</small>
+        </div>
+
+        <div class="mt-4" data-aos="fade-up">
+          <div class="divider"></div>
+          <small class="text-center text-sm"> Takdir mempertemukan kami, cinta menyatukan hati kami. Kini, kami siap menulis babak baru kehidupan bersama. </small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="event-section" id="events">
+      <div class="container">
+        <h2 class="section-title text-center mb-4" data-aos="fade-up">Acara</h2>
+
+        <div data-aos="fade-up">
+          <div class="event-card">
+            <div class="event-details text-center">
+              <div class="event-icon"><i class="fas fa-ring"></i></div>
+              <h3>Akad Nikah</h3>
+              <p><i class="far fa-calendar-alt me-2"></i><span data-key="event-0-date">23 Juni 2025</span></p>
+              <p><i class="far fa-clock me-2"></i><span data-key="event-0-time">08.00 - 09.00</span></p>
+              <p><i class="fas fa-map-marker-alt me-2"></i><span data-key="event-0-venue">KAU Mantingan</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4" data-aos="fade-up">
+          <div class="event-card">
+            <div class="event-details text-center">
+              <div class="event-icon"><i class="fas fa-glass-cheers"></i></div>
+              <h3>Resepsi</h3>
+              <p><i class="far fa-calendar-alt me-2"></i><span data-key="event-1-date">24 Juni 2025</span></p>
+              <p><i class="far fa-clock me-2"></i><span data-key="event-1-time">10.00 - Selesai</span></p>
+              <p><i class="fas fa-map-marker-alt me-2"></i><span data-key="event-1-venue">Rumah Mempelai Pria</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section" id="map">
+      <div class="container">
+        <h2 class="section-title text-center mb-4" data-aos="fade-up">Lokasi</h2>
+        <div data-aos="fade-up">
+          <div class="card">
+            <div class="card-body text-center">
+              <h3>Rumah Mempelai Wanita</h3>
+              <p><i class="fas fa-map-marker-alt me-2" aria-hidden="true"></i><span data-key="bride-address" >Peloksepur RT 14 RW 05, Bener, Ngrampal, Sragen</span></p>
+              <div class="map-responsive my-3">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d31651.307796925274!2d111.02533761083986!3d-7.419408499999986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zN8KwMjUnMDkuOSJTIDExMcKwMDMnNDEuMCJF!5e0!3m2!1sen!2sid!4v1745384074920!5m2!1sen!2sid"
+                  width="100%"
+                  height="300"
+                  style="border: 0"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+              <a data-key="event-1-maps" href="https://maps.app.goo.gl/LrxA7o76MvcXCAWs8" target="_blank" rel="noopener" class="btn btn-primary mt-2"> <i class="fa fa-map-marked-alt me-2" aria-hidden="true"></i>Google Maps </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section" id="quote">
+      <div class="container">
+        <div data-aos="fade-up" data-aos-duration="1000">
+          <i class="fas fa-quote-left" style="color: var(--primary-color); opacity: 0.5"></i>
+          <p class="quote-text my-3">
+            "Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya
+            pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir"
+          </p>
+          <p class="text-muted">Ar-Rum 30:21</p>
+          <i class="fas fa-quote-right" style="color: var(--primary-color); opacity: 0.5"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section (slide diganti otomatis dari API kalau ada foto) -->
+    <section class="gallery-section" id="gallery">
+      <div class="container">
+        <h2 class="section-title text-center mb-4" data-aos="fade-up">Our Gallery</h2>
+        <div class="swiper mySwiper" data-aos="fade-up">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="gallery/galeri-1.jpg" alt="Gallery image 1" /></div>
+            <div class="swiper-slide"><img src="gallery/galeri-2.jpg" alt="Gallery image 2" /></div>
+            <div class="swiper-slide"><img src="gallery/galeri-3.jpg" alt="Gallery image 3" /></div>
+            <div class="swiper-slide"><img src="gallery/galeri-4.jpg" alt="Gallery image 4" /></div>
+            <div class="swiper-slide"><img src="gallery/galeri-5.jpg" alt="Gallery image 5" /></div>
+            <div class="swiper-slide"><img src="gallery/galeri-6.jpg" alt="Gallery image 6" /></div>
+            <div class="swiper-slide"><img src="gallery/galeri-7.jpg" alt="Gallery image 7" /></div>
+            <div class="swiper-slide"><img src="gallery/galeri-8.jpg" alt="Gallery image 8" /></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gift Section -->
+    <section class="gift-section" id="gift">
+      <div class="container">
+        <h2 class="section-title text-center mb-4" data-aos="fade-up">Hadiah Pernikahan</h2>
+        <div data-aos="fade-up">
+          <div class="gift-card">
+            <div class="gift-icon"><i class="fas fa-gift"></i></div>
+            <h3>Amplop Digital</h3>
+            <p class="mb-3">Anda juga dapat memberikan hadiah melalui transfer bank:</p>
+
+            <div class="mb-3">
+              <p class="fw-bold">Bank Transfer:</p>
+              <p>Bank: <span data-key="wallet-0-bank">BRI</span></p>
+              <p>Nomor Rekening: <span data-key="wallet-0-number">093501049316538</span></p>
+              <p data-key="wallet-0-holder">a.n. Januar Ischak</p>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-copy" data-key="wallet-0-copy" data-copy="093501049316538"><i class="fas fa-copy me-2"></i>Salin Rekening</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section class="rsvp-section" id="rsvp">
+      <div class="container">
+        <h2 class="section-title text-center mb-4" data-aos="fade-up">Konfirmasi Kehadiran</h2>
+
+        <div data-aos="fade-up">
+          <form class="rsvp-form" id="rsvp-form">
+            <input type="text" name="name" class="form-control" placeholder="Nama Anda" required />
+
+            <select name="attendance" class="form-control" required>
+              <option value="" disabled selected>Kehadiran</option>
+              <option value="hadir">Hadir</option>
+              <option value="tidak_hadir">Tidak Hadir</option>
+              <option value="ragu_ragu">Belum Pasti</option>
+            </select>
+
+            <textarea name="greeting" class="form-control" rows="3" placeholder="Ucapan & Doa" required></textarea>
+
+            <button type="submit" id="rsvp-submit" class="btn btn-primary mt-3"><i class="fas fa-paper-plane"></i> Kirim</button>
+            <div id="rsvp-feedback" class="rsvp-feedback"></div>
+          </form>
+
+          <div id="comments-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <h2 id="closing-couple" class="script-font mb-3" style="color: white; font-size: 2rem">Januar Ischak & Sundari</h2>
+        <p>Terima kasih atas doa dan kehadiran Anda dalam momen bahagia kami</p>
+        <p class="mt-3">© <span id="current-year">2025</span> Permata Wedding</p>
+      </div>
+    </footer>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-navbar">
+      <div class="container">
+        <div class="row">
+          <div class="col-3 nav-item">
+            <a class="nav-link active" href="#opening"><i class="fas fa-home"></i><span>Home</span></a>
+          </div>
+          <div class="col-3 nav-item">
+            <a class="nav-link" href="#couple"><i class="fas fa-heart"></i><span>Couple</span></a>
+          </div>
+          <div class="col-3 nav-item">
+            <a class="nav-link" href="#events"><i class="fas fa-calendar-alt"></i><span>Events</span></a>
+          </div>
+          <div class="col-3 nav-item">
+            <a class="nav-link" href="#rsvp"><i class="fas fa-envelope"></i><span>RSVP</span></a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
+    <!-- custom -->
+    <script src="assets/api.js"></script>
+    <script src="assets/script.js"></script>
+  </body>
+</html>

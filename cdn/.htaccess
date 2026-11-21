@@ -1,0 +1,97 @@
+# ==============================================================================
+# CDN Permata Wedding - Apache Server Configuration
+# cdn.permatawedding.com
+# ==============================================================================
+
+# 1. Enable Options & Disable Directory Browsing
+Options -Indexes +FollowSymLinks
+
+# 2. CORS (Cross-Origin Resource Sharing) Configuration
+# Essential so any wedding invitation website can stream/play assets from this CDN
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS, PUT, DELETE"
+    Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-API-KEY"
+    Header set Timing-Allow-Origin "*"
+
+    # Anti-XSS, Anti-MIME-sniffing, Anti-Clickjacking Security Headers
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Block access to hidden files and sensitive database extensions
+<FilesMatch "(^\.|\.(json|lock|bak|config|sql|md|log)$)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# 3. Proper MIME Types for Audio & Video Streaming
+<IfModule mod_mime.c>
+    AddType audio/mpeg .mp3
+    AddType audio/mp4 .m4a
+    AddType audio/ogg .ogg .oga
+    AddType audio/wav .wav
+    AddType audio/aac .aac
+    AddType video/mp4 .mp4
+    AddType video/webm .webm
+    AddType application/json .json
+</IfModule>
+
+# 4. Browser Caching for CDN Media Delivery
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+    
+    # Audio & Video Cache: 1 year (Immutable CDN assets)
+    ExpiresByType audio/mpeg "access plus 1 year"
+    ExpiresByType audio/mp4 "access plus 1 year"
+    ExpiresByType audio/ogg "access plus 1 year"
+    ExpiresByType audio/wav "access plus 1 year"
+    ExpiresByType video/mp4 "access plus 1 year"
+    ExpiresByType video/webm "access plus 1 year"
+    
+    # CSS & JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    
+    # API JSON: No cache or short revalidation
+    ExpiresByType application/json "access plus 0 seconds"
+</IfModule>
+
+# 5. Clean URLs / Routing
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Handle API routes without .php extension
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^api/music/?$ api/music.php [L,QSA]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^api/videos/?$ api/videos.php [L,QSA]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^api/upload/?$ api/upload.php [L,QSA]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^api/process/?$ api/process.php [L,QSA]
+</IfModule>
+
+# 6. Upload Size Limits (For Apache environments where Allowed)
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 64M
+    php_value post_max_size 64M
+    php_value memory_limit 128M
+</IfModule>
+<IfModule mod_php.c>
+    php_value upload_max_filesize 64M
+    php_value post_max_size 64M
+    php_value memory_limit 128M
+</IfModule>

@@ -1,0 +1,35 @@
+# Apache Configuration for Permata Wedding Unified Application
+Options -Indexes +FollowSymLinks
+DirectoryIndex index.html index.php
+RewriteEngine On
+
+# 1. Allow direct access to real files or directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# 2. Routing to Core API
+RewriteRule ^api/(.*)$ api/index.php [QSA,L]
+
+# 3. Routing to Admin Panel
+RewriteRule ^admin/?$ admin/index.html [L]
+
+# 4. Routing to CDN API / files
+RewriteRule ^cdn/api/(.*)$ cdn/api/$1 [QSA,L]
+RewriteRule ^cdn/?$ cdn/index.php [L]
+
+# 5. Routing to Invitations (Dukungan Folder Tahun Dinamis misal /2026/, /2027/, /2028/ dll)
+# Akses langsung misal /2027/{slug} akan ditangani direct directory matching di rule #1
+# Jika user mengakses /{slug} tanpa prefix tahun, rewrite ke tahun sekarang atau tahun yang ada
+RewriteCond %{DOCUMENT_ROOT}/order-permata/2027/$1 -d [OR]
+RewriteCond %{DOCUMENT_ROOT}/2027/$1 -d
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ 2027/$1/ [L]
+
+RewriteCond %{DOCUMENT_ROOT}/order-permata/2026/$1 -d [OR]
+RewriteCond %{DOCUMENT_ROOT}/2026/$1 -d
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ 2026/$1/ [L]
+
+# Fallback backwards-compatibility ke invitations/ jika masih ada
+RewriteCond %{DOCUMENT_ROOT}/order-permata/invitations/$1 -d [OR]
+RewriteCond %{DOCUMENT_ROOT}/invitations/$1 -d
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ invitations/$1/ [L]

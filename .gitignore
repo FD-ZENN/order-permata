@@ -1,0 +1,28 @@
+# Dependency directories
+/vendor/
+/node_modules/
+
+# Environment configurations & credentials
+.env
+.env.local
+.env.*.local
+*.env
+
+# Local server & upload storage
+/uploads/*
+!/uploads/.gitkeep
+!/uploads/.htaccess
+/202*/*
+!/202*/.gitkeep
+admin/wa/storage/*.sqlite
+
+# Logs & cache
+*.log
+.cache/
+tmp/
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

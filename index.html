@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Undangan Digital Eksklusif</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" />
+  <link rel="preload" href="assets/fonts/material-symbols-outlined.woff2" as="font" type="font/woff2" crossorigin />
+
+  <link rel="stylesheet" href="assets/css/order.css?v=2.0" />
+</head>
+
+<body>
+  <!-- ─── 2. Top Header Navigation ─── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="brand-group">
+        <div class="brand-mark">Permata Wedding</div>
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ─── Hero Headline ─── -->
+    <section class="page-hero">
+      <h1>Pemesanan Undangan Digital Eksklusif</h1>
+      <p>Lengkapi formulir terpadu ini untuk menyiapkan undangan pernikahan impian Anda dalam hitungan menit.</p>
+    </section>
+
+    <!-- ─── Progress Bar & Indicators ─── -->
+    <div id="draft-restore-banner" class="draft-alert-banner" style="display: none;">
+      <div style="display: flex; align-items: center; gap: 0.6rem;">
+        <span class="material-symbols-outlined" style="font-size: 1.25rem;">history</span>
+        <span>Ditemukan draf data yang tersimpan sebelumnya. Ingin memulihkan data?</span>
+      </div>
+      <div class="draft-alert-actions">
+        <button type="button" class="btn-draft-restore" onclick="restoreDraftData()">Pulihkan</button>
+        <button type="button" class="btn-draft-discard" onclick="discardDraftData()">Mulai Baru</button>
+      </div>
+    </div>
+
+    <div id="progress-bar-wrap">
+      <div id="progress-fill"></div>
+    </div>
+
+    <nav id="step-indicators" aria-label="Langkah Pemesanan">
+      <div class="step-ind" id="step-indicator-1">
+        <div class="ind-circle">1</div>
+        <span class="ind-label">Tema &amp; Paket</span>
+        <span class="ind-sub">Pilih Desain</span>
+      </div>
+      <div class="step-ind" id="step-indicator-2">
+        <div class="ind-circle">2</div>
+        <span class="ind-label">Mempelai</span>
+        <span class="ind-sub">Data Diri</span>
+      </div>
+      <div class="step-ind" id="step-indicator-3">
+        <div class="ind-circle">3</div>
+        <span class="ind-label">Acara &amp; Musik</span>
+        <span class="ind-sub">Waktu &amp; Lagu</span>
+      </div>
+      <div class="step-ind" id="step-indicator-4">
+        <div class="ind-circle">4</div>
+        <span class="ind-label">Cerita</span>
+        <span class="ind-sub">Love Story</span>
+      </div>
+      <div class="step-ind" id="step-indicator-5">
+        <div class="ind-circle">5</div>
+        <span class="ind-label">Galeri</span>
+        <span class="ind-sub">Foto Prewedding</span>
+      </div>
+      <div class="step-ind" id="step-indicator-6">
+        <div class="ind-circle">6</div>
+        <span class="ind-label">Live &amp; Hadiah</span>
+        <span class="ind-sub">Streaming &amp; Rekening</span>
+      </div>
+      <div class="step-ind" id="step-indicator-7">
+        <div class="ind-circle">7</div>
+        <span class="ind-label">Submit</span>
+        <span class="ind-sub">Review Order</span>
+      </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         PANEL 1 — Pilih Tema Undangan
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="step-panel" id="panel-1">
+      <div class="card">
+        <div class="card-header-editorial">
+          <div class="card-title-group">
+            <h2>
+              <span class="material-symbols-outlined">palette</span>
+              Langkah 1: Pilih Tema Undangan
+            </h2>
+            <p class="hint">Klik pada kartu tema yang Anda inginkan. Seluruh aset tema akan otomatis di-deploy ke link
+              undangan Anda.</p>
+          </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="theme-filter-bar">
+          <div class="search-input-wrap">
+            <span class="material-symbols-outlined">search</span>
+            <input id="theme-search" type="text" placeholder="Cari desain (mis. Floral, Zen, Javanese)..." />
+          </div>
+          <select id="theme-cat-filter">
+            <option value="">Semua Kategori</option>
+            =
+          </select>
+        </div>
+
+        <!-- Theme Grid Container for order.js -->
+        <div id="theme-grid-public">
+          <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-light)">Memuat tema
+            eksklusif...</div>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <span></span>
+        <button type="button" class="btn btn-primary" id="btn-next-1">
+          Lanjutkan
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         PANEL 2 — Data Mempelai & Konfigurasi URL
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="step-panel" id="panel-2">
+      <div class="card">
+        <div class="card-header-editorial">
+          <div class="card-title-group">
+            <h2>
+              <span class="material-symbols-outlined">favorite</span>
+              Langkah 2: Data Mempelai &amp; Paket Layanan
+            </h2>
+            <p class="hint">Lengkapi biodata kedua calon mempelai beserta informasi keluarga dan paket undangan digital.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tautan & Kontak -->
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="o-slug">Slug URL Undangan <span class="req">*</span></label>
+            <div class="input-prefix-wrap" style="position: relative;">
+              <input type="hidden" id="o-package" value="basic" />
+              <input id="o-slug" type="text" placeholder="sarah-dimas" autocomplete="off" />
+              <span id="slug-status-icon"
+                style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; display: none;"></span>
+            </div>
+            <small id="slug-feedback"
+              style="font-size: 0.75rem; margin-top: 4px; display: block; transition: all 0.2s;">
+              Hanya huruf kecil, angka, dan tanda hubung (-)
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="o-phone">Nomor WhatsApp Aktif <span class="req">*</span></label>
+            <input id="o-phone" type="tel" placeholder="081234567890 atau 62812..." oninput="normalizePhoneInput(this); triggerAutoDraftSave();" />
+            <small style="font-size: 0.75rem; color: var(--text-light); margin-top: 2px"> Notifikasi kode order dan draf
+              akan dikirim ke nomor ini (format otomatis disesuaikan) </small>
+          </div>
+
+          <div class="form-group span-full">
+            <label for="o-notes">Catatan Tambahan untuk Admin (Opsional)</label>
+            <textarea id="o-notes"
+              placeholder="Tuliskan catatan khusus atau preferensi warna/nuansa tambahan..."></textarea>
+          </div>
+        </div>
+
+        <!-- Mempelai Pria -->
+        <div class="couple-sub-card">
+          <div class="couple-sub-title">
+            <span class="material-symbols-outlined">man</span>
+            Informasi Mempelai Pria
+          </div>
+
+          <div style="margin-bottom: 1rem">
+            <label style="margin-bottom: 0.4rem; display: block">Foto Mempelai Pria</label>
+            <div class="photo-upload-box" onclick="triggerUpload('groom-photo-input')">
+              <img id="groom-photo-preview" class="photo-preview" src="" alt="Preview Mempelai Pria" />
+              <span class="material-symbols-outlined">add_a_photo</span>
+              <div id="groom-photo-label" style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted)">Klik
+                untuk upload foto avatar pria</div>
+              <small style="font-size: 0.7rem; color: var(--text-light)">JPEG, PNG, WebP • Maks. 20 MB</small>
+            </div>
+            <input type="file" id="groom-photo-input" accept="image/jpeg,image/png,image/webp" style="display: none" />
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="g-name">Nama Lengkap <span class="req">*</span></label>
+              <input id="g-name" type="text" placeholder="Muhammad Dimas Prasetyo, S.T." />
+            </div>
+            <div class="form-group">
+              <label for="g-nick">Nama Panggilan</label>
+              <input id="g-nick" type="text" placeholder="Dimas" />
+            </div>
+            <div class="form-group">
+              <label for="g-father">Nama Ayah <span class="req">*</span></label>
+              <input id="g-father" type="text" placeholder="Bpk. H. Prasetyo Widodo" />
+            </div>
+            <div class="form-group">
+              <label for="g-mother">Nama Ibu <span class="req">*</span></label>
+              <input id="g-mother" type="text" placeholder="Ibu Hj. Siti Nurhaliza" />
+            </div>
+            <div class="form-group span-full">
+              <label for="g-address">Alamat Mempelai / Keluarga Pria</label>
+              <textarea id="g-address" placeholder="Kota Surakarta, Jawa Tengah"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mempelai Wanita -->
+        <div class="couple-sub-card">
+          <div class="couple-sub-title">
+            <span class="material-symbols-outlined">woman</span>
+            Informasi Mempelai Wanita
+          </div>
+
+          <div style="margin-bottom: 1rem">
+            <label style="margin-bottom: 0.4rem; display: block">Foto Mempelai Wanita</label>
+            <div class="photo-upload-box" onclick="triggerUpload('bride-photo-input')">
+              <img id="bride-photo-preview" class="photo-preview" src="" alt="Preview Mempelai Wanita" />
+              <span class="material-symbols-outlined">add_a_photo</span>
+              <div id="bride-photo-label" style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted)">Klik
+                untuk upload foto avatar wanita</div>
+              <small style="font-size: 0.7rem; color: var(--text-light)">JPEG, PNG, WebP • Maks. 20 MB</small>
+            </div>
+            <input type="file" id="bride-photo-input" accept="image/jpeg,image/png,image/webp" style="display: none" />
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="b-name">Nama Lengkap <span class="req">*</span></label>
+              <input id="b-name" type="text" placeholder="Sarah Ayu Safitri, S.Farm." />
+            </div>
+            <div class="form-group">
+              <label for="b-nick">Nama Panggilan</label>
+              <input id="b-nick" type="text" placeholder="Sarah" />
+            </div>
+            <div class="form-group">
+              <label for="b-father">Nama Ayah <span class="req">*</span></label>
+              <input id="b-father" type="text" placeholder="Bpk. Hendro Santoso" />
+            </div>
+            <div class="form-group">
+              <label for="b-mother">Nama Ibu <span class="req">*</span></label>
+              <input id="b-mother" type="text" placeholder="Ibu Ratna Dewi" />
+            </div>
+            <div class="form-group span-full">
+              <label for="b-address">Alamat Mempelai / Keluarga Wanita</label>
+              <textarea id="b-address" placeholder="Kota Yogyakarta, D.I. Yogyakarta"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-outline" id="btn-prev-2"><span
+            class="material-symbols-outlined">arrow_back</span> Kembali</button>
+        <button type="button" class="btn btn-primary" id="btn-next-2">
+          Lanjutkan
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         PANEL 3 — Rangkaian Acara & Musik Latar
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="step-panel" id="panel-3">
+      <div class="card">
+        <div class="card-header-editorial">
+          <div class="card-title-group">
+            <h2>
+              <span class="material-symbols-outlined">event</span>
+              Langkah 3: Rangkaian Acara Pernikahan
+            </h2>
+            <p class="hint">Tambahkan detail acara seperti Akad Nikah, Pemberkatan, Resepsi, atau Ngunduh Mantu.</p>
+          </div>
+        </div>
+
+        <div id="events-list"></div>
+
+        <button type="button" class="btn btn-add" id="btn-add-event"><span
+            class="material-symbols-outlined">add_circle</span> Tambah Sesi Acara Baru</button>
+      </div>
+
+      <div class="card">
+        <div class="card-header-editorial">
+          <div class="card-title-group">
+            <h2>
+              <span class="material-symbols-outlined">music_note</span>
+              Musik Latar Undangan (MP3)
+            </h2>
+            <p class="hint">Tambahkan backsound romantis untuk menyambut para tamu saat membuka undangan.</p>
+          </div>
+        </div>
+
+        <div id="music-list"></div>
+
+        <button type="button" class="btn btn-add" id="btn-add-music"><span
+            class="material-symbols-outlined">add_circle</span> Tambah Musik Latar</button>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-outline" id="btn-prev-3"><span
+            class="material-symbols-outlined">arrow_back</span> Kembali</button>
+        <button type="button" class="btn btn-primary" id="btn-next-3">
+          Lanjutkan
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         PANEL 4 — Love Story Timeline
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="step-panel" id="panel-4">
+      <div class="card">
+        <div class="card-header-editorial">
+          <div class="card-title-group">
+            <h2>
+              <span class="material-symbols-outlined">history_edu</span>
+              Langkah 4: Kisah Cinta / Love Story Timeline
+            </h2>
+            <p class="hint">Bagikan kenangan indah perjalanan cinta Anda mulai dari awal bertemu, lamaran, hingga hari
+              bahagia.</p>
+          </div>
+        </div>
+
+        <div id="stories-list"></div>
+
+        <button type="button" class="btn btn-add" id="btn-add-story"><span
+            class="material-symbols-outlined">add_circle</span> Tambah Momen Cerita</button>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-outline" id="btn-prev-4"><span
+            class="material-symbols-outlined">arrow_back</span> Kembali</button>
+        <button type="button" class="btn btn-primary" id="btn-next-4">
+          Lanjutkan
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         PANEL 5 — Galeri Foto Prewedding
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="step-panel" id="panel-5">
+      <div class="card">
+        <div class="card-header-editorial">
+          <div class="card-title-group">
+            <h2>
+              <span class="material-symbols-outlined">photo_library</span>
+              Langkah 5: Galeri Foto Prewedding
+            </h2>
+            <p class="hint">Upload foto-foto pre-wedding terbaik Anda (maksimal 20 foto sekaligus).</p>
+          </div>
+        </div>
+
+        <label for="gallery-input" class="photo-upload-box" style="min-height: 160px; padding: 2rem">
+          <span class="material-symbols-outlined" style="font-size: 3rem; color: var(--secondary)"> collections </span>
+          <div style="font-weight: 700; font-size: 1rem; color: var(--primary); margin: 0.4rem 0 0.2rem">Klik atau seret
+            foto ke sini</div>
+          <div style="font-size: 0.8rem; color: var(--text-light)">Format JPEG, PNG, atau WebP • Maks. 20 MB per foto •
+            Maks. 20 foto</div>
+        </label>
+        <input type="file" id="gallery-input" accept="image/jpeg,image/png,image/webp" multiple style="display: none" />
+
+        <div id="gallery-count-label"
+          style="font-size: 0.84rem; font-weight: 600; color: var(--primary); margin-top: 0.85rem"></div>
+        <div id="gallery-preview-wrap"></div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-outline" id="btn-prev-5"><span
+            class="material-symbols-outlined">arrow_back</span> Kembali</button>
+        <button type="button" class="btn btn-primary" id="btn-next-5">
+          Lanjutkan
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         PANEL 6 — Live Streaming, Hiburan, & Hadiah Digital
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="step-panel" id="panel-6">
+      <!-- Live Streaming -->
+      <div class="card">
+        <div class="card-header-editorial">
+          <div class="card-title-group">
+            <h2>
+              <span class="material-symbols-outlined">live_tv</span>
+              Live Streaming Pernikahan
+            </h2>
+            <p class="hint">Sematkan tautan YouTube Live untuk keluarga dan tamu yang berhalangan hadir langsung.</p>
+          </div>
+        </div>
+
+        <div id="live-list"></div>
+
+        <button type="button" class="btn btn-add" id="btn-add-live"><span
+            class="material-symbols-outlined">add_circle</span> Tambah Tautan Siaran Langsung</button>
+      </div>
+
+      <!-- Hiburan -->
+      <div class="card">
+        <div class="card-header-editorial">
+          <div class="card-title-group">
+            <h2>
+              <span class="material-symbols-outlined">celebration</span>
+              Hiburan &amp; Pengisi Acara
+            </h2>
+            <p class="hint">Daftarkan hiburan yang akan memeriahkan pesta pernikahan Anda (Band, MC, Akustik, dll).</p>
+          </div>
+        </div>
+
+        <div id="entertainment-list"></div>
+
+        <button type="button" class="btn btn-add" id="btn-add-entertainment"><span
+            class="material-symbols-outlined">add_circle</span> Tambah Pengisi Acara</button>
+      </div>
+
+      <!-- Rekening & Hadiah Digital -->
+      <div class="card">
+        <div class="card-header-editorial">
+          <div class="card-title-group">
+            <h2>
+              <span class="material-symbols-outlined">account_balance</span>
+              Amplop Digital &amp; Rekening Hadiah
+            </h2>
+            <p class="hint">Tamu undangan dapat mengirimkan hadiah tanda kasih secara langsung via transfer perbankan.
+            </p>
+          </div>
+        </div>
+
+        <div id="bank-list"></div>
+
+        <button type="button" class="btn btn-add" id="btn-add-bank"><span
+            class="material-symbols-outlined">add_circle</span> Tambah Nomor Rekening / E-Wallet</button>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-outline" id="btn-prev-6"><span
+            class="material-symbols-outlined">arrow_back</span> Kembali</button>
+        <button type="button" class="btn btn-primary" id="btn-next-6">
+          Lanjutkan
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         PANEL 7 — Review & Submit Data
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="step-panel" id="panel-7">
+      <div class="card">
+        <div class="card-header-editorial">
+          <div class="card-title-group">
+            <h2>
+              <span class="material-symbols-outlined">fact_check</span>
+              Langkah 7: Review &amp; Simpan Data Order
+            </h2>
+            <p class="hint">Periksa kelengkapan seluruh data sebelum disimpan secara resmi ke sistem Permata Wedding.
+            </p>
+          </div>
+        </div>
+
+        <div id="review-content"></div>
+      </div>
+
+      <div class="card" style="text-align: center; padding: 2rem">
+        <button type="button" class="btn btn-primary" id="btn-submit"
+          style="width: 100%; max-width: 440px; justify-content: center; padding: 0.95rem; font-size: 1rem">
+          <span class="material-symbols-outlined">send</span>
+          Kirim &amp; Simpan Data Order
+        </button>
+        <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 0.75rem">Data aman terenkripsi. Anda akan
+          mendapatkan kode order resmi untuk konfirmasi ke WhatsApp Admin.</p>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-outline" id="btn-prev-7"><span
+            class="material-symbols-outlined">arrow_back</span> Kembali</button>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         PANEL SUCCESS — Notifikasi Sukses & Hubungi Admin
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="step-panel" id="panel-success">
+      <div class="success-badge">
+        <span class="material-symbols-outlined">verified</span>
+      </div>
+      <h2>Pemesanan Berhasil Disimpan!</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem">Terima kasih telah mempercayakan undangan pernikahan Anda
+        kepada Permata Wedding.</p>
+
+      <div>
+        <span
+          style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-light); display: block; margin-top: 1rem">
+          Kode Registrasi Pesanan: </span>
+        <div class="order-code-box" id="success-order-code">ORD-XXXXXX</div>
+      </div>
+
+      <p style="font-size: 0.875rem; color: var(--text-muted)">
+        Alamat Tautan Undangan Anda:
+        <strong id="success-slug" style="color: var(--primary); font-family: monospace; font-size: 1rem"></strong>
+      </p>
+
+      <div style="max-width: 600px; margin: 1.5rem auto 0; text-align: left">
+        <label style="display: block; margin-bottom: 0.35rem">Preview Pesan Konfirmasi WhatsApp:</label>
+        <div class="wa-preview" id="wa-preview-text"></div>
+      </div>
+
+      <div class="success-actions">
+        <button type="button" class="btn btn-wa" id="btn-share-wa">
+          <span class="material-symbols-outlined">chat</span>
+          Kirim ke WhatsApp Admin Permata Wedding
+        </button>
+        <button type="button" class="btn btn-outline" id="btn-copy-link">
+          <span class="material-symbols-outlined">link</span>
+          Salin Tautan Web Undangan
+        </button>
+        <a href="/" class="btn btn-outline" style="text-decoration: none">
+          <span class="material-symbols-outlined">arrow_back</span>
+          Kembali ke Katalog
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- ─── Order Processing Modal Dialog ─── -->
+  <dialog id="order-processing-modal" aria-labelledby="modal-status-title" aria-describedby="modal-status-desc">
+    <div class="modal-spinner-wrap">
+      <progress class="order-spinner" aria-label="Memproses pesanan"></progress>
+    </div>
+    <h3 class="order-status-title" id="modal-status-title">Memproses Pesanan Anda</h3>
+    <p class="order-status-desc" id="modal-status-desc">Mohon tunggu sebentar, sistem sedang menyiapkan undangan...</p>
+
+    <div class="order-status-steps">
+      <div class="status-step-item active" id="step-status-upload">
+        <div class="step-icon-wrap">
+          <span class="material-symbols-outlined step-icon" id="icon-status-upload">cloud_upload</span>
+        </div>
+        <span class="step-text-title">1. Mengunggah &amp; mengompresi media foto</span>
+      </div>
+      <div class="status-step-item" id="step-status-db">
+        <div class="step-icon-wrap">
+          <span class="material-symbols-outlined step-icon" id="icon-status-db">database</span>
+        </div>
+        <span class="step-text-title">2. Menyimpan data mempelai &amp; jadwal acara</span>
+      </div>
+      <div class="status-step-item" id="step-status-build">
+        <div class="step-icon-wrap">
+          <span class="material-symbols-outlined step-icon" id="icon-status-build">auto_fix_high</span>
+        </div>
+        <span class="step-text-title">3. Pre-rendering &amp; kompilasi website undangan</span>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ─── Site Footer ─── -->
+  <footer class="site-footer">
+    <div class="footer-brand">Permata Wedding</div>
+    <p>© <span id="tahun"></span> Permata Wedding</p>
+    <p style="font-size: 0.75rem; color: var(--text-light); margin-top: 0.35rem">Eksklusif Template Undangan Digital.
+      All rights reserved.</p>
+  </footer>
+  <div id="toast-container"></div>
+  <script>
+    document.getElementById("tahun").textContent = new Date().getFullYear();
+    function selectPackage(val) {
+      const select = document.getElementById("o-package");
+      if (select) {
+        select.value = val;
+      }
+      document.querySelectorAll(".pkg-card").forEach((card) => {
+        card.classList.remove("active");
+      });
+      event.currentTarget.classList.add("active");
+    }
+  </script>
+  <!-- ─── Order Permata Modular Scripts ─── -->
+  <script src="assets/js/order-config.js?v=2.2"></script>
+  <script src="assets/js/order-upload.js?v=2.2"></script>
+  <script src="assets/js/order-events.js?v=2.2"></script>
+  <script src="assets/js/order-music.js?v=2.2"></script>
+  <script src="assets/js/order-components.js?v=2.2"></script>
+  <script src="assets/js/order-stepper.js?v=2.2"></script>
+  <script src="assets/js/order-draft.js?v=2.2"></script>
+  <script src="assets/js/order-submit.js?v=2.2"></script>
+  <script src="assets/js/order-app.js?v=2.2"></script>
+</body>
+
+</html>

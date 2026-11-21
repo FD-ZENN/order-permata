@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=5.0">
+    <title>Wedding Invitation</title>
+    <meta name="description" content="Undangan Pernikahan Online Permata Wedding">
+
+    <!-- CSS Vendor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.12/sweetalert2.min.css">
+
+    <!-- CSS Tema Lokal -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="no-scroll">
+    <!-- Music Button & Audio Player -->
+    <button id="audioButton" class="audio-btn" data-aos="fade-in" data-aos-delay="600" aria-label="Toggle Audio">
+        <i id="audioIcon" class="fa fa-volume-mute"></i>
+    </button>
+    <audio id="bg-music" src="assets/musik/musik.mp3" loop preload="none"></audio>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast-notification">
+        Berhasil disalin!
+    </div>
+
+    <!-- Cover Section -->
+    <section id="cover" class="cover">
+        <div class="cover-content" data-aos="zoom-in" data-aos-duration="800">
+            <h3 class="mb-3">Wedding Invitation</h3>
+            <h1 class="font-glitten mb-2" style="font-size: 3rem;" data-key="cover-groom" id="cover-groom">AMIR</h1>
+            <h1 class="font-glitten mb-2" style="font-size: 2rem;">&amp;</h1>
+            <h1 class="font-glitten mb-4" style="font-size: 3rem;" data-key="cover-bride" id="cover-bride">WULAN</h1>
+            <p class="mb-4">Kepada Yth.<br><strong id="guest-name">Tamu Undangan</strong></p>
+            <button id="bukaUndangan" class="btn btn-dark px-4 py-2">Buka Undangan</button>
+        </div>
+    </section>
+
+    <!-- Home Section -->
+    <section id="home" class="section bg-light">
+        <div class="container">
+            <div class="hero" data-aos="fade-up">
+                <h3 class="mb-3">We Are Getting Married</h3>
+                <h1 class="font-glitten mb-3"><span data-key="name-groom" id="name-groom">Amir</span> &amp; <span data-key="name-bride" id="name-bride">Wulan</span></h1>
+                <div class="divider"></div>
+                <p class="text-center mb-4">
+                    Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri pernikahan kami yang insya Allah akan diselenggarakan pada:
+                </p>
+                <h2 class="mb-2" data-key="cover-date" id="cover-date">Sabtu, 21 Juni 2025</h2>
+                
+                <!-- Countdown -->
+                <div class="countdown-container" id="countdown" data-count="2025/06/21">
+                    <div class="countdown-box" data-aos="flip-left" data-aos-delay="200">
+                        <h3 class="countdown-value" id="countdown-days">00</h3>
+                        <p class="countdown-label">Hari</p>
+                    </div>
+                    <div class="countdown-box" data-aos="flip-left" data-aos-delay="300">
+                        <h3 class="countdown-value" id="countdown-hours">00</h3>
+                        <p class="countdown-label">Jam</p>
+                    </div>
+                    <div class="countdown-box" data-aos="flip-left" data-aos-delay="400">
+                        <h3 class="countdown-value" id="countdown-minutes">00</h3>
+                        <p class="countdown-label">Menit</p>
+                    </div>
+                    <div class="countdown-box" data-aos="flip-left" data-aos-delay="500">
+                        <h3 class="countdown-value" id="countdown-seconds">00</h3>
+                        <p class="countdown-label">Detik</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Couple Section -->
+    <section id="couple" class="section">
+        <div class="container">
+            <h2 class="section-title font-glitten" data-aos="fade-up">Mempelai</h2>
+            <div class="divider mb-4"></div>
+            
+            <!-- Groom -->
+            <div class="text-center mb-5" data-aos="fade-right">
+                <img src="couple/mempelai-pria.jpg" alt="Mempelai Pria" id="groom-photo" class="couple-img" loading="lazy" decoding="async">
+                <h3 class="mb-2" data-key="groom-full" id="groom-full">Amir Syamnuri</h3>
+                <p class="mb-2">Putra dari Pasangan:<br>Bp. <span data-key="groom-father" id="groom-father">Wagiyo</span> &amp; Ibu <span data-key="groom-mother" id="groom-mother">Darwati</span></p>
+                <p class="text-muted" data-key="groom-address" id="groom-address">Bolorejo Rt.11 / Rw.04, Banaran, Sambungmacan, Sragen.</p>
+            </div>
+            
+            <div class="text-center mb-5" data-aos="zoom-in" data-aos-delay="200">
+                <h3 class="font-glitten">&amp;</h3>
+            </div>
+            
+            <!-- Bride -->
+            <div class="text-center" data-aos="fade-left">
+                <img src="couple/mempelai-wanita.jpg" alt="Mempelai Wanita" id="bride-photo" class="couple-img" loading="lazy" decoding="async">
+                <h3 class="mb-2" data-key="bride-full" id="bride-full">Catur Wulandari</h3>
+                <p class="mb-2">Putri dari Pasangan:<br>Bp. <span data-key="bride-father" id="bride-father">Alm. Wiknyo Sukarto</span> &amp; Ibu <span data-key="bride-mother" id="bride-mother">Sumiyem</span></p>
+                <p class="text-muted" data-key="bride-address" id="bride-address">Tanjung Rt.10, Celep, Kedawung, Sragen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Section -->
+    <section id="event" class="section">
+        <div class="container">
+            <h2 class="section-title font-glitten" data-aos="fade-up">Acara</h2>
+            <div class="divider mb-4"></div>
+              
+            <!-- Event 0: Akad Nikah -->
+            <div class="event-card mb-4" data-aos="fade-up">
+                <h3 class="text-center mb-3">Akad Nikah</h3>
+                <div class="text-center mb-3">
+                    <i class="fa fa-calendar mb-2" style="font-size: 1.5rem;"></i>
+                    <p class="mb-1" data-key="event-0-date">Selasa, 14 Mei 2024</p>
+                    <p class="mb-3" data-key="event-0-time">08.00 WIB - Selesai</p>
+                </div>
+                <div class="text-center">
+                    <i class="fa fa-map-marker-alt mb-2" style="font-size: 1.5rem;"></i>
+                    <p class="mb-1" data-key="event-0-venue">KUA Kedawung</p>
+                    <p class="text-muted mb-3" data-key="event-0-address">Kedawung, Sragen</p>
+                    <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-dark" data-key="event-0-maps">
+                        <i class="fa fa-map me-1"></i> Google Maps
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Event 1: Resepsi -->
+            <div class="event-card mt-4" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="text-center mb-3">Resepsi</h3>
+                <div class="text-center mb-3">
+                    <i class="fa fa-calendar mb-2" style="font-size: 1.5rem;"></i>
+                    <p class="mb-1" data-key="event-1-date">Sabtu Wage, 21 Juni 2025</p>
+                    <p class="mb-3" data-key="event-1-time">10.00 WIB - Selesai</p>
+                </div>
+                <div class="text-center">
+                    <i class="fa fa-map-marker-alt mb-2" style="font-size: 1.5rem;"></i>
+                    <p class="mb-1" data-key="event-1-venue">Rumah Mempelai Wanita</p>
+                    <p class="text-muted mb-3" data-key="event-1-address">Tanjung Rt.01, Celep, Kedawung, Sragen.</p>
+                    <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-dark" data-key="event-1-maps">
+                        <i class="fa fa-map me-1"></i> Google Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section id="story" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title font-glitten" data-aos="fade-up">Cerita Kita</h2>
+            <div class="divider mb-4"></div>
+            
+            <div class="timeline-container">
+                <div class="timeline-item" data-aos="fade-up">
+                    <h4 data-key="story-0-label">Januari 2024</h4>
+                    <h5 class="fw-bold" data-key="story-0-title">Pertemuan Pertama</h5>
+                    <p data-key="story-0-content">Di awal tahun, kami bertemu di sebuah acara teman bersama. Dari obrolan hangat, bermula kisah indah yang membawa kami ke jenjang yang lebih serius.</p>
+                </div>
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                    <h4 data-key="story-1-label">Februari 2024</h4>
+                    <h5 class="fw-bold" data-key="story-1-title">Menjalin Komitmen</h5>
+                    <p data-key="story-1-content">Kami memutuskan untuk bersama saling melengkapi, saling mendukung dan menjaga cinta yang dianugerahkan oleh Allah SWT.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section">
+        <div class="container">
+            <h2 class="section-title font-glitten" data-aos="fade-up">Galeri</h2>
+            <div class="divider mb-4"></div>
+            
+            <div class="row g-3">
+                <div class="col-6" data-aos="zoom-in">
+                    <a href="gallery/galeri-1.jpg" data-lightbox="wedding-gallery" data-title="Galeri 1">
+                        <img src="gallery/galeri-1.jpg" alt="Galeri 1" class="gallery-img" loading="lazy" decoding="async">
+                    </a>
+                </div>
+                <div class="col-6" data-aos="zoom-in" data-aos-delay="100">
+                    <a href="gallery/galeri-2.jpg" data-lightbox="wedding-gallery" data-title="Galeri 2">
+                        <img src="gallery/galeri-2.jpg" alt="Galeri 2" class="gallery-img" loading="lazy" decoding="async">
+                    </a>
+                </div>
+                <div class="col-6" data-aos="zoom-in" data-aos-delay="200">
+                    <a href="gallery/galeri-3.jpg" data-lightbox="wedding-gallery" data-title="Galeri 3">
+                        <img src="gallery/galeri-3.jpg" alt="Galeri 3" class="gallery-img" loading="lazy" decoding="async">
+                    </a>
+                </div>
+                <div class="col-6" data-aos="zoom-in" data-aos-delay="300">
+                    <a href="gallery/galeri-4.jpg" data-lightbox="wedding-gallery" data-title="Galeri 4">
+                        <img src="gallery/galeri-4.jpg" alt="Galeri 4" class="gallery-img" loading="lazy" decoding="async">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Streaming Section -->
+    <section id="livestream" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title font-glitten" data-aos="fade-up">Live Streaming</h2>
+            <div class="divider mb-4"></div>
+            
+            <p class="text-center mb-4" data-aos="fade-up">Bagi keluarga dan sahabat yang tidak dapat hadir secara langsung, silakan mengikuti prosesi secara online:</p>
+            
+            <div class="text-center mt-3" data-aos="zoom-in">
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="btn btn-danger px-4 py-2" data-key="stream-0-url">
+                    <i class="fab fa-youtube me-2"></i> Tonton Live Streaming
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gift Section -->
+    <section id="gift" class="section">
+        <div class="container">
+            <h2 class="section-title font-glitten" data-aos="fade-up">Wedding Gift</h2>
+            <div class="divider mb-4"></div>
+            
+            <div class="gift-card" data-aos="fade-up">
+                <p class="mb-3">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless melalui:</p>
+                
+                <div class="account-info">
+                    <div>
+                        <p class="mb-0 fw-bold" data-key="wallet-0-bank">BRI</p>
+                        <p class="mb-0" id="account-number" data-key="wallet-0-number">6864010125207536</p>
+                        <p class="mb-0 text-muted" data-key="wallet-0-holder">a.n. Catur Wulandari</p>
+                    </div>
+                    <button class="copy-btn" id="copy-account" data-key="wallet-0-copy" data-copy="6864010125207536" title="Salin nomor rekening">
+                        <i class="fa fa-copy"></i>
+                    </button>
+                </div>
+                
+                <p class="text-muted mt-3 mb-0">Terima kasih atas doa dan tanda kasih yang telah diberikan.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title font-glitten" data-aos="fade-up">Konfirmasi Kehadiran</h2>
+            <div class="divider mb-4"></div>
+            
+            <form id="rsvp-form" class="mb-5" data-aos="fade-up">
+                <div class="mb-3">
+                    <label for="rsvp-name" class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-control" id="rsvp-name" name="name" placeholder="Nama Anda" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="rsvp-attendance" class="form-label">Konfirmasi Kehadiran</label>
+                    <select class="form-select" id="rsvp-attendance" name="attendance" required>
+                        <option value="" selected disabled>Pilih konfirmasi</option>
+                        <option value="Hadir">Ya, Saya Akan Hadir</option>
+                        <option value="Tidak Hadir">Maaf, Tidak Bisa Hadir</option>
+                    </select>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="rsvp-greeting" class="form-label">Ucapan &amp; Doa</label>
+                    <textarea class="form-control" id="rsvp-greeting" name="greeting" rows="4" placeholder="Tulis ucapan dan doa restu untuk kedua mempelai" required></textarea>
+                </div>
+                
+                <button type="submit" id="rsvp-submit" class="btn btn-dark w-100 py-2">
+                    <i class="fas fa-paper-plane me-2"></i> Kirim Ucapan
+                </button>
+            </form>
+            
+            <h4 class="mb-3 text-center" data-aos="fade-up">Ucapan &amp; Doa Restu</h4>
+            <div class="overflow-auto" style="max-height: 500px;" data-aos="fade-up">
+                <div class="row" id="rsvp-list">
+                    <!-- Daftar komentar dari database akan di-render di sini -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-4 pb-5 text-center">
+        <div class="container">
+            <h3 class="font-glitten mb-3">Terima Kasih</h3>
+            <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami atas kehadiran serta doa restu Bapak/Ibu/Saudara/i sekalian.</p>
+            <p class="mb-4">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+            <h1 class="font-glitten mb-2" id="closing-couple">Amir &amp; Wulan</h1>
+            <p class="text-muted mt-3">&copy; <span id="current-year">2026</span>. Made With ❤️ Permata Wedding. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation -->
+    <nav id="bottom-navbar" class="bottom-navbar" style="display:none;">
+        <div class="container">
+            <div class="row">
+                <div class="col nav-item">
+                    <a href="#home" class="nav-link active">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </div>
+                <div class="col nav-item">
+                    <a href="#couple" class="nav-link">
+                        <i class="fa fa-heart"></i>
+                        <span>Couple</span>
+                    </a>
+                </div>
+                <div class="col nav-item">
+                    <a href="#event" class="nav-link">
+                        <i class="fa fa-calendar"></i>
+                        <span>Event</span>
+                    </a>
+                </div>
+                <div class="col nav-item">
+                    <a href="#gallery" class="nav-link">
+                        <i class="fa fa-images"></i>
+                        <span>Gallery</span>
+                    </a>
+                </div>
+                <div class="col nav-item">
+                    <a href="#rsvp" class="nav-link">
+                        <i class="fa fa-envelope"></i>
+                        <span>RSVP</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.12/sweetalert2.min.js"></script>
+
+    <!-- Inisialisasi API & Interaksi Template -->
+    <script src="js/api.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

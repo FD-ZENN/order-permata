@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Izinkan akses langsung ke file/folder yang memang ada
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Arahkan semua request lain ke index.php sebagai front controller
+RewriteRule ^ index.php [QSA,L]

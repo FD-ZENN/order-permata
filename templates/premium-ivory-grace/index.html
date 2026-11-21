@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>The Wedding of Elyana &amp; Syahril</title>
+    <meta name="description" id="meta-description" content="Undangan Pernikahan Elyana &amp; Syahril - 31 Desember 2025">
+    
+    <!-- OpenGraph Metadata -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" id="meta-og-title" content="The Wedding of Elyana &amp; Syahril">
+    <meta property="og:description" id="meta-og-description" content="Undangan Pernikahan Elyana &amp; Syahril - 31 Desember 2025">
+    <meta property="og:image" id="meta-og-image" content="couple/cover.jpg">
+    <meta property="og:locale" content="id_ID">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="meta-twitter-title" content="The Wedding of Elyana &amp; Syahril">
+    <meta name="twitter:description" id="meta-twitter-description" content="Undangan Pernikahan Elyana &amp; Syahril - 31 Desember 2025">
+    <meta name="twitter:image" id="meta-twitter-image" content="couple/cover.jpg">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+</head>
+
+<body>
+    <!-- LOADING SCREEN -->
+    <div id="loading-screen">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- MAIN LAYOUT -->
+    <div class="layout-wrapper">
+
+        <!-- LEFT COLUMN (Desktop BG) -->
+        <aside class="col-left">
+            <div id="desktop-bg" class="col-left-bg" style="background-image: url('assets/images/VINTAGE-08-II-V2.1_PII_DESKTOP.jpg');">
+            </div>
+            <div class="col-left-overlay"></div>
+            <div class="col-left-content">
+                <h2 class="font-pinyon text-white fw-500 mb-2 animate-up" style="font-size: 28px;">The Wedding of</h2>
+                <h1 id="desktop-names" class="font-pinyon text-accent fw-600 mb-4 animate-zoom delay-1" style="font-size: 48px;">Elyana &amp; Syahril</h1>
+                <blockquote class="font-gilda text-white fst-italic animate-up delay-2"
+                    style="font-size: 13px; line-height: 1.6; border-left: 2px solid var(--color-accent); padding-left: 15px; max-width: 400px;">
+                    "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari
+                    jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya..."
+                    <cite class="d-flex mt-2 font-poppins" style="font-size: 10px; opacity: 0.7;">— QS. Ar-Rum: 21</cite>
+                </blockquote>
+            </div>
+        </aside>
+
+        <!-- RIGHT COLUMN (Main Content) -->
+        <main class="col-right">
+
+            <!-- COVER SECTION -->
+            <section id="cover" class="section-cover"
+                style="background-image: url('couple/cover.jpg');">
+                <div class="overlay"></div>
+                <div class="content">
+                    <div class="mb-8 animate-up">
+                        <h3 class="font-pinyon text-white fw-500 mb-2" style="font-size: 24px;">The Wedding of</h3>
+                        <h1 class="font-pinyon text-accent fw-600 text-shadow"
+                            style="font-size: 36px; letter-spacing: 5.8px;">
+                            <span id="cover-bride">Elyana</span> &amp; <span id="cover-groom">Syahril</span>
+                        </h1>
+                        <p class="font-poppins text-white text-xs mt-2"><span id="cover-date" data-key="cover-date">31 Desember 2025</span></p>
+                    </div>
+
+                    <div class="guest-info text-center mt-12 animate-up delay-2">
+                        <p class="font-poppins text-white text-xs mb-2">Kepada Yth:</p>
+                        <h3 id="guest-name" class="font-cormorant text-white fw-700 mb-8"
+                            style="font-size: 22px; letter-spacing: 1px;">Nama Tamu</h3>
+                    </div>
+
+                    <button id="btn-buka" class="btn animate-zoom delay-3"
+                        style="background: var(--color-accent); color: var(--color-dark); border: none; font-weight: 600; padding: 12px 40px;">
+                        <i class="fas fa-envelope-open"></i> Buka Undangan
+                    </button>
+                </div>
+            </section>
+
+            <!-- MAIN SCROLLABLE CONTENT (hidden by default) -->
+            <div id="main-content" style="display: none;">
+                <div class="relative z-10 w-100">
+
+                    <!-- SEC[2] HERO VIDEO -->
+                    <article id="bukaUndangan" class="section-hero w-100 relative bg-dark" style="min-height: 100vh;">
+                        <video id="hero-video" class="absolute" style="width: auto; height: 100vh; object-fit: cover;"
+                            src="assets/media/VINTAGE08_V3.1_MOTION_PII.mp4" playsinline muted preload="none"
+                            poster="couple/cover.jpg"></video>
+                        <div class="video-overlay" style="position: absolute; width: 100%; height: 100%; z-index: 2;">
+                        </div>
+
+                        <div id="hero-card-wrapper"
+                            class="content z-10 d-flex flex-column justify-content-center align-items-center h-100 w-100"
+                            style="opacity: 0; transition: opacity 1.5s ease; padding-bottom: 15vh;">
+                            <div class="text-center" data-aos="zoom-in" data-aos-duration="1600">
+                                <h3 class="font-cormorant text-dark fw-600 mb-4 text-uppercase"
+                                    style="font-size: 21px; line-height: 1.3; text-shadow: 0 2px 8px rgba(0,0,0,0.5);">
+                                    The Wedding of</h3>
+
+                                <img id="hero-cover-img" src="couple/cover.jpg" alt="Couple"
+                                    class="rounded-pill shadow-lg mx-auto"
+                                    style="border: 5px solid #fff; box-shadow: 0 10px 15px rgba(0,0,0,0.3); width: 200px; height: 200px; object-fit: cover;">
+
+                                <div class="mt-8 mb-4 px-4 py-8">
+                                    <h2 class="font-gilda fw-500 text-dark"
+                                        style="font-size: 33px; line-height: 1.3; text-shadow: 0 2px 8px rgba(0,0,0,0.5);">
+                                        <span id="hero-bride">Elyana</span> &amp; <span id="hero-groom">Syahril</span>
+                                    </h2>
+                                    <h3 id="hero-date" class="font-cormorant text-dark fw-700 mt-2"
+                                        style="font-size: 18px; letter-spacing: 3.5px; text-shadow: 0 2px 6px rgba(0,0,0,0.5);">
+                                        31 . 12 . 25</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- SEC[3] QUOTES -->
+                    <article class="section-quotes relative overflow-hidden">
+                        <!-- Green overlay -->
+                        <div class="absolute w-100 h-100"
+                            style="top:0;left:0;background-color:#2A623A;opacity:0.75;z-index:2;"></div>
+
+                        <div class="relative" style="z-index:1;">
+                            <div
+                                style="background-image: url('assets/images/VINTAGE08_V2_DARKBG2_PII-1-1.jpg'); background-size: cover; background-position: center;">
+
+                                <!-- Heritage photo -->
+                                <div class="d-flex align-items-center justify-content-center"
+                                    style="padding: 30px 30px 0;">
+                                    <div style="width: 200px; height: 200px; border-radius: 15px; overflow: hidden; background-image: url('gallery/galeri-1.jpg'); background-size: cover; background-position: center;"
+                                        data-aos="zoom-in-up"></div>
+                                </div>
+
+                                <!-- Initials & Quote -->
+                                <div class="relative text-center" style="padding: 30px 30px 50px;">
+                                    <!-- Gray overlay behind content -->
+                                    <div class="absolute w-100 h-100"
+                                        style="top:0;left:0;background-color:#5D6D79;opacity:0.6;z-index:1;"></div>
+
+                                    <div class="relative z-10">
+                                        <div class="d-flex justify-content-center align-items-center mb-6"
+                                            style="gap: 15px;" data-aos="zoom-in-up">
+                                            <h2 id="cover-initials-bride" class="font-gilda text-gold" style="font-size: 42px;">E</h2>
+                                            <h2 class="font-gilda text-gold" style="font-size: 28px;">&amp;</h2>
+                                            <h2 id="cover-initials-groom" class="font-gilda text-gold" style="font-size: 42px;">S</h2>
+                                        </div>
+
+                                        <blockquote class="font-gilda text-white fst-italic"
+                                            style="font-size: 13px; line-height: 1.6; padding: 0 10px;"
+                                            data-aos="fade-up">
+                                            "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan
+                                            pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan
+                                            merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan
+                                            sayang."
+                                            <cite class="d-flex justify-content-center mt-4 font-poppins text-white"
+                                                style="font-size: 10px; opacity: 0.7;">— QS. Ar-Rum: 21</cite>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- SEC[4] MEMPELAI / BRIDE & GROOM -->
+                    <article class="section-mempelai relative overflow-hidden" style="padding: 50px 20px 60px;">
+                        <div class="text-center mb-8" data-aos="zoom-in-up">
+                            <h2 class="font-pinyon fw-500 text-primary mb-4" style="font-size: 38px;">Bride &amp; Groom</h2>
+                            <p class="font-poppins text-dark text-xs" style="line-height: 1.5; padding: 0 10px;">
+                                Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i serta kerabat sekalian
+                                untuk menghadiri acara pernikahan kami:
+                            </p>
+                        </div>
+
+                        <!-- Mempelai Wanita -->
+                        <div class="text-center d-flex flex-column align-items-center mb-12" data-aos="fade-up">
+                            <div class="relative mb-8" style="width: 220px; height: 310px;">
+                                <!-- Ornamen belakang (bunga kiri bawah) -->
+                                <div class="absolute"
+                                    style="top: 30px; left: -80px; width: 350px; height: 350px; background-image: url('assets/images/Midnight-05-Couple-Belakang-2.png'); background-size: contain; background-repeat: no-repeat; z-index: 0; opacity: 0.6;">
+                                </div>
+                                <!-- Foto mempelai (arch shape) -->
+                                <img id="bride-photo" src="couple/mempelai-wanita.jpg" alt="Mempelai Wanita" class="relative z-10 mx-auto"
+                                    style="width: 220px; height: 280px; object-fit: cover; border: 4px solid var(--color-primary); border-radius: 999px;">
+                                <!-- Ornamen depan (bunga kanan atas) -->
+                                <div class="absolute"
+                                    style="top: -40px; right: -80px; width: 350px; height: 350px; background-image: url('assets/images/Midnight-05-Couple-Depan-2.png'); background-size: contain; background-repeat: no-repeat; z-index: 1;">
+                                </div>
+                            </div>
+                            <h3 id="name-bride" class="font-pinyon text-primary fw-500 mb-2" style="font-size: 36px;">Elyana</h3>
+                            <h4 id="bride-full" class="font-gilda text-primary fw-400 mb-2 text-uppercase"
+                                style="font-size: 16px; letter-spacing: 1px;">Elyana Azkiya Nur</h4>
+                            <p class="font-poppins text-dark text-xs mb-4" style="line-height: 1.5;">Putri dari Bapak
+                                <span id="bride-father">Nasrudin Hatta</span><br>&amp; Ibu <span id="bride-mother">Elma Muna</span>
+                                <span id="bride-address-wrap" style="display:none;"><br><span id="bride-address"></span></span>
+                            </p>
+                            <a href="#" class="btn"
+                                style="background: var(--color-gold); color: var(--color-dark); border: none; font-size: 10px;">
+                                <i class="fab fa-instagram"></i> Instagram</a>
+                        </div>
+
+                        <!-- Separator -->
+                        <h2 class="font-cormorant text-primary fw-600 text-center mb-8" style="font-size: 32px;"
+                            data-aos="zoom-in">&amp;</h2>
+
+                        <!-- Mempelai Pria -->
+                        <div class="text-center d-flex flex-column align-items-center" data-aos="fade-up">
+                            <div class="relative mb-8 mt-4" style="width: 220px; height: 310px;">
+                                <!-- Ornamen belakang (bunga kanan bawah) -->
+                                <div class="absolute"
+                                    style="top: 30px; right: -80px; width: 350px; height: 350px; background-image: url('assets/images/Midnight-05-Couple-Belakang-1.png'); background-size: contain; background-repeat: no-repeat; z-index: 0; opacity: 0.6;">
+                                </div>
+                                <!-- Foto mempelai (arch shape) -->
+                                <img id="groom-photo" src="couple/mempelai-pria.jpg" alt="Mempelai Pria" class="relative z-10 mx-auto"
+                                    style="width: 220px; height: 280px; object-fit: cover; border: 4px solid var(--color-primary); border-radius: 999px;">
+                                <!-- Ornamen depan (bunga kiri atas) -->
+                                <div class="absolute"
+                                    style="top: -40px; left: -80px; width: 350px; height: 350px; background-image: url('assets/images/Midnight-05-Couple-Depan-1.png'); background-size: contain; background-repeat: no-repeat; z-index: 1;">
+                                </div>
+                            </div>
+                            <h3 id="name-groom" class="font-pinyon text-primary fw-500 mb-2" style="font-size: 36px;">Syahril</h3>
+                            <h4 id="groom-full" class="font-gilda text-primary fw-400 mb-2 text-uppercase"
+                                style="font-size: 16px; letter-spacing: 1px;">Syahril Rendra Backhtiar</h4>
+                            <p class="font-poppins text-dark text-xs mb-4" style="line-height: 1.5;">Putra dari Bapak
+                                <span id="groom-father">Sufian Jadin</span><br>&amp; Ibu <span id="groom-mother">Elmira Ghendis</span>
+                                <span id="groom-address-wrap" style="display:none;"><br><span id="groom-address"></span></span>
+                            </p>
+                            <a href="#" class="btn"
+                                style="background: var(--color-gold-dark); color: #fff; border: none; font-size: 10px;">
+                                <i class="fab fa-instagram"></i> Instagram</a>
+                        </div>
+                    </article>
+
+                    <!-- SEC[5] GREEN DIVIDER -->
+                    <article style="background-color: #225141; padding: 40px 0;">
+                        <div style="background: rgba(245,188,188,0); padding: 20px;"></div>
+                    </article>
+
+                    <!-- SEC[6] SAVE THE DATE -->
+                    <article class="section-date relative" style="background-color: #5D6D79; padding: 50px 30px 60px;">
+                        <div class="container text-center d-flex flex-column align-items-center">
+                            <img src="assets/images/VINTAGE-08-II-PII_FLOWS-1.webp" alt="Flower Decor"
+                                style="width: 180px; margin-bottom: 2rem;" data-aos="zoom-in-up">
+
+                            <h2 class="font-pinyon fw-500 text-white mb-8" style="font-size: 42px;"
+                                data-aos="zoom-in-up">Save the Date</h2>
+
+                            <div class="countdown-hero d-flex justify-content-center w-100 mb-8" style="gap: 15px;"
+                                data-aos="zoom-in-up">
+                                <div class="d-flex flex-column align-items-center justify-content-center"
+                                    style="background-color: #4A5D68; border: 1px solid var(--color-gold); border-radius: 10px; width: 65px; height: 75px;">
+                                    <span id="count-days" class="font-cormorant fw-600 text-white"
+                                        style="font-size: 28px; line-height: 1;">00</span>
+                                    <span class="font-poppins text-white text-uppercase mt-1"
+                                        style="font-size: 10px;">Hari</span>
+                                </div>
+                                <div class="d-flex flex-column align-items-center justify-content-center"
+                                    style="background-color: #4A5D68; border: 1px solid var(--color-gold); border-radius: 10px; width: 65px; height: 75px;">
+                                    <span id="count-hours" class="font-cormorant fw-600 text-white"
+                                        style="font-size: 28px; line-height: 1;">00</span>
+                                    <span class="font-poppins text-white text-uppercase mt-1"
+                                        style="font-size: 10px;">Jam</span>
+                                </div>
+                                <div class="d-flex flex-column align-items-center justify-content-center"
+                                    style="background-color: #4A5D68; border: 1px solid var(--color-gold); border-radius: 10px; width: 65px; height: 75px;">
+                                    <span id="count-mins" class="font-cormorant fw-600 text-white"
+                                        style="font-size: 28px; line-height: 1;">00</span>
+                                    <span class="font-poppins text-white text-uppercase mt-1"
+                                        style="font-size: 10px;">Menit</span>
+                                </div>
+                                <div class="d-flex flex-column align-items-center justify-content-center"
+                                    style="background-color: #4A5D68; border: 1px solid var(--color-gold); border-radius: 10px; width: 65px; height: 75px;">
+                                    <span id="count-secs" class="font-cormorant fw-600 text-white"
+                                        style="font-size: 28px; line-height: 1;">00</span>
+                                    <span class="font-poppins text-white text-uppercase mt-1"
+                                        style="font-size: 10px;">Detik</span>
+                                </div>
+                            </div>
+
+                            <p class="font-poppins text-white px-4" style="font-size: 12px; line-height: 1.5;"
+                                data-aos="zoom-in-up">
+                                Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i, untuk
+                                menghadiri acara pernikahan kami:
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- SEC[7] AKAD & RESEPSI -->
+                    <article class="section-acara" style="padding: 15px;">
+
+                        <!-- Akad Nikah (Event 0) -->
+                        <div class="relative overflow-hidden mb-4"
+                            style="border: 5px solid var(--color-gold); border-radius: 20px;" data-aos="zoom-in-up">
+                            <div class="absolute w-100 h-100"
+                                style="top:0;left:0;background-image: url('assets/images/VINTAGE-08-II-PII_EVNT2v2.jpg'); background-size: cover; background-position: bottom; z-index:1;">
+                            </div>
+                            <div class="absolute w-100 h-100" style="top:0;left:0; z-index:2; opacity:0.85;"></div>
+
+                            <div class="relative z-10 text-center" style="padding: 50px 30px;">
+                                <h2 class="font-pinyon fw-500 text-green-dark mb-6" style="font-size: 38px;">Akad Nikah</h2>
+                                <div class="mb-6">
+                                    <p data-key="event-0-date" class="font-cormorant fw-700 text-dark text-uppercase mb-2"
+                                        style="font-size: 24px;">31 Desember 2025</p>
+                                    <p data-key="event-0-time" class="font-poppins text-dark" style="font-size: 14px;">08.00 - 10.00 WIB</p>
+                                </div>
+                                <i class="fas fa-map-marker-alt text-dark mb-4" style="font-size: 24px;"></i>
+                                <h3 data-key="event-0-venue" class="font-cormorant fw-700 text-dark text-uppercase mb-2"
+                                    style="font-size: 18px;">Auditorium Masjid</h3>
+                                <p data-key="event-0-address" class="font-poppins text-dark mb-6" style="font-size: 12px;">Jalan Raya Bojongsari
+                                    No.5, Gunung Putri, Citeureup, Bogor, Jawa Barat</p>
+                                <a data-key="event-0-maps" href="#" class="btn text-white" target="_blank" rel="noopener"
+                                    style="background: linear-gradient(90deg, #6F8392 0%, #5D6D79 100%); border: 1px solid #fff;">
+                                    <i class="fas fa-map-marker-alt"></i> Google Maps</a>
+                            </div>
+                        </div>
+
+                        <!-- Resepsi (Event 1) -->
+                        <div class="relative overflow-hidden"
+                            style="border: 5px solid var(--color-gold); border-radius: 20px;" data-aos="zoom-in-up">
+                            <div class="absolute w-100 h-100"
+                                style="top:0;left:0;background-image: url('assets/images/VINTAGE-08-II-PII_EVNT2.jpg'); background-size: cover; background-position: bottom; z-index:1;">
+                            </div>
+                            <div class="absolute w-100 h-100" style="top:0;left:0; z-index:2; opacity:0.9;"></div>
+
+                            <div class="relative z-10 text-center" style="padding: 50px 30px;">
+                                <h2 class="font-pinyon fw-500 text-green mb-6" style="font-size: 38px;">Resepsi</h2>
+                                <div class="mb-6">
+                                    <p data-key="event-1-date" class="font-cormorant fw-700 text-dark text-uppercase mb-2"
+                                        style="font-size: 24px;">31 Desember 2025</p>
+                                    <p data-key="event-1-time" class="font-poppins text-dark" style="font-size: 14px;">11.00 - 17.00 WIB</p>
+                                </div>
+                                <i class="fas fa-map-marker-alt text-dark mb-4" style="font-size: 24px;"></i>
+                                <h3 data-key="event-1-venue" class="font-cormorant fw-700 text-dark text-uppercase mb-2"
+                                    style="font-size: 18px;">Auditorium Masjid</h3>
+                                <p data-key="event-1-address" class="font-poppins text-dark mb-6" style="font-size: 12px;">Jalan Raya Bojongsari
+                                    No.5, Gunung Putri, Citeureup, Bogor, Jawa Barat</p>
+                                <a data-key="event-1-maps" href="#" class="btn text-white" target="_blank" rel="noopener"
+                                    style="background: linear-gradient(90deg, #5D6D79 0%, #4A5D68 100%); border: 1px solid #fff;">
+                                    <i class="fas fa-map-marker-alt"></i> Google Maps</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- SEC[8] LIVE STREAMING -->
+                    <article class="section-stream text-center" style="padding: 40px 30px;">
+                        <div class="relative overflow-hidden"
+                            style="border: 4px solid #fff; border-radius: 20px; padding: 40px 20px;"
+                            data-aos="zoom-in-up">
+                            <div class="absolute w-100 h-100"
+                                style="top:0;left:0;background-color: #5D6D79; opacity:0.9; z-index:1;"></div>
+
+                            <div class="relative z-10">
+                                <h2 class="font-pinyon fw-500 text-white mb-6" style="font-size: 38px;">Live Streaming</h2>
+                                <p class="font-poppins text-white mb-8" style="font-size: 12px;">Temui kami secara
+                                    virtual untuk menyaksikan acara pernikahan kami melalui tautan di bawah ini:</p>
+                                <div class="d-flex flex-column align-items-center" style="gap: 10px;">
+                                    <a data-key="stream-0-url" href="#" class="btn text-white w-100 justify-content-center" target="_blank" rel="noopener"
+                                        style="background: linear-gradient(90deg, #5D6D79 0%, #6F8392 100%); border: 1px solid #fff;">
+                                        <i class="fab fa-instagram"></i> Buka Live Streaming</a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- SEC[9] GALLERY -->
+                    <article class="section-gallery relative"
+                        style="background-color: #5D6D79; background-image: url('assets/images/VINTAGE08_V2.1_ENDBG_PII.jpg'); background-size: cover; background-blend-mode: multiply; padding: 60px 30px;">
+                        <div class="text-center relative z-10">
+                            <h2 class="font-pinyon fw-500 text-white mb-8" style="font-size: 38px;"
+                                data-aos="zoom-in-up">Our Gallery</h2>
+
+                            <!-- Grid -->
+                            <div class="d-flex flex-wrap" style="gap: 5px;" data-aos="zoom-in-up">
+                                <div
+                                    style="width: calc(50% - 3px); height: 148px; border-radius: 10px; overflow: hidden; background-image: url('gallery/galeri-1.jpg'); background-size: cover; background-position: right;">
+                                </div>
+                                <div
+                                    style="width: calc(50% - 3px); height: 148px; border-radius: 10px; overflow: hidden; background-image: url('gallery/galeri-2.jpg'); background-size: cover; background-position: center;">
+                                </div>
+                            </div>
+                            <div style="height: 300px; border-radius: 10px; overflow: hidden; margin-top: 5px; background-image: url('gallery/galeri-3.jpg'); background-size: cover; background-position: center;"
+                                data-aos="zoom-in-up"></div>
+
+                            <!-- Carousel -->
+                            <div class="gallery-carousel mt-4" data-aos="zoom-in-up">
+                                <div
+                                    style="display: flex; overflow-x: auto; gap: 8px; scroll-snap-type: x mandatory; padding: 10px 0; -webkit-overflow-scrolling: touch;">
+                                    <div
+                                        style="min-width: 200px; height: 250px; flex-shrink: 0; border-radius: 10px; overflow: hidden; scroll-snap-align: start; background-image: url('gallery/galeri-4.jpg'); background-size: cover; background-position: center;">
+                                    </div>
+                                    <div
+                                        style="min-width: 200px; height: 250px; flex-shrink: 0; border-radius: 10px; overflow: hidden; scroll-snap-align: start; background-image: url('gallery/galeri-5.jpg'); background-size: cover; background-position: center;">
+                                    </div>
+                                    <div
+                                        style="min-width: 200px; height: 250px; flex-shrink: 0; border-radius: 10px; overflow: hidden; scroll-snap-align: start; background-image: url('gallery/galeri-6.jpg'); background-size: cover; background-position: center;">
+                                    </div>
+                                    <div
+                                        style="min-width: 200px; height: 250px; flex-shrink: 0; border-radius: 10px; overflow: hidden; scroll-snap-align: start; background-image: url('assets/images/Heritage-13.jpeg'); background-size: cover; background-position: center;">
+                                    </div>
+                                    <div
+                                        style="min-width: 200px; height: 250px; flex-shrink: 0; border-radius: 10px; overflow: hidden; scroll-snap-align: start; background-image: url('assets/images/Heritage-12.jpeg'); background-size: cover; background-position: center;">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bottom image -->
+                            <div style="height: 300px; border-radius: 10px; overflow: hidden; margin-top: 10px; background-image: url('assets/images/Heritage-9.jpeg'); background-size: cover; background-position: bottom center;"
+                                data-aos="zoom-in-up"></div>
+                        </div>
+                    </article>
+
+                    <!-- SEC[10] LOVE STORY -->
+                    <article class="section-story" style="padding: 0;">
+                        <div style="padding: 50px 30px;">
+                            <div class="relative overflow-hidden"
+                                style="background-color: #5D6D79; border: 5px solid #4A5D68; border-radius: 20px; padding: 50px 20px;"
+                                data-aos="zoom-in-up">
+                                <!-- Overlay bg -->
+                                <div class="absolute w-100 h-100"
+                                    style="top:0;left:0;background-image: url('assets/images/VIN-08-PII-2-scaled-1-1.jpg'); background-size: cover; background-position: bottom; opacity: 0.2; z-index: 1;">
+                                </div>
+                                <div class="absolute w-100 h-100"
+                                    style="top:0;left:0;background-color: #5D80A2; opacity: 0.3; z-index: 2;"></div>
+
+                                <div class="relative z-10 text-center">
+                                    <img src="assets/images/VINTAGE-08-II-PII_FLOWS-1.webp" alt="Decor"
+                                        style="width: 150px; margin: 0 auto 2rem;">
+                                    <h2 class="font-pinyon fw-500 text-white mb-8" style="font-size: 38px;">Love Story</h2>
+
+                                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                                        <div style="background-color: #FFFCF3DE; border: 3px solid var(--color-gold); border-radius: 20px; padding: 20px;"
+                                            data-aos="fade-up">
+                                            <h3 data-key="story-0-label" class="font-cormorant fw-600 text-dark mb-2" style="font-size: 24px;">2015</h3>
+                                            <h4 data-key="story-0-title" style="display:none;">Pertama Bertemu</h4>
+                                            <p data-key="story-0-content" class="font-poppins text-dark fw-300"
+                                                style="font-size: 12px; line-height: 1.5;">Kami pertama kali bertemu
+                                                satu sama lain di sebuah acara peminatan di kampus. Kami berkenalan
+                                                karena kami menjadi perwakilan masing-masing divisi kegiatan yang kami
+                                                selenggarakan.</p>
+                                        </div>
+                                        <div style="background-color: #FFFCF3DE; border: 3px solid var(--color-gold); border-radius: 20px; padding: 20px;"
+                                            data-aos="fade-up">
+                                            <h3 data-key="story-1-label" class="font-cormorant fw-600 text-dark mb-2" style="font-size: 24px;">2017</h3>
+                                            <h4 data-key="story-1-title" style="display:none;">Bertemu Kembali</h4>
+                                            <p data-key="story-1-content" class="font-poppins text-dark fw-300"
+                                                style="font-size: 12px; line-height: 1.5;">Setelah lama tidak bertemu
+                                                akhirnya kami bertemu kembali di sebuah acara seminar profesional.
+                                                Kebetulan kami berada di bidang yang sama.</p>
+                                        </div>
+                                        <div style="background-color: #FFFCF3DE; border: 3px solid var(--color-gold); border-radius: 20px; padding: 20px;"
+                                            data-aos="fade-up">
+                                            <h3 data-key="story-2-label" class="font-cormorant fw-600 text-dark mb-2" style="font-size: 24px;">2023</h3>
+                                            <h4 data-key="story-2-title" style="display:none;">Lamaran</h4>
+                                            <p data-key="story-2-content" class="font-poppins text-dark fw-300"
+                                                style="font-size: 12px; line-height: 1.5;">Salah satu momen yang tidak
+                                                disangka, Syahril melamar saya dengan langsung menyatakan keinginannya
+                                                kepada ayah saya. Kami pun bersiap dengan petualangan baru.</p>
+                                        </div>
+                                        <div style="background-color: #FFFCF3DE; border: 3px solid var(--color-gold); border-radius: 20px; padding: 20px;"
+                                            data-aos="fade-up">
+                                            <h3 data-key="story-3-label" class="font-cormorant fw-600 text-dark mb-2" style="font-size: 24px;">2025</h3>
+                                            <h4 data-key="story-3-title" style="display:none;">Menuju Pelaminan</h4>
+                                            <p data-key="story-3-content" class="font-poppins text-dark fw-300"
+                                                style="font-size: 12px; line-height: 1.5;">Momen spesial kami akan
+                                                dimulai dari titik ini, momen kebahagiaan kami bersama membangun
+                                                keluarga kecil kami. Semoga Allah SWT memberikan keberkahan untuk
+                                                pernikahan kami.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- SEC[11] LOVE GIFT -->
+                    <article class="section-gift relative"
+                        style="background: radial-gradient(circle, #6C8292 0%, #4A5D68 80%); padding: 80px 30px 90px;">
+                        <div class="absolute w-100 h-100"
+                            style="top:0;left:0;background-color: #5C4324; opacity: 0.1; z-index:1;"></div>
+
+                        <div class="relative z-10 text-center" data-aos="zoom-in-up">
+                            <i class="fas fa-gifts text-white mb-4" style="font-size: 50px;"></i>
+                            <h2 class="font-pinyon fw-500 text-white mb-2" style="font-size: 38px;">Love Gift</h2>
+                            <p class="font-poppins text-white mb-8" style="font-size: 12px;">Tanpa mengurangi rasa
+                                hormat, bagi Bapak/Ibu/Saudara/i yang ingin memberikan tanda kasih untuk kami, dapat
+                                melalui:</p>
+
+                            <div
+                                style="background-color: #FFFCF3; border: 5px solid #6C8292; border-radius: 20px; padding: 30px;">
+                                <!-- Bank Mandiri (Wallet 0) -->
+                                <div class="mb-4">
+                                    <img src="assets/images/iconmandiri.png" alt="Mandiri"
+                                        style="height: 30px; margin: 0 auto 15px;">
+                                    <p class="font-poppins text-dark" style="font-size: 12px; line-height: 1.5;">
+                                        <span data-key="wallet-0-bank">Bank Mandiri</span><br>
+                                        No. Rekening <span data-key="wallet-0-number">123123123</span><br>
+                                        <span data-key="wallet-0-holder">a.n. <b>Elyana Azkiya Nur</b></span>
+                                    </p>
+                                </div>
+                                <button class="btn btn-copy w-100 justify-content-center mb-6" data-key="wallet-0-copy" data-copy="123123123"
+                                    style="background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-gold-dark) 100%); color: #333; border: none; text-transform: uppercase;">
+                                    Salin Rekening</button>
+
+                                <hr style="border-top: 1px solid rgba(0,0,0,0.1); margin-bottom: 25px;">
+
+                                <!-- Kirim Kado -->
+                                <div id="gift-wrapper">
+                                    <div class="mb-4">
+                                        <i class="fas fa-gift text-gray mb-2" style="font-size: 36px; display: block;"></i>
+                                        <h3 class="font-cormorant fw-700 text-dark text-uppercase mb-4"
+                                            style="font-size: 18px; letter-spacing: 0.5px;">Kirim Kado</h3>
+                                    </div>
+                                    <p id="gift-recipient" class="font-poppins fw-500 text-dark mb-2" style="font-size: 13px;">Elyana Azkiya Nur</p>
+                                    <p id="gift-address" class="font-poppins text-dark mb-4" style="font-size: 12px; line-height: 1.5;">Jalan
+                                        Raya Bojongsari No.5, Gunung Putri, Citeureup, Bogor, Jawa Barat</p>
+                                    <button id="gift-copy-btn" class="btn btn-copy w-100 justify-content-center"
+                                        data-copy="Jalan Raya Bojongsari No.5, Gunung Putri, Citeureup, Bogor, Jawa Barat"
+                                        style="background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-gold-dark) 100%); color: #333; border: none; text-transform: uppercase;">
+                                        Salin Alamat</button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- SEC[12] RSVP / WISHES -->
+                    <article class="section-rsvp relative" style="background-color: #F6F6F0;">
+                        <div class="absolute w-100 h-100"
+                            style="top:0;left:0;background-color:#FFFCF3; opacity:0.8; z-index:1;"></div>
+
+                        <div class="relative z-10" style="padding: 95px 30px 80px;">
+                            <h2 class="font-pinyon fw-500 text-dark text-center mb-2" style="font-size: 38px;"
+                                data-aos="zoom-in-up">Wishes</h2>
+                            <p class="font-poppins text-dark text-center mb-8" style="font-size: 12px;"
+                                data-aos="zoom-in-up">Ucapan Selamat &amp; Do'a</p>
+
+                            <div style="background: #fff; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08);"
+                                data-aos="fade-up">
+                                <p class="font-poppins fw-bold text-dark mb-4" style="font-size: 12px;">
+                                    <i class="fas fa-comments text-primary" style="margin-right: 8px;"></i> Kirim Pesan
+                                </p>
+
+                                <form id="rsvp-form" class="d-flex flex-column" style="gap: 12px;" onsubmit="handleApiRsvpSubmit(event)">
+                                    <input type="text" name="name" id="rsvp-name" class="font-poppins" placeholder="Nama Anda" required
+                                        style="font-size: 12px; padding: 12px; border: 1px solid #ddd; border-radius: 8px; width: 100%; outline: none;">
+                                    <select name="attendance" id="rsvp-att" class="font-poppins" required
+                                        style="font-size: 12px; padding: 12px; border: 1px solid #ddd; border-radius: 8px; width: 100%; outline: none; background: #fff;">
+                                        <option value="" disabled selected>Konfirmasi Kehadiran</option>
+                                        <option value="Hadir">Hadir</option>
+                                        <option value="Tidak Hadir">Tidak Hadir</option>
+                                        <option value="Belum Pasti">Belum Pasti</option>
+                                    </select>
+                                    <textarea name="greeting" id="rsvp-msg" class="font-poppins" rows="4"
+                                        placeholder="Tulis ucapan atau doa Anda..." required
+                                        style="font-size: 12px; padding: 12px; border: 1px solid #ddd; border-radius: 8px; width: 100%; outline: none; resize: vertical;"></textarea>
+
+                                    <button type="submit" id="rsvp-submit"
+                                        class="btn w-100 justify-content-center font-poppins fw-bold mt-2"
+                                        style="background: linear-gradient(90deg, #5D6D79 0%, #4A5D68 100%); color: #fff; border: none;">
+                                        KIRIM PESAN</button>
+                                    <div id="rsvp-feedback" style="display:none;"></div>
+                                </form>
+
+                                <hr style="margin: 25px 0; border-top: 1px solid #eee;">
+
+                                <div class="comments-section">
+                                    <p id="comments-count" class="font-poppins fw-bold text-dark mb-4"
+                                        style="font-size: 12px; border-bottom: 1px solid #eee; padding-bottom: 10px;">0
+                                        Pesan</p>
+                                    <div id="comments-list" class="comments-scroll"
+                                        style="max-height: 400px; overflow-y: auto;">
+                                        <p class="text-center font-poppins text-dark"
+                                            style="font-size: 12px; opacity: 0.5; padding: 20px 0;">Memuat data...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- SEC[13] FOOTER -->
+                    <article class="section-footer relative"
+                        style="background-image: url('assets/images/Heritage-12.jpeg'); background-size: cover; background-position: center;">
+                        <div class="absolute w-100 h-100"
+                            style="top:0;left:0;background-color: #5D6D79; opacity: 0.3; z-index:1;"></div>
+
+                        <div class="relative z-10 text-center text-white" style="padding: 80px 30px 60px;">
+                            <div class="mb-8">
+                                <p class="font-poppins text-white mb-8" style="font-size: 12px; line-height: 1.5;"
+                                    data-aos="zoom-in-up">
+                                    Suatu kebahagiaan &amp; kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i, berkenan
+                                    hadir dan memberikan do'a restu kepada kami
+                                </p>
+                                <p class="font-poppins fw-600 text-white mb-4" style="font-size: 12px;"
+                                    data-aos="zoom-in-up">Kami Yang Berbahagia</p>
+                                <h3 id="closing-couple" class="font-pinyon text-white mb-12" style="font-size: 28px;" data-aos="zoom-in-up">
+                                    Elyana &amp; Syahril</h3>
+                                <p id="closing-date" style="display:none;"></p>
+                            </div>
+
+                            <div style="margin-top: 50px;" data-aos="fade-up">
+                                <p class="font-poppins text-white" style="font-size: 11px;">
+                                    <i>Design By:</i><br><b>PermataWedding.com</b> &copy; <span id="current-year">2026</span>
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- AUDIO -->
+    <audio id="bg-music" loop preload="none">
+        <source src="assets/media/FULL.-Bless-the-Broken-Road-Rascal-Flatts-Emotional-Piano-Cover-by-The-Piano-Guys.mp3"
+            type="audio/mpeg">
+    </audio>
+    <button id="music-btn" aria-label="Toggle Musik"><i class="fas fa-play"></i></button>
+
+    <!-- SCRIPTS -->
+    <script src="js/script.js"></script>
+    <script src="js/api.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</body>
+
+</html>
