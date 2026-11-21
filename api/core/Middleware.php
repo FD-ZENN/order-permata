@@ -47,11 +47,31 @@ class Middleware
             return $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
         }
 
+        // Cek header alternatif jika web server me-rewrite authorization
+        if (!empty($_SERVER['HTTP_X_AUTHORIZATION'])) {
+            return $_SERVER['HTTP_X_AUTHORIZATION'];
+        }
+
+        // Cek query string / body token jika header terpotong habis oleh proxy/server
+        if (!empty($_GET['token'])) {
+            return 'Bearer ' . trim($_GET['token']);
+        }
+
         // Beberapa konfigurasi Apache/PHP-FPM (mod_php, CGI) tidak meneruskan
         // header Authorization ke $_SERVER secara default, jadi cek juga di sini.
         if (function_exists('apache_request_headers')) {
-            foreach (apache_request_headers() as $name => $value) {
-                if (strcasecmp($name, 'Authorization') === 0) {
+            $headers = apache_request_headers();
+            foreach ($headers as $name => $value) {
+                if (strcasecmp($name, 'Authorization') === 0 || strcasecmp($name, 'X-Authorization') === 0) {
+                    return $value;
+                }
+            }
+        }
+
+        if (function_exists('getallheaders')) {
+            $headers = getallheaders();
+            foreach ($headers as $name => $value) {
+                if (strcasecmp($name, 'Authorization') === 0 || strcasecmp($name, 'X-Authorization') === 0) {
                     return $value;
                 }
             }

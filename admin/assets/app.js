@@ -50,7 +50,10 @@ async function api(method, path, body = null) {
     method,
     headers: {
       "Content-Type": "application/json",
-      ...(S.token ? { Authorization: `Bearer ${S.token}` } : {}),
+      ...(S.token ? {
+        Authorization: `Bearer ${S.token}`,
+        "X-Authorization": `Bearer ${S.token}`
+      } : {}),
     },
   };
   if (body) opts.body = JSON.stringify(body);
