@@ -35,6 +35,14 @@ Cari memakai kata kunci: #database, #auth, #compiler, #template, [DB], [ENV], [S
 - Lokasi terkait: `api/core/InvitationCompiler.php`
 - Tag: #bug #compiler #amplop #story #blueprint
 
+### [SERVER] Permission Denied mkdir() pada Hosting Linux / aaPanel — 2026-11-21
+- Fakta/keputusan: Server Linux aaPanel berjalan di bawah user `www:www`. Jika root repository atau subfolder tahun (`2026/`) dimiliki oleh `root:root` (misal setelah git clone/pull via terminal SSH), proses PHP-FPM tidak memiliki izin (`Permission denied`) untuk membuat folder `/{year}/{slug}/`.
+- Solusi:
+  1. Di server aaPanel/Linux jalankan: `chown -R www:www /www/wwwroot/invitation-test.permatawedding.com` dan `chmod -R 755 /www/wwwroot/invitation-test.permatawedding.com`.
+  2. Di `InvitationCompiler.php`, `mkdir` dibungkus dengan supresi `@` dan deteksi error yang melempar exception deskriptif alih-alih melempar PHP Warning yang merusak JSON Response.
+- Lokasi terkait: `api/core/InvitationCompiler.php`
+- Tag: #server #linux #permissions #chown #aapanel #mkdir
+
 ### [SERVER] Apache/Nginx .htaccess 500 Error pada uploads/.htaccess — 2026-11-21
 - Fakta/keputusan: Server produksi modern (Apache 2.4+ dengan PHP-FPM / FastCGI / Nginx proxy) melempar HTTP 500 saat membaca `php_flag engine off` di luar modul PHP prefork Apache standar (`mod_php`).
 - Solusi: Seluruh direktif modul PHP di `uploads/.htaccess` dibungkus dalam blok `<IfModule mod_php.c>`, `<IfModule mod_php7.c>`, dan `<IfModule mod_php8.c>`. Proteksi eksekusi utama dialihkan ke standar Apache modern `<IfModule mod_authz_core.c>` dengan `Require all denied` untuk file script (`.php`, `.phtml`, dll). File media (.png, .jpg, .webp) dapat diakses langsung oleh web browser tanpa 500 error.

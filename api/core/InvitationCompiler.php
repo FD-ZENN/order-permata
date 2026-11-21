@@ -128,12 +128,16 @@ class InvitationCompiler
 
         $yearDir = self::$rootDir . $eventYear . '/';
         if (!is_dir($yearDir)) {
-            mkdir($yearDir, 0755, true);
+            if (!@mkdir($yearDir, 0755, true) && !is_dir($yearDir)) {
+                throw new \RuntimeException("Gagal membuat folder tahun ({$yearDir}). Periksa izin/ownership folder website di server.");
+            }
         }
 
         $destDir = $yearDir . $slug . '/';
         if (!is_dir($destDir)) {
-            mkdir($destDir, 0755, true);
+            if (!@mkdir($destDir, 0755, true) && !is_dir($destDir)) {
+                throw new \RuntimeException("Gagal membuat folder undangan ({$destDir}). Periksa izin direktori di server.");
+            }
         } else {
             // Jika folder sudah ada (misal ganti tema atau re-compile),
             // bersihkan aset lama (css, js, assets, fonts, ornamen, dll)
