@@ -35,6 +35,15 @@ Cari memakai kata kunci: #database, #auth, #compiler, #template, [DB], [ENV], [S
 - Lokasi terkait: `api/core/InvitationCompiler.php`
 - Tag: #bug #compiler #amplop #story #blueprint
 
+### [BUG] Ekstensi Fileinfo Tidak Aktif di Server Hosting (mime_content_type) — 2026-11-21
+- Fakta/keputusan: Error fatal `Call to undefined function mime_content_type()` terjadi di server live aaPanel (`/www/wwwroot/...`) karena ekstensi PHP `fileinfo` belum dicentang/diaktifkan.
+- Solusi: Diimplementasikan fallback deteksi MIME berjenjang di `UploadController::detectMimeType()`:
+  1. `mime_content_type()` jika fileinfo aktif.
+  2. `finfo_open(FILEINFO_MIME_TYPE)` jika modul finfo tersedia.
+  3. `getimagesize()` membaca signature header gambar secara native (selalu tersedia di PHP dengan GD).
+- Lokasi terkait: `api/controllers/UploadController.php`
+- Tag: #bug #upload #mime #fileinfo #server #aapanel
+
 ### [API] Endpoint Komentar & RSVP — 2026-11-21
 - Fakta/keputusan: Endpoint RSVP dan ucapan doa dilayani oleh `CommentController` di path `/api/comments` dengan method GET (query `order_id`) dan POST (payload JSON: `order_id`, `guest_name`, `attendance`, `content`).
 - Lokasi terkait: `api/controllers/CommentController.php`, `api/index.php`

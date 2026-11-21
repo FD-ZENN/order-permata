@@ -223,6 +223,41 @@ class UploadController
         );
     }
 
+    /**
+     * Deteksi MIME Type secara aman dengan fallback berjenjang:
+     * 1. mime_content_type() (membutuhkan ekstensi fileinfo)
+     * 2. finfo_open() (standar PHP fileinfo class/resource)
+     * 3. getimagesize() (memeriksa signature header gambar secara native via GD)
+     */
+    private function detectMimeType(string $filePath): string|false
+    {
+        if (function_exists('mime_content_type')) {
+            $mime = @mime_content_type($filePath);
+            if (!empty($mime)) {
+                return $mime;
+            }
+        }
+
+        if (function_exists('finfo_open')) {
+            $finfo = @finfo_open(FILEINFO_MIME_TYPE);
+            if ($finfo) {
+                $mime = @finfo_file($finfo, $filePath);
+                @finfo_close($finfo);
+                if (!empty($mime)) {
+                    return $mime;
+                }
+            }
+        }
+
+        // Fallback untuk file gambar menggunakan getimagesize()
+        $imgInfo = @getimagesize($filePath);
+        if (!empty($imgInfo['mime'])) {
+            return $imgInfo['mime'];
+        }
+
+        return false;
+    }
+
     private function processFile(array $file, string $folderRaw, string $label, string $context = '', int $number = 0): string
     {
         if ($file['error'] !== UPLOAD_ERR_OK) {
@@ -232,7 +267,7 @@ class UploadController
             throw new \RuntimeException('Ukuran melebihi 2 MB');
         }
 
-        $mime = mime_content_type($file['tmp_name']);
+        $mime = $this->detectMimeType($file['tmp_name']);
         if ($mime === false || !in_array($mime, self::ALLOWED, true)) {
             throw new \RuntimeException('Tipe file tidak didukung');
         }
