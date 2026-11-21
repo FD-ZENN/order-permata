@@ -43,6 +43,10 @@ class Middleware
             return $_SERVER['HTTP_AUTHORIZATION'];
         }
 
+        if (!empty($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+            return $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+        }
+
         // Beberapa konfigurasi Apache/PHP-FPM (mod_php, CGI) tidak meneruskan
         // header Authorization ke $_SERVER secara default, jadi cek juga di sini.
         if (function_exists('apache_request_headers')) {

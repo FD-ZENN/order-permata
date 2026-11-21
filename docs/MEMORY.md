@@ -35,6 +35,14 @@ Cari memakai kata kunci: #database, #auth, #compiler, #template, [DB], [ENV], [S
 - Lokasi terkait: `api/core/InvitationCompiler.php`
 - Tag: #bug #compiler #amplop #story #blueprint
 
+### [SERVER] Header Authorization Hilang di PHP-FPM / FastCGI (401 Unauthorized) — 2026-11-21
+- Fakta/keputusan: Server Apache dengan PHP-FPM / CGI / Proxy secara default memotong header `Authorization: Bearer <token>`. Akibatnya, request admin seperti `GET /api/orders/stats` ditolak dengan status 401 Unauthorized karena `$_SERVER['HTTP_AUTHORIZATION']` kosong.
+- Solusi:
+  1. Di `.htaccess` ditambahkan rule rewritenya: `RewriteCond %{HTTP:Authorization} .` dan `RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]`.
+  2. Di `Middleware::getAuthorizationHeader()`, ditambahkan fallback `$_SERVER['REDIRECT_HTTP_AUTHORIZATION']`.
+- Lokasi terkait: `.htaccess`, `api/core/Middleware.php`
+- Tag: #server #apache #php-fpm #authorization #bearer #jwt #401
+
 ### [FRONTEND] Normalisasi Auto-Detect API Base URL Admin Panel — 2026-11-21
 - Fakta/keputusan: Pada browser yang pernah membuka admin di localhost, `localStorage` menyimpan `wd_base = "http://localhost/order-permata/api"`. Saat dibuka di live domain (`https://invitation-test.permatawedding.com/admin/`), admin panel masih memanggil URL localhost atau URL dengan prefix `/order-permata/api/auth/login` yang menghasilkan 404.
 - Solusi: Di `admin/assets/app.js`, ditambahkan deteksi dinamis: jika `window.location.origin` bukan localhost, `baseUrl` otomatis disetel ke `${window.location.origin}/api` dan meng-override nilai usang di `localStorage`.

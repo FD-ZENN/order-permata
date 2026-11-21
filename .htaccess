@@ -3,6 +3,10 @@ Options -Indexes +FollowSymLinks
 DirectoryIndex index.html index.php
 RewriteEngine On
 
+# Teruskan HTTP Authorization Header ke PHP-FPM / FastCGI
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
 # 1. Allow direct access to real files or directories
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
