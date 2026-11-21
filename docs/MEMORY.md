@@ -35,6 +35,12 @@ Cari memakai kata kunci: #database, #auth, #compiler, #template, [DB], [ENV], [S
 - Lokasi terkait: `api/core/InvitationCompiler.php`
 - Tag: #bug #compiler #amplop #story #blueprint
 
+### [FRONTEND] Normalisasi Auto-Detect API Base URL Admin Panel — 2026-11-21
+- Fakta/keputusan: Pada browser yang pernah membuka admin di localhost, `localStorage` menyimpan `wd_base = "http://localhost/order-permata/api"`. Saat dibuka di live domain (`https://invitation-test.permatawedding.com/admin/`), admin panel masih memanggil URL localhost atau URL dengan prefix `/order-permata/api/auth/login` yang menghasilkan 404.
+- Solusi: Di `admin/assets/app.js`, ditambahkan deteksi dinamis: jika `window.location.origin` bukan localhost, `baseUrl` otomatis disetel ke `${window.location.origin}/api` dan meng-override nilai usang di `localStorage`.
+- Lokasi terkait: `admin/assets/app.js`
+- Tag: #admin #api #url #404 #localstorage #auth
+
 ### [CONFIG] Konfigurasi RATE_LIMIT_ENABLED & Reset Storage — 2026-11-21
 - Fakta/keputusan: Rate limiter menyimpan file JSON hitungan di direktori temporary sistem: `sys_get_temp_dir() . '/wedding_api_ratelimit'` (di Linux: `/tmp/wedding_api_ratelimit`).
 - Reset manual via SSH/Terminal: `rm -rf /tmp/wedding_api_ratelimit/*`.

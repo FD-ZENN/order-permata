@@ -1,13 +1,23 @@
 // ═══════════════════════════════════════════════
 // State
 // ═══════════════════════════════════════════════
+const defaultApiBase = window.location.origin.includes("localhost")
+  ? window.location.origin + "/order-permata/api"
+  : window.location.origin + "/api";
+
 const S = {
   token: localStorage.getItem("wd_token") || "",
-  baseUrl: (localStorage.getItem("wd_base") || window.location.origin + "/order-permata/api").replace(/\/+$/, ""),
+  baseUrl: (localStorage.getItem("wd_base") || defaultApiBase).replace(/\/+$/, ""),
   page: "dashboard",
   orderDetailId: null,
   orderDetailTab: "couple",
 };
+
+// Validasi jika baseUrl yang tersimpan di localStorage masih berisi path localhost saat dibuka di live domain
+if (!window.location.origin.includes("localhost") && S.baseUrl.includes("/order-permata/api")) {
+  S.baseUrl = defaultApiBase;
+  localStorage.setItem("wd_base", defaultApiBase);
+}
 
 // Data Global State
 let ordersData = [];
