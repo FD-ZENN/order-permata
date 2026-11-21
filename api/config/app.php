@@ -23,3 +23,9 @@ define('JWT_EXPIRY', (int) (getenv('JWT_EXPIRY') ?: 86400)); // detik, default 2
  * struktur tabel/kolom ke penyerang. Set true hanya saat development lokal.
  */
 define('APP_DEBUG', filter_var(getenv('APP_DEBUG') ?: false, FILTER_VALIDATE_BOOLEAN));
+
+/**
+ * RATE_LIMIT_ENABLED mengontrol apakah rate limiter aktif.
+ * Set false di .env atau di sini untuk mematikan sementara rate limit saat testing/development.
+ */
+define('RATE_LIMIT_ENABLED', filter_var(getenv('RATE_LIMIT_ENABLED') ?? true, FILTER_VALIDATE_BOOLEAN));

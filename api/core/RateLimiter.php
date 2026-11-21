@@ -23,6 +23,11 @@ class RateLimiter
      */
     public static function attempt(string $key, int $maxAttempts, int $windowSeconds): bool
     {
+        // Jika rate limiter dimatikan sementara (misal di testing / config)
+        if (defined('RATE_LIMIT_ENABLED') && !RATE_LIMIT_ENABLED) {
+            return true;
+        }
+
         $safeName = preg_replace('/[^a-zA-Z0-9_\-]/', '_', $key);
         $file = self::storageDir() . '/' . $safeName . '.json';
 

@@ -35,6 +35,13 @@ Cari memakai kata kunci: #database, #auth, #compiler, #template, [DB], [ENV], [S
 - Lokasi terkait: `api/core/InvitationCompiler.php`
 - Tag: #bug #compiler #amplop #story #blueprint
 
+### [CONFIG] Konfigurasi RATE_LIMIT_ENABLED & Reset Storage — 2026-11-21
+- Fakta/keputusan: Rate limiter menyimpan file JSON hitungan di direktori temporary sistem: `sys_get_temp_dir() . '/wedding_api_ratelimit'` (di Linux: `/tmp/wedding_api_ratelimit`).
+- Reset manual via SSH/Terminal: `rm -rf /tmp/wedding_api_ratelimit/*`.
+- Mematikan sementara: Ditambahkan konstanta `RATE_LIMIT_ENABLED` di `api/config/app.php` (bisa diatur via file `.env` dengan `RATE_LIMIT_ENABLED=false`).
+- Lokasi terkait: `api/config/app.php`, `api/core/RateLimiter.php`
+- Tag: #config #ratelimit #reset #temp
+
 ### [SERVER] Permission Denied mkdir() pada Hosting Linux / aaPanel — 2026-11-21
 - Fakta/keputusan: Server Linux aaPanel berjalan di bawah user `www:www`. Jika root repository atau subfolder tahun (`2026/`) dimiliki oleh `root:root` (misal setelah git clone/pull via terminal SSH), proses PHP-FPM tidak memiliki izin (`Permission denied`) untuk membuat folder `/{year}/{slug}/`.
 - Solusi:
