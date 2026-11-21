@@ -52,6 +52,9 @@ Terakhir diperbarui: 2026-11-21
   2. **Otomatisasi Hitungan Kunjungan (View Tracker)**: Injeksi otomatis beacon tracking ringan tanpa beban render (`navigator.sendBeacon` / `fetch keepalive`) dengan session guard anti-double-count.
   3. **Ekspor & Salin Rekap RSVP Tamu**: Tombol "Ekspor CSV" untuk mengunduh daftar tamu ke file Excel/CSV, dan tombol "Salin Rekap WA" untuk menyalin ringkasan kehadiran berformat rapi langsung ke clipboard.
   4. **Perluasan Unit Test Suite**: Automated unit tests diperluas menjadi 110 pengujian (100% PASS / Berhasil).
+- Pembaruan Dokumentasi Publik Repository (GitHub README.md):
+  1. Penambahan tautan Live Preview resmi: `https://invitation-test.permatawedding.com/`.
+  2. Diagram alur interaktif (*Mermaid Flowchart*) dan penjelasan rinci 7-step alur pemesanan klien (Client Order Workflow) beserta tahapan pre-rendering otomatis di sisi server.
 
 ## Sedang Dikerjakan
 - Pemantauan performa dan adaptasi tema undangan berikutnya.

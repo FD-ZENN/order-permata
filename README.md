@@ -1,6 +1,69 @@
 # Permata Wedding — Online Invitation & Order Management System
 
+[![Live Demo & Preview](https://img.shields.io/badge/Live%20Preview-invitation--test.permatawedding.com-2ea44f?style=for-the-badge&logo=googlechrome&logoColor=white)](https://invitation-test.permatawedding.com/)
+[![Tests Status](https://img.shields.io/badge/Automated%20Tests-110%20Passed%20(100%25)-brightgreen?style=for-the-badge&logo=checkmarx&logoColor=white)](tests/run_all.php)
+[![Architecture](https://img.shields.io/badge/Architecture-True%20Static%20Pre--Rendering-blue?style=for-the-badge)](docs/MEMORY.md)
+
 Sistem manajemen pemesanan dan generator undangan digital pernikahan modern (*True Static Pre-Rendering*) berbasis PHP, MySQL, Vanilla JavaScript, serta terintegrasi penuh dengan **WhatsApp Gateway Center** (GoWA).
+
+🔗 **Live Preview Link:** [https://invitation-test.permatawedding.com/](https://invitation-test.permatawedding.com/)
+
+---
+
+## 🔄 Alur Pemesanan Klien (Client Order Workflow)
+
+Proses pemesanan dirancang intuitif, cepat, dan sepenuhnya otomatis dari sisi klien (*front-facing customer*) hingga undangan siap dibagikan:
+
+```mermaid
+flowchart TD
+    A["1. Klien Membuka Form Pemesanan"] --> B["2. Pilih Desain Tema & Kategori"]
+    B --> C["3. Input Data Diri & Foto Mempelai"]
+    C --> D["4. Jadwal Acara, Maps & Musik Latar"]
+    D --> E["5. Cerita Cinta & Love Story Timeline"]
+    E --> F["6. Unggah Galeri Foto (Kompresi Otomatis)"]
+    F --> G["7. Info Streaming & Amplop Digital/QRIS"]
+    G --> H["8. Review Order & Kirim Pesanan"]
+    
+    subgraph ProcessingModal ["Server-Side Static Pipeline"]
+        H --> I["Tahap 1: Client Canvas Image Compression (WebP/JPEG)"]
+        I --> J["Tahap 2: Penyimpanan Transaksi Database (PDO Prepared)"]
+        J --> K["Tahap 3: True Static Compiler Menghasilkan index.html"]
+    end
+    
+    K --> L["Undangan Siap Dibagikan (0ms Loading Time)"]
+    K --> M["Notifikasi & Integrasi WhatsApp Gateway ke Admin/Klien"]
+```
+
+### Penjelasan Tahapan Alur Pemesanan:
+
+1. **Langkah 1 — Pilih Tema & Desain (`Pilih Desain`)**:
+   - Klien memilih tema yang diinginkan (tersedia tema Modern, Luxury, Zen, Javanese, Floral, dsb).
+   - Dilengkapi pencarian instan dan filter kategori, serta tombol live demo pratinjau tema secara langsung.
+2. **Langkah 2 — Data Mempelai (`Data Diri`)**:
+   - Mengisi nama lengkap, nama panggilan, nama orang tua, serta media sosial kedua mempelai.
+   - Mengunggah foto profil masing-masing mempelai dan foto sampul utama (*Hero Cover*).
+3. **Langkah 3 — Acara & Musik Latar (`Waktu & Lagu`)**:
+   - Mengatur detail Akad/Pemberkatan dan Resepsi (tanggal, jam mulai, opsi *"Sampai Selesai"*, nama gedung, dan tautan Google Maps).
+   - Tombol cerdas *"Salin Lokasi dari Acara 1"* untuk menghemat waktu input lokasi resepsi.
+   - Memilih lagu latar (*background music*) dari katalog CDN atau mengunggah audio MP3 sendiri.
+4. **Langkah 4 — Cerita Cinta (`Love Story`)**:
+   - Menambahkan tonggak perjalanan kisah cinta (Pertama Bertemu, Lamaran/Khitbah, Menuju Pelaminan) lengkap dengan tahun, deskripsi, dan foto dokumentasi momen.
+5. **Langkah 5 — Galeri Foto Prewedding (`Foto Prewedding`)**:
+   - Klien dapat mengunggah banyak foto sekaligus.
+   - **Client-Side Compression**: Foto otomatis dikompresi di peramban klien via HTML5 Canvas (resolusi maks 1600px) sebelum dikirim, memangkas ukuran hingga 90% tanpa mengurangi ketajaman visual.
+   - Dilengkapi tombol silang `(×)` pada masing-masing thumbnail untuk membatalkan atau mengganti foto.
+6. **Langkah 6 — Live Streaming & Amplop Digital (`Streaming & Rekening`)**:
+   - Opsi tautan siaran langsung (YouTube / Instagram / Zoom).
+   - Slot rekening amplop digital (BCA, Mandiri, BRI, BNI, BSI, DANA, GoPay, OVO, ShopeePay) dengan auto-clean spasi nomor rekening, upload QRIS, dan alamat pengiriman kado fisik.
+7. **Langkah 7 — Review Order & Submit**:
+   - Meninjau seluruh ringkasan data pesanan, nomor WhatsApp aktif pemesan, dan catatan khusus.
+   - **Auto-Save Draft**: Draf data klien tersimpan otomatis di LocalStorage peramban sehingga tidak akan hilang jika peramban tidak sengaja tertutup atau terefresh.
+8. **Proses Kompilasi & Penyelesaian (Real-Time Modal)**:
+   - Saat tombol submit ditekan, modal interaktif menampilkan progres 3 tahap secara real-time:
+     1. Unggah & sinkronisasi media foto.
+     2. Penyimpanan data relasional ke database MySQL.
+     3. *Pre-rendering static compiler* membangun website statis mandiri di `/{year}/{slug}/index.html`.
+   - Klien langsung menerima link undangan aktif yang siap disebarkan ke para tamu undangan.
 
 ---
 
