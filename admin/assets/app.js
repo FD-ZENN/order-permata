@@ -46,6 +46,14 @@ let tmSelectedRating = 0;
 // ═══════════════════════════════════════════════
 async function api(method, path, body = null) {
   const cleanPath = path.startsWith("/") ? path : "/" + path;
+  
+  // Kirim token via Header & juga via URL query parameter '?token=...'
+  // Ini adalah solusi pamungkas jika web server/proxy (Nginx/Apache aaPanel) memotong header Authorization
+  const urlSeparator = cleanPath.includes("?") ? "&" : "?";
+  const urlWithToken = S.token 
+    ? S.baseUrl + cleanPath + urlSeparator + "token=" + encodeURIComponent(S.token)
+    : S.baseUrl + cleanPath;
+
   const opts = {
     method,
     headers: {
@@ -57,7 +65,7 @@ async function api(method, path, body = null) {
     },
   };
   if (body) opts.body = JSON.stringify(body);
-  const res = await fetch(S.baseUrl + cleanPath, opts);
+  const res = await fetch(urlWithToken, opts);
   if (res.status === 401) {
     toast("Sesi berakhir, silakan login kembali", "error");
     doLogout();
@@ -101,9 +109,15 @@ async function uploadFile(file, folder = "misc", label = "foto", context = "") {
   fd.append("label", label);
   if (context) fd.append("context", context);
   try {
-    const res = await fetch(S.baseUrl + "/upload", {
+    const uploadUrl = S.token
+      ? `${S.baseUrl}/upload?token=${encodeURIComponent(S.token)}`
+      : `${S.baseUrl}/upload`;
+    const res = await fetch(uploadUrl, {
       method: "POST",
-      headers: { Authorization: "Bearer " + S.token },
+      headers: S.token ? {
+        Authorization: "Bearer " + S.token,
+        "X-Authorization": "Bearer " + S.token
+      } : {},
       body: fd,
     });
     if (res.status === 401) {
@@ -138,9 +152,15 @@ async function uploadMultipleFiles(files, folder = "misc", label = "galeri") {
   fd.append("folder", typeof folder === "function" ? folder() : folder);
   fd.append("label", label);
   try {
-    const res = await fetch(S.baseUrl + "/upload-multi", {
+    const uploadMultiUrl = S.token
+      ? `${S.baseUrl}/upload-multi?token=${encodeURIComponent(S.token)}`
+      : `${S.baseUrl}/upload-multi`;
+    const res = await fetch(uploadMultiUrl, {
       method: "POST",
-      headers: { Authorization: "Bearer " + S.token },
+      headers: S.token ? {
+        Authorization: "Bearer " + S.token,
+        "X-Authorization": "Bearer " + S.token
+      } : {},
       body: fd,
     });
     if (res.status === 401) {
