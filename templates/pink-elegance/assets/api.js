@@ -1,10 +1,15 @@
 "use strict";
 // ─── NORMALIZE CONFIG ────────────────────────────────────────────
 (function normalizeConfig() {
+  window.CONFIG = window.CONFIG || {};
   const C = window.CONFIG;
-  if (!C) return;
-  // Semua template wajib pakai apiBase ini ke depannya
-  C.apiBase = (C.apiBase || "https://invitation.permatawedding.com/api/API").replace(/\/+$/, "");
+  if (!C.apiBase) {
+    const path = window.location.pathname || "";
+    const m = path.match(/^(\/[^\/]+)?\/(?:20\d\d)\//);
+    const prefix = m && m[1] ? m[1] : "";
+    C.apiBase = window.location.origin + prefix + "/api";
+  }
+  C.apiBase = C.apiBase.replace(/\/+$/, "");
   C.ORDER_ID = C.ORDER_ID || C.id_orders || C.idOrders || "";
   C.id_orders = C.id_orders || C.ORDER_ID || "";
   C.idOrders = C.idOrders || C.ORDER_ID || "";
@@ -24,18 +29,14 @@ window.DATA = window.DATA || {
 };
 
 // ─── BASE DOMAIN ─────────────────────────────────────────────────
-const _BASE_DOMAIN = (function () {
-  try {
-    return new URL(CONFIG.apiBase).origin;
-  } catch {
-    return window.location.origin;
-  }
-})();
+const _BASE_DOMAIN = window.location.origin;
 
 // ─── DOM HELPERS ─────────────────────────────────────────────────
 function photoUrl(path) {
   if (!path) return "";
-  return path.startsWith("http") ? path : `${_BASE_DOMAIN}${path}`;
+  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  return `${_BASE_DOMAIN}${cleanPath}`;
 }
 
 function _setMeta(id, val) {

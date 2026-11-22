@@ -109,7 +109,7 @@ ul {
   transition: width 0.1s linear;
 }
 
-/* ── COVER SECTION ── */
+/* ── COVER SECTION ── */a
 .cover-section {
   position: relative;
   min-height: 100svh;
@@ -119,6 +119,7 @@ ul {
   overflow: hidden;
   z-index: 10;
   opacity: 0;
+  background-image:  url('../tambahan/SUJA-FALLBACK-FIRST2-PII-1.webp');
   transition: opacity 0.8s ease;
 }
 

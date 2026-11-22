@@ -2,7 +2,7 @@
 
 // CONFIG didefinisikan di index.html (sebelum api.js). Ini hanya fallback.
 window.CONFIG = window.CONFIG || {
-  apiBase: "https://invitation.permatawedding.com/api/API",
+  apiBase: window.location.origin + "/api",
   ORDER_ID: "",
 };
 

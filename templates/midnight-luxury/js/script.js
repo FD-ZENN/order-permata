@@ -1,7 +1,7 @@
 "use strict";
 
 window.CONFIG = window.CONFIG || {
-  apiBase: "https://invitation.permatawedding.com/api",
+  apiBase: window.location.origin + "/api",
   ORDER_ID: "",
 };
 var CONFIG = window.CONFIG;

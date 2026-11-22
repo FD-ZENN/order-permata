@@ -2,7 +2,7 @@
 
 window.CONFIG = window.CONFIG || {
   weddingDate: "2026-12-31T08:00:00+07:00",
-  apiBase: "https://invitation.permatawedding.com/api/API",
+  apiBase: window.location.origin + "/api",
   ORDER_ID: "",
 };
 

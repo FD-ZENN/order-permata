@@ -25,10 +25,16 @@ Cari memakai kata kunci: #database, #auth, #compiler, #template, [DB], [ENV], [S
 - Lokasi terkait: `api/core/InvitationCompiler.php`
 - Tag: #keputusan #compiler #media #sinkronisasi
 
-### [KEPUTUSAN] Standar Kontrak Template & Larangan Hardcode — 2026-11-21
-- Fakta/keputusan: Semua tema (`templates/*`) dilarang keras menyuntikkan `window.INVITATION_DATA` atau mendeklarasikan `const CONFIG =` keras di JS tema. Harus menggunakan `id` & `data-key` standar, serta audio lokal `../../cdn/`.
-- Lokasi terkait: `templates/`, `tests/ThemeContractTest.php`
-- Tag: #keputusan #template #kontrak #html
+### [FRONTEND & TEMPLATES] Standar Dynamic Origin Resolver & Larangan Hardcode Domain — 2026-11-22
+- Fakta/keputusan:
+  1. Ditemukan gambar galeri / mempelai mengarah ke `https://invitation.permatawedding.com/uploads/...` saat dibuka di staging `https://invitation-test.permatawedding.com`.
+  2. Penyebab: Di `templates/*/js/api.js` dan `script.js`, deklarasi `CONFIG.apiBase` memiliki fallback hardcode `https://invitation.permatawedding.com/api/API`, dan resolver `_BASE_DOMAIN` mengambil `new URL(CONFIG.apiBase).origin`.
+  3. Solusi Wajib:
+     - Seluruh template JS (`sakura-zen`, `pink-elegance`, `premium-ivory-grace`, `premium-elegant-javanese`, `midnight-luxury`, `fresh-minimal`, `premium-eternal-luxe`) kini WAJIB menggunakan `const _BASE_DOMAIN = window.location.origin;`.
+     - Fungsi `photoUrl(path)` otomatis menempelkan origin aktif jika path adalah path relatif lokal (`/uploads/...` -> `https://invitation-test.permatawedding.com/uploads/...`).
+     - Tidak boleh ada lagi fallback hardcode domain produksi di file template frontend.
+- Lokasi terkait: `templates/*/js/api.js`, `templates/*/assets/api.js`, `templates/*/js/script.js`, `templates/*/assets/script.js`
+- Tag: #frontend #template #gallery #photoUrl #origin #staging #domain
 
 ### [BUG] Ekstraksi Outer Container Blueprint Cloning Amplop & Story — 2026-11-21
 - Fakta/keputusan: Regex single-tag div sebelumnya memotong inner card-body pada amplop digital bertingkat sehingga card rekening menumpuk di satu box. Diperbaiki dengan scanner balanced-div `extractOuterContainerByMarker()` dan `extractBalancedTag()` di compiler.

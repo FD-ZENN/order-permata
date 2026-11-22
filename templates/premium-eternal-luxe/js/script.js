@@ -3,7 +3,7 @@
 // ================================================================
 window.CONFIG = Object.assign({
     weddingDate: '2027-12-31T00:00:00+07:00', // 31 Des 2025 WIB
-    apiBase: 'https://invitation.permatawedding.com/api/komentar/komentar.php',
+    apiBase: window.location.origin + '/api',
     idOrders: '143',
     heroRevealDelay: 1000,
     textRevealDelay: 1000,

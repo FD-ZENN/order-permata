@@ -31,18 +31,14 @@ window.DATA = window.DATA || {
 };
 
 // ─── BASE DOMAIN ─────────────────────────────────────────────────
-const _BASE_DOMAIN = (function () {
-  try {
-    return new URL(CONFIG.apiBase).origin;
-  } catch {
-    return window.location.origin;
-  }
-})();
+const _BASE_DOMAIN = window.location.origin;
 
 // ─── DOM HELPERS ─────────────────────────────────────────────────
 function photoUrl(path) {
   if (!path) return "";
-  return path.startsWith("http") ? path : `${_BASE_DOMAIN}${path}`;
+  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  return `${_BASE_DOMAIN}${cleanPath}`;
 }
 
 function _setMeta(id, val) {
